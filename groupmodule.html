@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="apptpbuser">
+  <head>
+    <meta charset="utf-8">
+    <title>Simple & Dynamic Tables - eKoders Responsive Admin Theme</title>
+	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/fonts.css">
+	<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+	
+	<!-- PAGE LEVEL PLUGINS STYLES -->
+	<link rel="stylesheet" href="assets/css/plugins/footable/footable.min.css">
+	<!-- REQUIRE FOR SPEECH COMMANDS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/plugins/gritter/jquery.gritter.css" />	
+
+    <!-- Tc core CSS -->
+	<link id="qstyle" rel="stylesheet" href="assets/css/themes/style.css">	
+	<!--[if lte IE 8]>
+		<link rel="stylesheet" href="assets/css/ie-fix.css" />
+	<![endif]-->
+	<script src="http://localhost:8888/js/angular.js"></script>
+	<script src="http://localhost:8888/js/angular/tpbfnc.js"></script>
+	<script src="http://localhost:8888/js/angular/linkaddress.js"></script>
+	<script src="js/angular/obj/groupmodule.js"></script>
+	<script src="js/angular/da/groupmoduleda.js"></script>
+	<script src="js/angular/bll/groupmodulecontroller.js"></script>
+	
+	
+    <!-- Add custom CSS here -->
+
+	<!-- End custom CSS here -->
+	
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+	
+  </head>
+
+  <body>
+	<div id="wrapper">
+		<div id="main-container">		
+			<!-- BEGIN TOP NAVIGATION -->
+				<nav class="navbar-top" role="navigation">
+					<!-- BEGIN BRAND HEADING -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle pull-right" data-toggle="collapse" data-target=".top-collapse">
+							<i class="fa fa-bars"></i>
+						</button>
+						<div class="navbar-brand">
+							<a href="index.html">
+								<img src="assets/images/logo.png" alt="logo" class="img-responsive">
+							</a>
+						</div>
+					</div>
+					<!-- END BRAND HEADING -->
+					<div class="nav-top">
+						<!-- BEGIN RIGHT SIDE DROPDOWN BUTTONS -->
+							<ul class="nav navbar-right">								
+								<li class="dropdown user-box">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+										<img class="img-circle" src="assets/images/user.jpg" alt=""> <span class="user-info">John Smith</span> <b class="caret"></b>
+									</a>
+										<ul class="dropdown-menu dropdown-user">
+											<li>
+												<a href="profile.html">
+													<i class="fa fa-user"></i> My Profile
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<i class="fa fa-envelope"></i> My Messages
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<i class="fa fa-tasks"></i> My Tasks
+												</a>
+											</li>
+											<li>
+												<a href="#">
+													<i class="fa fa-gear"></i> Settings
+												</a>
+											</li>											
+											<li>
+												<a href="login.html">
+													<i class="fa fa-power-off"></i> Logout
+												</a>
+											</li>
+										</ul>
+								</li>								
+							</ul>
+						<!-- END RIGHT SIDE DROPDOWN BUTTONS -->							
+						<!-- BEGIN TOP MENU -->
+							<div class="collapse navbar-collapse top-collapse">
+								<!-- .nav -->
+								<ul class="nav navbar-left navbar-nav">
+									<li><a href="list.html" class="active">List</a></li>
+									<li><a href="edit.html">Edit</a></li>
+									<li><a href="login.html">Login</a></li>
+								</ul><!-- /.nav -->
+							</div>
+						<!-- END TOP MENU -->
+					</div><!-- /.nav-top -->
+				</nav><!-- /.navbar-top -->
+				<!-- END TOP NAVIGATION -->
+
+				
+				<!-- BEGIN SIDE NAVIGATION -->				
+				<nav class="navbar-side" role="navigation">
+					<div class="navbar-collapse sidebar-collapse collapse">
+						
+						<ul id="side" class="nav navbar-nav side-nav">
+							<!-- BEGIN SIDE NAV MENU -->							
+							<!-- Navigation category -->
+							<li>
+								<h4>Navigation</h4> 								
+							</li>
+							<!-- END Navigation category -->
+							
+							<li>
+								<a href="list.html" class="active">
+									<i class="fa fa-dashboard"></i> List
+								</a>
+								<a href="edit.html">
+									<i class="fa fa-dashboard"></i> Edit
+								</a>
+							</li>
+						</ul><!-- /.side-nav -->												
+					</div><!-- /.navbar-collapse -->
+				</nav><!-- /.navbar-side -->
+				<!-- END SIDE NAVIGATION -->
+				
+
+				<!-- BEGIN MAIN PAGE CONTENT -->
+				<div id="page-wrapper">
+					<!-- BEGIN PAGE HEADING ROW -->
+						<div class="row">
+							<div class="col-lg-12">
+								<!-- BEGIN BREADCRUMB -->
+								<div class="breadcrumbs">
+									<ul class="breadcrumb">
+										<li>
+											<a href="#">Home</a>
+										</li>
+										<li class="active">Tables</li>
+									</ul>
+								</div>
+								<!-- END BREADCRUMB -->
+								
+								<div class="page-header title">
+								<!-- PAGE TITLE ROW -->
+									<h1>Tables <span class="sub-title">Factor Options</span></h1>							
+								</div>								
+							</div><!-- /.col-lg-12 -->
+						</div><!-- /.row -->
+					<!-- END PAGE HEADING ROW -->					
+						<div class="row">
+							<div class="col-lg-12">
+							
+							<!-- START YOUR CONTENT HERE -->
+							<form ng-controller="groupmoduleController" ng-submit="save()">
+								<div class="portlet"><!-- /Portlet -->
+									<div class="portlet-heading dark">
+										<div class="portlet-title">
+											<button type="submit" id="btnInsert" class="btn btn-primary">save</button>
+										</div>
+										<div class="portlet-widgets">
+											<a data-toggle="collapse" data-parent="#accordion" href="#basic"><i class="fa fa-chevron-down"></i></a>
+											<span class="divider"></span>
+											<a href="#" class="box-close"><i class="fa fa-times"></i></a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div id="basic" class="panel-collapse collapse in">
+										<div class="portlet-body no-padding">
+											group <select id="cboGroup" name="cboGroup" ng-model="groupmodule.groupid" ng-options="group._id as group.group.groupname for group in groups">
+											</select>
+											<table id="tablemodule" class="table table-bordered table-hover tc-table">
+												<thead>
+													<tr>
+														<th class="col-small center"><label><input type="checkbox" class="tc" value="{{module._id}}"><span class="labels"></span></label></th>
+														<th>modulename</th>
+														<!-- <th class="hidden-xs">parentname</th> -->
+														<th class="hidden-xs">link</th>
+														<th class="hidden-xs">displayforguess</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="module in modules">
+														<td class="col-small center"><label><input type="checkbox" class="tc" value="{{module._id}}"><span class="labels"></span></label></td>
+														<td>
+															{{module.module.modulename}}
+														</td>
+														<!-- <td class="hidden-xs">
+															{{module.module.parentname}}
+														</td> -->
+														<td class="hidden-xs">
+															{{module.module.link}}
+														</td>
+														<td class="hidden-xs">
+															{{module.module.displayforguess == 1?'true':'false'}}
+														</td>
+													</tr>
+												</tbody>
+											</table>												
+										</div>
+										
+									</div>
+								</div><!-- /Portlet -->								
+								</form>
+							<!-- END YOUR CONTENT HERE -->
+					
+							</div>
+						</div>					
+					
+					<!-- BEGIN FOOTER CONTENT -->		
+						<div class="footer">
+							<div class="footer-inner">
+								<!-- basics/footer -->
+								<div class="footer-content">
+									&copy; 2014 <a href="#">eKoders</a>, All Rights Reserved.
+								</div>
+								<!-- /basics/footer -->
+							</div>
+						</div>
+						<button type="button" id="back-to-top" class="btn btn-primary btn-sm back-to-top">
+							<i class="fa fa-angle-double-up icon-only bigger-110"></i>
+						</button>
+					<!-- END FOOTER CONTENT -->
+						
+				</div><!-- /#page-wrapper -->	  
+			<!-- END MAIN PAGE CONTENT -->
+		</div>  
+	</div> 
+	 
+    <!-- core JavaScript -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="assets/js/plugins/pace/pace.min.js"></script>
+		
+	<!-- PAGE LEVEL PLUGINS JS -->
+	<script src="assets/js/plugins/footable/footable.min.js"></script>	
+	
+	<script src="assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="assets/js/plugins/datatables/datatables.js"></script>
+	<script src="assets/js/plugins/datatables/datatables.responsive.js"></script>
+	
+    <!-- Themes Core Scripts -->	
+	<script src="assets/js/main.js"></script>
+
+	<!-- REQUIRE FOR SPEECH COMMANDS -->
+	<script src="assets/js/speech-commands.js"></script>
+	<script src="assets/js/plugins/gritter/jquery.gritter.min.js"></script>	
+	
+	<!-- initial page level scripts for examples -->
+	<script src="assets/js/plugins/slimscroll/jquery.slimscroll.init.js"></script>
+	<script src="assets/js/plugins/footable/footable.init.js"></script>
+	<script src="assets/js/plugins/datatables/datatables.init.js"></script>
+	<script>
+	
+	//for tables checkbox demo
+		jQuery(function($) {
+			$('table th input:checkbox').on('click' , function(){
+					var that = this;
+					$(this).closest('table').find('tr > td:first-child input:checkbox')
+					.each(function(){
+						this.checked = that.checked;
+						$(this).closest('tr').toggleClass('selected');
+					});
+						
+				});
+			});
+	</script>
+  </body>
+</html>

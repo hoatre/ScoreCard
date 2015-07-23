@@ -1,0 +1,4 @@
+var usergroup={
+	groupid:'',
+	userid:'',
+};

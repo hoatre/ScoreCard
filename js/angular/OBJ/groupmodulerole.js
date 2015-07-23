@@ -1,0 +1,4 @@
+var groupmodulerole={
+	groupid:'',
+	moduleroleid:'',
+};
