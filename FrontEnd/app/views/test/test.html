@@ -1,0 +1,125 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Test</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row" ng-init="getModelByStatus('publish')">
+        <form id="frmMain">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Model:</label>
+                <div class="col-sm-5">
+                    <div class="clearfix">
+                        <select id="cboModel" style="width:200px" name="cboModel"
+                                ng-change="getFactorByModelId(selectModel)"
+                                ng-model="selectModel"
+                                ng-options="model._id as model.name for model in models">
+                            <option value="">Please select</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <button class="btn btn-primary" type="submit" id="btnGetChecked"
+                            onclick="return CheckValidate();"
+                            ng-click="submit()"
+                            ng-disabled="CheckValidate()">
+                        Get Checked
+                    </button>
+                </div>
+            </div>
+            <div class="form-group"
+                 ng-show="message">
+                <div ng-class="messageClass" ng-bind-html="message">
+
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <!-- START YOUR CONTENT HERE -->
+                <ul class="nav nav-tree" id="myTree">
+                    <li ng-repeat='factor1 in getFactorByParentId("")'>
+                        <a href="javascript:;" class="accordion-toggle" data-toggle="collapse"
+                           data-target="#sub-menu2{{factor1._id}}">
+                            <label class="col-sm-6 control-label">
+                                <i class="fa fa-angle-double-right"></i>{{factor1.FactorName}}
+                            </label>
+                            <label class="col-sm-6">Weight: {{factor1.Weight}}%</label>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-tree collapse in" id="sub-menu2{{factor1._id}}">
+                            <li ng-repeat='factor2 in getFactorByParentId(factor1._id)'>
+                                <a href="javascript:;" class="accordion-toggle has-success" data-toggle="collapse"
+                                   data-target="#sub-menu3{{factor2._id}},#sub-menu32{{factor2._id}}">
+                                    <label class="col-sm-6 control-label">
+                                        <i class="fa fa-angle-double-right"></i>{{factor2.FactorName}}
+                                    </label>
+                                    <label class="col-sm-6 control-label">Weight: {{factor2.Weight}}%</label>
+                                    <span class="fa arrow"></span>
+                                </a>
+                                <ul class="nav nav-tree collapse in" id="sub-menu3{{factor2._id}}" ng-show="factor2['FactorOption'].length == 0">
+                                    <li ng-repeat='factor3 in getFactorByParentId(factor2._id)'>
+                                        <a href="javascript:;" class="accordion-toggle has-warning" data-toggle="collapse"
+                                           data-target="#sub-menu4{{factor3._id}}">
+                                            <label class="col-sm-6 control-label">
+                                                <i class="fa fa-angle-double-right"></i>{{factor3.FactorName}}
+                                            </label>
+                                            <label class="col-sm-6 control-label">Weight: {{factor3.Weight}}%</label>
+                                            <span class="fa arrow"></span>
+                                        </a>
+                                        <ul class="nav nav-tree collapse in" id="sub-menu4{{factor3._id}}">
+                                            <li ng-repeat="factorOption in factor3['FactorOption']">
+                                                <label class="col-sm-10">
+                                                    <input type="radio" name="{{factor3._id}}"
+                                                           id="{{factorOption.FactorOptionId}}"
+                                                           value='{"factorid": "{{factor3._id}}", "factoroptionid": "{{factorOption.FactorOptionId}}", "factorname": "", "score": "{{factorOption.Score}}"}' class="tc">
+                                                    <span class="col-sm-9 labels"> {{factorOption.FactorOptionName}}</span>
+                                                    <span class="col-sm-3">Score: {{factorOption.Score}}</span>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <ul class="nav nav-tree collapse in" id="sub-menu32{{factor2._id}}" ng-show="factor2['FactorOption'].length > 0">
+                                    <li ng-repeat="factorOption in factor2['FactorOption']">
+                                        <label class="col-sm-10">
+                                            <input type="radio" name="{{factor2._id}}"
+                                                   id="{{factorOption.factor_option_id}}"
+                                                   value='{"factorid": "{{factor2._id}}", "factor_name": "{{factor2.FactorName}}", "factor_option_id": "{{factorOption.FactorOptionId}}", "factor_option_name": "{factorOption.FactorOptionName}}", "score": "{{factorOption.Score}}"}' class="tc">
+                                            <span class="col-sm-9 labels"> {{factorOption.FactorOptionName}}</span>
+                                            <span class="col-sm-3">Score: {{factorOption.Score}}</span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- END YOUR CONTENT HERE -->
+
+            </div>
+        </form>
+    </div>
+</div>
+<script language="javascript">
+
+    function CheckValidate() {
+        var check = false;
+        if ($('#frmMain input:radio:checked').length == 0) {
+            alert('You must choose!');
+            return false;
+        }
+
+        return true;
+    }
+
+    function getOptionChecked() {
+
+        var result = '';
+        $('#frmMain input:radio:checked').each(function () {
+            result += "," + $(this).val();
+        });
+        //alert('{listresult: [' + result.substring(1) + ']}');
+        return '{listresult: [' + result.substring(1) + ']}';
+    }
+</script>

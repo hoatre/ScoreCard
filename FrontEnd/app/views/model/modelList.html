@@ -1,0 +1,59 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Models</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="form-group">
+            <button type="button" onclick="modeldetail()" class="btn btn-primary">Add</button>
+        </div>
+        <div class="form-group">
+            <table class="table table-bordered table-hover tc-table">
+                <thead>
+                    <tr>
+                        <!--<th class="col-small center"><label><input type="checkbox" class="tc"><span class="labels"></span></label></th>-->
+                        <th>Name</th>
+                        <!-- <th class="hidden-xs">parentname</th> -->
+                        <th class="hidden-xs">Description</th>
+                        <th class="col-medium center">Minimum Score</th>
+                        <th class="col-medium center">Maximum Score</th>
+                        <th class="hidden-xs">Status</th>
+                        <th class="col-medium center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="modelinfo in modelinfos">
+                        <!-- <td class="col-small center"><label><input type="checkbox" class="tc"><span class="labels"></span></label></td>-->
+                        <td>
+                            {{modelinfo.name}}
+                        </td>
+                        <!-- <td class="hidden-xs">
+                            {{model.model.parentname}}
+                        </td> -->
+                        <td class="hidden-xs">
+                            {{modelinfo.description}}
+                        </td>
+                        <td class="hidden-xs">
+                            {{modelinfo.min}}
+                        </td>
+                        <td class="hidden-xs">
+                            {{modelinfo.max}}
+                        </td>
+                        <td class="hidden-xs">
+                            {{modelinfo.status}}
+                        </td>
+                        <td class="col-medium center">
+                            <div class="btn-group btn-group-xs " ng-show="{{modelinfo.status=='publish'?false:true}}">
+                                <a href="/modeldetail.html?id={{modelinfo._id}}" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                                <a ng-click='modeldelete($index)' class="btn btn-danger" ng-show="{{modelinfo.status=='draft'?true:false}}"><i class="fa fa-times icon-only"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

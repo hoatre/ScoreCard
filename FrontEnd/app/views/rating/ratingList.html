@@ -1,0 +1,93 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Ratings</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Model:</label>
+            <div class="col-sm-5">
+                <div class="clearfix">
+                    <select id="cboModel" style="width:200px" name="cboModel" ng-model="choiceModel" ng-options="modelinfo._id as modelinfo.name for modelinfo in modelinfos" ng-change="backmodelChanged(choiceModel)">
+                        <option value="">Please select</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="button" id="btnGenerateScoringRange" ng-click='gennerateScoringRange()' class="btn btn-primary" style="display:none">Gennerate Scoring Range</button>
+            <button type="button" id="btnValidateModel" ng-click='validatemodel()' class="btn btn-primary" style="display:none">Validate Model</button>
+        </div>
+        <div class="form-group">
+            <table class="table table-bordered table-hover tc-table">
+                <tbody>
+                    <tr>
+                        <td class="hidden-xs">
+                            Status
+                        </td>
+                        <td class="hidden-xs">
+                            {{modelinfodetail.status}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="hidden-xs">
+                            Minimum Score
+                        </td>
+                        <td class="hidden-xs">
+                            {{modelinfodetail.min}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="hidden-xs">
+                            Maximum Score
+                        </td>
+                        <td class="hidden-xs">
+                            {{modelinfodetail.max}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group">
+            <button type="button" id="btnInsert" ng-click='ratingAdd()' class="btn btn-primary" style="display:none">Action</button>
+            <button type="button" id="btnCheckRating" ng-click='ratingCheckRating()' class="btn btn-primary" style="display:none">Check Rating</button>
+        </div>
+        <table class="table table-bordered table-hover tc-table">
+            <thead>
+                <tr>
+                    <th class="col-small center"><label><input type="checkbox" class="tc"><span class="labels"></span></label></th>
+                    <th>Code</th>
+                    <th class="hidden-xs">From</th>
+                    <th class="hidden-xs">Up To</th>
+                    <th class="col-medium center">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="rating in ratings">
+                    <td class="col-small center"><label><input type="checkbox" class="tc"><span class="labels"></span></label></td>
+                    <td class="hidden-xs">
+                        {{rating.code}}
+                    </td>
+                    <td class="hidden-xs">
+                        {{rating.scorefrom}}
+                    </td>
+                    <td class="hidden-xs">
+                        {{rating.scoreto}}
+                    </td>
+                    <td class="hidden-xs">
+                        {{rating.status}}
+                    </td>
+                    <td class="col-medium center">
+                        <div class="btn-group btn-group-xs " ng-show="{{modelinfodetail.status=='draft'?true:false}}">
+                            <a href="/ratingdetail.html?modelid={{modelforrating.modelid}}&id={{rating.code}}" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a ng-click='ratingdelete($index)' class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
