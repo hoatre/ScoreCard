@@ -1,4 +1,0 @@
-var usergroup={
-	groupid:'',
-	userid:'',
-};

@@ -1,4 +1,0 @@
-var groupmodule={
-	groupid:'',
-	moduleid:'',
-};
