@@ -44,6 +44,11 @@ angular
             url: '/factoroption',
             controller: "FactorOptionListCtrl"
         })
+        .state('factoredit', {
+            templateUrl: 'app/views/factor/factorlEdit.html',
+            url: '/factoredit',
+            controller: "FactorEditCtrl"
+        })
         .state('rating', {
             templateUrl: 'app/views/rating/ratingList.html',
             url: '/rating',
