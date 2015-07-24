@@ -36,7 +36,7 @@ angular
           })
         .state('factor', {
             templateUrl: 'app/views/factor/factorList.html',
-            url: '/factor',
+            url: '/factor/:modelId',
             controller: "FactorListCtrl"
         })
         .state('factoroption', {
@@ -46,7 +46,7 @@ angular
         })
         .state('factoredit', {
             templateUrl: 'app/views/factor/factorlEdit.html',
-            url: '/factoredit',
+            url: '/factoredit/:modelId/:factorId',
             controller: "FactorEditCtrl"
         })
         .state('rating', {
