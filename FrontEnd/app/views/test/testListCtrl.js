@@ -3,10 +3,10 @@
     angular
         .module("sbAdminApp")
         .controller("TestListCtrl",
-                    ["$scope", "$http", "appSettings",
+                    ["$scope", "$http", "appSettings", "modelResource",
                      TestListCtrl]);
 
-    function TestListCtrl($scope, $http, appSettings) {
+    function TestListCtrl($scope, $http, appSettings, modelResource) {
 
         $scope.models = [];
         $scope.factors = [];
@@ -19,11 +19,22 @@
         $scope.messageClass = 'col-md-6 wel bg-info';
 
         $scope.getAllModels = function () {
-            $http.get(appSettings.serverPath + "/modelinfo/getall")
-                .success(function (data) {
-                    //console.log(data);
+            //$http.get(appSettings.serverPath + "/modelinfo/getall")
+            //    .success(function (data) {
+            //        //console.log(data);
+            //        $scope.models = data.getModelInfoJSON.body;
+            //    });
+
+            modelResource.getAll.query(
+                function (data) {
                     $scope.models = data.getModelInfoJSON.body;
-                });
+                },
+            function (response) {
+                $scope.message = response.statusText + "\r\n";
+                
+                if (response.data.exceptionMessage)
+                    $scope.message = response.data.exceptionMessage;
+            });
         };
 
         $scope.getModelByStatus = function (status) {
@@ -43,17 +54,29 @@
 
         $scope.getFactorByModelId = function (modelId) {
 
-            $http.post(appSettings.serverPath + "/modelinfo/view", { _id: modelId }).
-                success(function (data, status, headers, config) {
-                    //console.log(data);
+            //$http.post(appSettings.serverPath + "/modelinfo/view", { _id: modelId }).
+            //    success(function (data, status, headers, config) {
+            //        //console.log(data);
+            //        $scope.factors = data.viewModelInfo.body;
+            //    })
+            //    .error(function (error, status, headers, config) {
+            //        // called asynchronously if an error occurs
+            //        // or server returns response with an error status.
+            //        $scope.message = error;
+            //        $scope.factors = [];
+            //    });
+
+            modelResource.getFactorByModelId.query({ _id: modelId },
+                function (data) {
                     $scope.factors = data.viewModelInfo.body;
-                })
-                .error(function (error, status, headers, config) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
-                    $scope.message = error;
-                    $scope.factors = [];
-                });
+                },
+            function (response) {
+                $scope.factors = [];
+                $scope.message = response.statusText + "\r\n";
+
+                if (response.data.exceptionMessage)
+                    $scope.message = response.data.exceptionMessage;
+            });
         };
 
         $scope.getFactorByParentId = function (parentId) {

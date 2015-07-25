@@ -8,15 +8,13 @@
     <!-- /.row -->
     <div class="row">
         <div class="form-group">
-            <button type="button" onclick="modeldetail()" class="btn btn-primary">Add</button>
+            <a ui-sref="modelEdit({modelId: ''})" class="btn btn-primary">Add</a>
         </div>
         <div class="form-group">
             <table class="table table-bordered table-hover tc-table">
                 <thead>
                     <tr>
-                        <!--<th class="col-small center"><label><input type="checkbox" class="tc"><span class="labels"></span></label></th>-->
                         <th>Name</th>
-                        <!-- <th class="hidden-xs">parentname</th> -->
                         <th class="hidden-xs">Description</th>
                         <th class="col-medium center">Minimum Score</th>
                         <th class="col-medium center">Maximum Score</th>
@@ -25,35 +23,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="modelinfo in modelinfos">
-                        <!-- <td class="col-small center"><label><input type="checkbox" class="tc"><span class="labels"></span></label></td>-->
+                    <tr ng-repeat="model in models">
                         <td>
-                            {{modelinfo.name}}
-                        </td>
-                        <!-- <td class="hidden-xs">
-                            {{model.model.parentname}}
-                        </td> -->
-                        <td class="hidden-xs">
-                            {{modelinfo.description}}
+                            {{model.name}}                            
                         </td>
                         <td class="hidden-xs">
-                            {{modelinfo.min}}
+                            {{model.description}}
                         </td>
                         <td class="hidden-xs">
-                            {{modelinfo.max}}
+                            {{model.min}}
                         </td>
                         <td class="hidden-xs">
-                            {{modelinfo.status}}
+                            {{model.max}}
+                        </td>
+                        <td class="hidden-xs">
+                            {{model.status}}
                         </td>
                         <td class="col-medium center">
-                            <div class="btn-group btn-group-xs " ng-show="{{modelinfo.status=='publish'?false:true}}">
-                                <a href="/modeldetail.html?id={{modelinfo._id}}" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
-                                <a ng-click='modeldelete($index)' class="btn btn-danger" ng-show="{{modelinfo.status=='draft'?true:false}}"><i class="fa fa-times icon-only"></i></a>
+                            <div class="btn-group btn-group-xs " ng-show="{{model.status=='publish'?false:true}}">
+                
+                                <a href="" ng-click="goEdit($index)" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                                <a ng-click='modelDelete($index)' class="btn btn-danger" ng-show="{{model.status=='draft'?true:false}}"><i class="fa fa-times icon-only"></i></a>
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-    </div>
+    </div>    
 </div>

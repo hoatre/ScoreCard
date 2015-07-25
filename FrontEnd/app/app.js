@@ -17,7 +17,7 @@ angular
     'ngSanitize'
   ])
     .constant("appSettings", {
-        serverPath: "http://10.15.171.35:8080"
+        serverPath: "http://localhost:8080"
     })
   .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
@@ -29,10 +29,20 @@ angular
       $urlRouterProvider.otherwise('/home');
 
       $stateProvider
-          .state('model', {
+          .state('modelList', {
               templateUrl: 'app/views/model/modelList.html',
-              url: '/model',
+              url: '/models',
               controller: "ModelListCtrl"
+          })
+          .state('modelEdit', {
+              templateUrl: 'app/views/model/modelEdit.html',
+              url: '/models/edit/:modelId',
+              controller: "ModelEditCtrl"
+          })
+          .state("modelDetail", {
+              url: "/models/:modelId",
+              templateUrl: "app/views/model/modelDetail.html",
+              controller: "ModelDetailCtrl"
           })
         .state('factor', {
             templateUrl: 'app/views/factor/factorList.html',

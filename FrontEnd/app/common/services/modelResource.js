@@ -10,25 +10,11 @@
 
     function modelResource($resource, appSettings) {
         return {
-            modelinfo: $resource(appSettings.serverPath + "/modelinfo/getall", null,
-                    {
-                        'getAll': { method: 'GET' }
-                    }),
-            modelview: $resource(appSettings.serverPath + "/registerUser", null,
-                    {
-                        'getByModelId': {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                            transformRequest: function (data, headersGetter) {
-                                var str = [];
-                                for (var d in data)
-                                    str.push(encodeURIComponent(d) + "=" +
-                                                        encodeURIComponent(data[d]));
-                                return str.join("&");
-                            }
-
-                        }
-                    })
+            getAll: $resource(appSettings.serverPath + "/modelinfo/getall", {},
+                { 'query': { method: 'GET', isArray: false } }),
+            getFactorByModelId: $resource(appSettings.serverPath + "/modelinfo/view/", {},
+                { 'query': { method: 'POST', isArray: false } })
         }
+        //return $resource(appSettings.serverPath + "/modelinfo/getall/:id", null, null);
     }
 })();
