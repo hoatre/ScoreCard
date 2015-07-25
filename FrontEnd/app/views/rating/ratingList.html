@@ -82,7 +82,7 @@
                     </td>
                     <td class="col-medium center">
                         <div class="btn-group btn-group-xs " ng-show="{{modelinfodetail.status=='draft'?true:false}}">
-                            <a href="/ratingdetail.html?modelid={{modelforrating.modelid}}&id={{rating.code}}" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a href="#/ratingEdit/{{choiceModel}}/{{rating.code}}" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
                             <a ng-click='ratingdelete($index)' class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
                         </div>
                     </td>

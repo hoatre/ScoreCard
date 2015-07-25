@@ -3,10 +3,10 @@
     angular
         .module("sbAdminApp")
         .controller("FactorListCtrl",
-                    ["$scope", "$http", "$stateParams", "appSettings",
+                    ["$scope", "$http", "$state", "$stateParams", "appSettings",
                      FactorListCtrl]);
 
-    function FactorListCtrl($scope, $http, $stateParams, appSettings) {
+    function FactorListCtrl($scope, $http, $state, $stateParams, appSettings) {
         //load form list factorlist
         if ($stateParams.modelId != '') {
             $scope.choiceModel = $stateParams.modelId;
@@ -195,7 +195,7 @@
 
 
         $scope.factoradd = function () {
-            window.location.assign("#/factoredit/" + $scope.choiceModel+"/");
+            $state.go('factoredit', { modelId: $scope.choiceModel,factorId: "" });
         }
 
         $scope.factordelete = function () {

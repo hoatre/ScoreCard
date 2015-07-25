@@ -17,6 +17,7 @@
                 </div>
             </div>
         </div>
+        <br />
         <div class="form-group">
             <label class="col-sm-3 control-label">Factor:</label>
             <div class="col-sm-5">
@@ -27,6 +28,7 @@
                 </div>
             </div>
         </div>
+        <br />
         <div class="form-group">
             <button type="button" id="btnInsert" ng-click='factoroptionadd()' class="btn btn-primary">Add</button>
             <button type="button" ng-click='validatemodel()' class="btn btn-primary">Validate Model</button>
@@ -34,7 +36,7 @@
         <table class="table table-bordered table-hover tc-table">
             <thead>
                 <tr>
-                    <th class="col-small center"><label><input type="checkbox" class="tc"><span class="labels"></span></label></th>
+                    <!--<th class="col-small center"><label><input type="checkbox" class="tc"><span class="labels"></span></label></th>-->
                     <th>Name</th>
                     <th class="hidden-xs">Description</th>
                     <th class="hidden-xs">Score</th>
@@ -44,7 +46,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="factoroption in factoroptions">
-                    <td class="col-small center"><label><input type="checkbox" class="tc"><span class="labels"></span></label></td>
+                    <!--<td class="col-small center"><label><input type="checkbox" class="tc"><span class="labels"></span></label></td>-->
                     <td>
                         {{factoroption.FactorOptionName}}
                     </td>
@@ -59,8 +61,8 @@
                     </td>
                     <td class="col-medium center">
                         <div class="btn-group btn-group-xs " ng-show="{{modelinfodetail.status=='draft'?true:false}}">
-                            <a href="/factoroptiondetail.html?modelid={{choiceModel}}&factorId={{choiceFactor}}&factorOptionId={{factoroption.FactorOptionId}}" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
-                            <a ng-click='factoroptiondelete(choiceFactor,factoroption.FactorOptionId)' class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
+                            <a href="#/factoroptionedit/{{choiceModel}}/{{choiceFactor}}/{{factoroption.FactorOptionId}}" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a ng-click='factoroptiondelete(factoroption.FactorOptionId,choiceFactor)' class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
                         </div>
                     </td>
                 </tr>
