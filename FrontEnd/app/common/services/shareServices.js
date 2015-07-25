@@ -4,7 +4,7 @@
 (function () {
     "use strict";
 
-    angular
+    var app = angular
         .module("common.services")
         .factory("shareServices",
                 ["$rootScope",
@@ -31,5 +31,16 @@
         }
         return shareService;
     }
+
+    //popupService
+    app.service('popupService', ['$window', function ($window) {
+        this.showPopup = function (msg) {
+            return $window.confirm(msg);
+        }
+        
+        this.showMessage = function (msg) {
+            return $window.alert(msg);
+        }
+    }])
 
 }());

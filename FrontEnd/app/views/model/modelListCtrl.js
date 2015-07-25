@@ -3,10 +3,10 @@
     angular
         .module("sbAdminApp")
         .controller("ModelListCtrl",
-                    ["$scope", "$http", "$state", "appSettings", "shareServices",
+                    ["$scope", "$http", "$state", "appSettings", "shareServices", "popupService",
                      ModelListCtrl]);
 
-    function ModelListCtrl($scope, $http, $state, appSettings, shareServices) {
+    function ModelListCtrl($scope, $http, $state, appSettings, shareServices, popupService) {
 
         //Broadcast message
         $scope.goEdit = function (index) {
@@ -28,17 +28,18 @@
                 });
         }
 
+        // Delete
         $scope.modelDelete = function (index) {
-
-            $http.post(appSettings.serverPath + "/modelinfo/delete", { _id: $scope.models[index]._id }).
-                success(function (data, status, headers, config) {
-                    //console.log(data);
-                    window.location.assign("/model.html")
-                }).
-                error(function (data, status, headers, config) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
-                });
+            if (popupService.showPopup('Are you sure delete this model?')) {
+                $http.post(appSettings.serverPath + "/modelinfo/delete", { _id: $scope.models[index]._id })
+                    .success(function (data, status, headers, config) {
+                        $scope.models.splice(index, 1);
+                    })
+                    .error(function (data, status, headers, config) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                    });
+            }
         }
         
         $scope.getAllModel();

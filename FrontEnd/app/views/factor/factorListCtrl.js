@@ -3,10 +3,14 @@
     angular
         .module("sbAdminApp")
         .controller("FactorListCtrl",
-                    ["$scope", "$http", "$state", "$stateParams", "appSettings",
+                    ["$scope", "$http", "$state", "$stateParams", "appSettings", "popupService",
                      FactorListCtrl]);
 
-    function FactorListCtrl($scope, $http, $state, $stateParams, appSettings) {
+    function FactorListCtrl($scope, $http, $state, $stateParams, appSettings, popupService) {
+
+        $scope.choiceModel = '';
+        $scope.model = {};
+
         //load form list factorlist
         if ($stateParams.modelId != '') {
             $scope.choiceModel = $stateParams.modelId;
@@ -14,52 +18,29 @@
         $http.get(appSettings.serverPath + "/modelinfo/getall")
                .success(function (data) {
                    //console.log(data);
-                   
-                   $scope.modelinfos = data.getModelInfoJSON.body;
-                   
+
+                   $scope.models = data.getModelInfoJSON.body;
+
                    if ($scope.choiceModel != '') {
-                       $scope.modelChangedLoad($scope.choiceModel);
+                       $scope.modelChanged($scope.choiceModel);
                    }
                })
 
 
         $scope.modelChanged = function (id) {
-            //console.log($scope.MODULE_CHOICE);
+            //console.log(id);
 
-            $scope.modelChangedLoad(id);
-        }
-
-        $scope.modelChangedLoad = function (id) {
-            for (var i = 0; i < $scope.modelinfos.length; i++) {
-                if ($scope.modelinfos[i]._id == id) {
-                    $scope.modelinfodetail = $scope.modelinfos[i];
-                    //console.log($scope.modelinfodetail.min);
+            for (var i = 0; i < $scope.models.length; i++) {
+                if ($scope.models[i]._id == id) {
+                    $scope.model = $scope.models[i];
+                    //console.log($scope.model.min);
                 }
             }
-            //console.log(url_ratinglistbymodelidangular_scala+"/"+id);
-            if ($scope.modelinfodetail.status == 'draft') {
-                $('#btnInsert').show();
 
-                $('#btnGennerateScoringRange').show();
-                $('#btnValidateModel').show();
-                //$('#btnCheckRating').show();
-            }
-            else {
-                $('#btnInsert').hide();
-                $('#btnGennerateScoringRange').show();
-                $('#btnValidateModel').show();
-                //$('#btnCheckRating').show();
-                if ($scope.modelinfodetail.status == "publish") {
-                    $('#btnGennerateScoringRange').hide();
-                    $('#btnValidateModel').hide();
-                    //$('#btnCheckRating').hide();
-                }
-            }
-              
-            $http.post(appSettings.serverPath + "/modelinfo/view", { _id: $scope.modelinfodetail._id }).
+            $http.post(appSettings.serverPath + "/modelinfo/view", { _id: $scope.model._id }).
                 success(function (data, status, headers, config) {
-                      
-                    //$scope.modelinfodetail = data["SUCCESS"];
+
+                    //$scope.model = data["SUCCESS"];
                     //console.log(data);
                     var factortreelist = [];
                     //alert(data["viewModelInfo"]["header"].code);
@@ -77,7 +58,7 @@
                         }
                     }
                     else {
-                        alert(data["viewModelInfo"]["header"].message);
+                        //alert(data["viewModelInfo"]["header"].message);
                     }
                     //console.log(1);
                     // prepare the data
@@ -114,23 +95,8 @@
                             rendered: function () {
                                 $(".deleteButtons").click(function (event) {
                                     // end edit and cancel changes.
-                                    var rowKey = event.target.getAttribute('data-row');
-                                    $http.post(appSettings.serverPath + "/factor/delete", { _id: rowKey }).
-                                        success(function (data, status, headers, config) {
-                                            if (data["deleteFactor"]["header"].code == 0) {
-                                                $("#treeGrid").jqxTreeGrid('deleteRow', rowKey);
-                                            }
-                                            else {
-                                                alert(data["deleteFactor"]["header"].message);
-                                            }
-                                            //console.log(data);
-                                            //window.location.assign("/factors.html")
-                                            //$scope.factors.splice(index, 1);
-                                        }).
-                                        error(function (data, status, headers, config) {
-                                            // called asynchronously if an error occurs
-                                            // or server returns response with an error status.
-                                        });
+                                    var factorId = event.target.getAttribute('data-row');
+                                    $scope.factorDelete(factorId);                                     
                                 });
 
                             },
@@ -141,9 +107,9 @@
                                 {
                                     text: 'Action', cellsAlign: 'center', align: "center", width: 130, columnType: 'none', editable: false, sortable: false, dataField: null, cellsRenderer: function (row, column, value) {
                                         // render custom column.
-                                        //console.log($scope.modelinfodetail.Status);
-                                        if ($scope.modelinfodetail.status == 'draft') {
-                                            return "<a href='#/factoredit/" + $scope.modelinfodetail._id + "/" + row + "'>edit</a>|"
+                                        //console.log($scope.model.Status);
+                                        if ($scope.model.status == 'draft') {
+                                            return "<a href='#/factors/edit/" + $scope.model._id + "/" + row + "'>edit</a>|"
                                                 + "<a  data-row='" + row + "' class='deleteButtons'>delete</a>";
                                         }
                                         else {
@@ -157,67 +123,64 @@
                             ]*/
                         });
                     //console.log(3);
-                }).
-                error(function (data, status, headers, config) {
+                })
+                .error(function (data, status, headers, config) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
                 });
         }
 
+        // Generator scoring range
         $scope.gennerateScoringRange = function () {
             //console.log(url_modelrangerandupdateangular_scala);
             //alert(appSettings.serverPath + "/modelinfo/rangeandupdate");
-            $http.post(appSettings.serverPath + "/modelinfo/rangeandupdate", { _id: $scope.modelinfodetail._id }).
-                success(function (data, status, headers, config) {
+            $http.post(appSettings.serverPath + "/modelinfo/rangeandupdate", { _id: $scope.model._id })
+                .success(function (data, status, headers, config) {
                     if (data["rangeAndUpdate"]["header"].code == 0) {
-                        $scope.modelinfodetail = data["rangeAndUpdate"]["body"];
+                        $scope.model = data["rangeAndUpdate"]["body"];
                     }
                     else {
                         alert(data["rangeAndUpdate"]["header"].message);
                     }
-                    //console.log($scope.modelinfodetail.name+"-->"+$scope.modelinfodetail.min);
-                }).
-                error(function (data, status, headers, config) {
+                    //console.log($scope.model.name+"-->"+$scope.model.min);
+                })
+                .error(function (data, status, headers, config) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
                 });
 
         }
 
-        $scope.validatemodel = function () {
+        // Validate model
+        $scope.validateModel = function () {
             //console.log('aaa');
             //alert('abc');
             checkweightrate($scope, $http, appSettings, $scope.choiceModel);
         }
 
-        
-        //load form list modellist
+        // Delete data
+        $scope.factorDelete = function (factorId) {
+            if (popupService.showPopup('Are you sure delete this factor?')) {
+                $http.post(appSettings.serverPath + "/factor/delete", { _id: factorId })
+                      .success(function (data, status, headers, config) {
+                          //console.log(data);
+                          //$scope.factors.splice(index, 1);
+                          if (data["deleteFactor"]["header"].code == 0) {
+                              $("#treeGrid").jqxTreeGrid('deleteRow', factorId);
+                              return true;
+                          }
+                          else {
 
-
-        $scope.factoradd = function () {
-            $state.go('factoredit', { modelId: $scope.choiceModel,factorId: "" });
-        }
-
-        $scope.factordelete = function () {
-            $scope.factordelete = function (index) {
-                //console.log(index);
-                $http.post(url, { id: $scope.factors[index]._id }).
-                  success(function (data, status, headers, config) {
-                      //console.log(data);
-                      //window.location.assign("/factors.html")
-                      $scope.factors.splice(index, 1);
-                  }).
-                  error(function (data, status, headers, config) {
-                      // called asynchronously if an error occurs
-                      // or server returns response with an error status.
-                  });
+                              return false;
+                          }
+                      })
+                      .error(function (data, status, headers, config) {
+                          // called asynchronously if an error occurs
+                          // or server returns response with an error status.
+                          return false;
+                      });
             }
         }
-
-        //alert($stateParams.modelId);
-        /*if ($stateParams.modelId != '') {
-            $scope.modelChangedLoad($stateParams.modelId);
-        }*/
     }
-   
+
 }());

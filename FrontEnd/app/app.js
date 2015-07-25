@@ -44,34 +44,34 @@ angular
               templateUrl: "app/views/model/modelDetail.html",
               controller: "ModelDetailCtrl"
           })
-        .state('factor', {
+        .state('factorList', {
             templateUrl: 'app/views/factor/factorList.html',
-            url: '/factor/:modelId',
+            url: '/factors/:modelId',
             controller: "FactorListCtrl"
         })
-        .state('factoredit', {
+        .state('factorEdit', {
             templateUrl: 'app/views/factor/factorlEdit.html',
-            url: '/factoredit/:modelId/:factorId',
+            url: '/factors/edit/:modelId/:factorId',
             controller: "FactorEditCtrl"
         })
-        .state('factoroption', {
+        .state('factorOptionList', {
             templateUrl: 'app/views/factor-option/factorOptionList.html',
-            url: '/factoroption/:modelId/:factorId/',
+            url: '/factoroptions/:modelId/:factorId',
             controller: "FactorOptionListCtrl"
         })
-        .state('factoroptionedit', {
+        .state('factorOptionEdit', {
             templateUrl: 'app/views/factor-option/factorOptionEdit.html',
-            url: '/factoroptionedit/:modelId/:factorId/:factorOptionId',
+            url: '/factoroptions/edit/:modelId/:factorId/:factorOptionId',
             controller: "FactorOptionEditCtrl"
         })
-        .state('rating', {
+        .state('ratingList', {
             templateUrl: 'app/views/rating/ratingList.html',
-            url: '/rating',
+            url: '/ratings',
             controller: "RatingListCtrl"
         })
-        .state('ratingedit', {
+        .state('ratingEdit', {
             templateUrl: 'app/views/rating/ratingEdit.html',
-            url: '/ratingEdit/:modelId/:ratingCode',
+            url: '/ratings/edit/:modelId/:ratingCode',
             controller: "RatingEditCtrl"
         })
         .state('test', {

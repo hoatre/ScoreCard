@@ -3,10 +3,10 @@
     angular
         .module("sbAdminApp")
         .controller("ModelEditCtrl",
-                    ["$scope", "$http", "$state", "$stateParams", "appSettings", "shareServices",
+                    ["$scope", "$http", "$state", "$stateParams", "appSettings", "shareServices", "popupService",
                      ModelEditCtrl]);
 
-    function ModelEditCtrl($scope, $http, $state, $stateParams, appSettings, shareServices) {
+    function ModelEditCtrl($scope, $http, $state, $stateParams, appSettings, shareServices, popupService) {
         $scope.model = {};
 
         $scope.model = shareServices.getCurrentObject();
@@ -39,8 +39,8 @@
 
                 $http.post(appSettings.serverPath + "/modelinfo/insert", $scope.model).
                     success(function (data, status, headers, config) {
-                        alert('Insert Success!');
-                        $state.go('modelList');
+                        popupService.showMessage('Insert Success!');
+                        $scope.back();
                     }).
                     error(function (data, status, headers, config) {
                         // called asynchronously if an error occurs
@@ -63,7 +63,8 @@
 
                                 $http.post(url, angular.toJson(models)).
                                     success(function (data, status, headers, config) {
-                                        window.location.assign("/model.html")
+                                        popupService.showMessage('Update Success!');
+                                        $scope.back();
                                     }).
                                     error(function (data, status, headers, config) {
                                         // called asynchronously if an error occurs
@@ -112,8 +113,8 @@
                 else {
                     $http.post(appSettings.serverPath + "/modelinfo/update", $scope.model).
                         success(function (data, status, headers, config) {
-                            alert('Update Success!');
-                            $state.go('modelList');
+                            popupService.showMessage('Update Success!');
+                            $scope.back();
                         }).
                         error(function (data, status, headers, config) {
                             // called asynchronously if an error occurs

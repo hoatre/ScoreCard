@@ -10,33 +10,37 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">Model:</label>
             <div class="col-sm-5">
-                <div class="clearfix">
-                    <select id="cboModel" style="width:200px" name="cboModel" ng-model="choiceModel" ng-options="modelinfo._id as modelinfo.name for modelinfo in modelinfos" ng-change="modelChanged(choiceModel)">
-                        <option value="">Please select</option>
-                    </select>
-                </div>
+                <select id="cboModel" class="form-control" name="cboModel"
+                        ng-model="choiceModel"
+                        ng-options="model._id as model.name for model in models"
+                        ng-change="modelChanged(choiceModel)">
+                    <option value="">Please select</option>
+                </select>
             </div>
         </div>
         <br />
         <div class="form-group">
             <label class="col-sm-3 control-label">Factor:</label>
             <div class="col-sm-5">
-                <div class="clearfix">
-                    <select id="cboFactor" style="width:200px" name="cboFactor" ng-model="choiceFactor" ng-options="factor._id as factor.FactorName for factor in factors" ng-change="factorChanged(choiceFactor)">
-                        <option value="">Please select</option>
-                    </select>
-                </div>
+                <select id="cboFactor" class="form-control" name="cboFactor"
+                        ng-model="choiceFactor"
+                        ng-options="factor._id as factor.FactorName for factor in factors"
+                        ng-change="factorChanged(choiceFactor)">
+
+                    <option value="">Please select</option>
+                </select>
             </div>
         </div>
         <br />
-        <div class="form-group">
-            <button type="button" id="btnInsert" ng-click='factoroptionadd()' class="btn btn-primary">Add</button>
-            <button type="button" ng-click='validatemodel()' class="btn btn-primary">Validate Model</button>
+        <div class="form-group" ng-if="choiceModel != ''">
+            <a id="btnInsert" class="btn btn-primary"
+               ui-sref="factorOptionEdit({modelId: choiceModel,factorId: choiceFactor})"
+               ng-if="choiceFactor != ''">Add</a>
+            <button type="button" ng-click='validateModel()' class="btn btn-default">Validate Model</button>
         </div>
         <table class="table table-bordered table-hover tc-table">
             <thead>
                 <tr>
-                    <!--<th class="col-small center"><label><input type="checkbox" class="tc"><span class="labels"></span></label></th>-->
                     <th>Name</th>
                     <th class="hidden-xs">Description</th>
                     <th class="hidden-xs">Score</th>
@@ -45,24 +49,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="factoroption in factoroptions">
-                    <!--<td class="col-small center"><label><input type="checkbox" class="tc"><span class="labels"></span></label></td>-->
+                <tr ng-repeat="factorOption in factorOptions">
                     <td>
-                        {{factoroption.FactorOptionName}}
+                        {{factorOption.FactorOptionName}}
                     </td>
                     <td class="hidden-xs">
-                        {{factoroption.Description}}
+                        {{factorOption.Description}}
                     </td>
                     <td class="hidden-xs">
-                        {{factoroption.Score}}
+                        {{factorOption.Score}}
                     </td>
                     <td class="hidden-xs">
-                        {{factoroption.Fatal}}
+                        {{factorOption.Fatal}}
                     </td>
                     <td class="col-medium center">
-                        <div class="btn-group btn-group-xs " ng-show="{{modelinfodetail.status=='draft'?true:false}}">
-                            <a href="#/factoroptionedit/{{choiceModel}}/{{choiceFactor}}/{{factoroption.FactorOptionId}}" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
-                            <a ng-click='factoroptiondelete(factoroption.FactorOptionId,choiceFactor)' class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
+                        <div class="btn-group btn-group-xs " ng-show="{{factorOption.status=='draft'?true:false}}">
+                            <a ui-sref="factorOptionEdit({modelId: choiceModel, factorId: choiceFactor, factorOptionId: factorOption.FactorOptionId})" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a ng-click='factorOptionDelete(factorOption.FactorOptionId,choiceFactor)' class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
                         </div>
                     </td>
                 </tr>

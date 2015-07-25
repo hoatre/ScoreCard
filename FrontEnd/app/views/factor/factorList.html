@@ -10,18 +10,18 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">Model:</label>
             <div class="col-sm-5">
-                <div class="clearfix">
-                    <select id="cboModel" style="width:200px" name="cboModel" ng-model="choiceModel" ng-options="modelinfo._id as modelinfo.name for modelinfo in modelinfos" ng-change="modelChanged(choiceModel)">
-                        <option value="">Please select</option>
-                    </select>
-                </div>
+                <select id="cboModel" class="form-control" name="cboModel"
+                        ng-model="choiceModel"
+                        ng-options="model._id as model.name for model in models"
+                        ng-change="modelChanged(choiceModel)">
+                    <option value="">Please select</option>
+                </select>
             </div>
-        </div>
-        <div class="form-group">
-            <button type="button" id="btnGennerateScoringRange" ng-click='gennerateScoringRange()' class="btn btn-primary" style="display:none">Generate Scoring Range</button>
-            <button type="button" id="btnValidateModel" ng-click='validatemodel()' class="btn btn-primary" style="display:none">Validate Model</button>
-        </div>
-        <div class="form-group">
+        </div>        
+    </div>
+    <div class="row" ng-show='choiceModel != ""? true : false'>
+        <br />
+        <div class="col-sm-8">
             <table class="table table-bordered table-hover tc-table">
                 <tbody>
                     <tr>
@@ -29,7 +29,7 @@
                             Status
                         </td>
                         <td class="hidden-xs">
-                            {{modelinfodetail.status}}
+                            {{model.status}}
                         </td>
                     </tr>
                     <tr>
@@ -37,7 +37,7 @@
                             Minimum Score
                         </td>
                         <td class="hidden-xs">
-                            {{modelinfodetail.min}}
+                            {{model.min}}
                         </td>
                     </tr>
                     <tr>
@@ -45,14 +45,30 @@
                             Maximum Score
                         </td>
                         <td class="hidden-xs">
-                            {{modelinfodetail.max}}
+                            {{model.max}}
                         </td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group" ng-show="model.status != 'publish'">
+                <button type="button" id="btnGennerateScoringRange" class="btn btn-default"
+                        ng-click='gennerateScoringRange()'>
+                    Generate Scoring Range
+                </button>
+                <button type="button" id="btnValidateModel" class="btn btn-default"
+                        ng-click='validateModel()'>
+                    Validate Model
+                </button>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group" ng-show="model.status == 'draft'">
+            <a id="btnInsert" class="btn btn-primary" ui-sref="factorEdit({modelId: choiceModel, factorId: ''})">Add</a>
+        </div>
         <div class="form-group">
-            <button id="btnInsert" type="button" ng-click='factoradd()' class="btn btn-primary" style="display:none">Add</button>
             <!--tree-->
             <div id="treeGrid">
             </div>
@@ -61,19 +77,16 @@
     </div>
 </div>
 <script>
-	function factordetail() {
-		window.location.assign("/factordetail.html")
-	}
-	//for tables checkbox demo
-	jQuery(function($) {
-		$('table th input:checkbox').on('click' , function(){
-			var that = this;
-			$(this).closest('table').find('tr > td:first-child input:checkbox')
-					.each(function(){
-						this.checked = that.checked;
-						$(this).closest('tr').toggleClass('selected');
+    //for tables checkbox demo
+    jQuery(function ($) {
+        $('table th input:checkbox').on('click', function () {
+            var that = this;
+            $(this).closest('table').find('tr > td:first-child input:checkbox')
+					.each(function () {
+					    this.checked = that.checked;
+					    $(this).closest('tr').toggleClass('selected');
 					});
 
-		});
-	});
+        });
+    });
 </script>

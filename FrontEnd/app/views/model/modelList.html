@@ -25,7 +25,9 @@
                 <tbody>
                     <tr ng-repeat="model in models">
                         <td>
-                            {{model.name}}                            
+                            <a ui-sref="modelDetail({modelId: model._id})">
+                                {{model.name}}
+                            </a>
                         </td>
                         <td class="hidden-xs">
                             {{model.description}}
@@ -40,10 +42,9 @@
                             {{model.status}}
                         </td>
                         <td class="col-medium center">
-                            <div class="btn-group btn-group-xs " ng-show="{{model.status=='publish'?false:true}}">
-                
+                            <div class="btn-group btn-group-xs " ng-show="{{model.status == 'publish'? false : true}}">
                                 <a href="" ng-click="goEdit($index)" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
-                                <a ng-click='modelDelete($index)' class="btn btn-danger" ng-show="{{model.status=='draft'?true:false}}"><i class="fa fa-times icon-only"></i></a>
+                                <a ng-click='modelDelete($index)' class="btn btn-danger" ng-show="{{model.status == 'draft'? true : false}}"><i class="fa fa-times icon-only"></i></a>
                             </div>
                         </td>
                     </tr>
