@@ -17,7 +17,7 @@ angular
     'ngSanitize'
   ])
     .constant("appSettings", {
-        serverPath: "http://localhost:8080"
+        serverPath: "http://10.15.171.35:8080"
     })
   .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
