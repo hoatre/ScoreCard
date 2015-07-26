@@ -1,6 +1,6 @@
 var connect = require('connect'),
     serveStatic = require('serve-static'),
-    port = 8888;
+    port = 9999;
 
 var app = connect();
 
