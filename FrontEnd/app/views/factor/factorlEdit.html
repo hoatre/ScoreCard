@@ -34,6 +34,33 @@
                         </span>
                     </span>
                 </div>
+                <div class="form-group"
+                     ng-class="{'has-error':factorForm.inputWeigth.$invalid &&
+                                    factorForm.inputWeigth.$dirty}">
+                    <label class="col-sm-3 control-label">Weight:</label>
+                    <div class="col-sm-5">
+                        <div class="input-group">
+                            <input type="number" name="inputWeigth" class="form-control"
+                                   min="0" max="100"
+                                   ng-model="factor.Weight" required>
+                            <span class="input-group-addon">%</span>
+                        </div>
+                    </div>
+                    <span class="help-block has-error">
+                        <span class="error" ng-show="factorForm.inputWeigth.$error.required">
+                            Factor weigth is required.
+                        </span>
+                        <span class="error" ng-show="factorForm.inputWeigth.$error.number">
+                            Not valid number!
+                        </span>
+                        <span class="error" ng-show="factorForm.inputWeigth.$error.min">
+                            Factor weigth min is  0!
+                        </span>
+                        <span class="error" ng-show="factorForm.inputWeigth.$error.max">
+                            Factor weigth max is  100!
+                        </span>
+                    </span>
+                </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label" for="subscription">Description:</label>
                     <div class="col-sm-5">
@@ -41,51 +68,25 @@
                                   ng-model="factor.Description" placeholder="Description"></textarea>
                     </div>
                 </div>
-                <div class="form-group"
-                     ng-class="{'has-error':factorForm.inputWeigth.$invalid &&
-                                    factorForm.inputWeigth.$dirty}">
-                    <label class="col-sm-3 control-label">Weight:</label>
-                    <div class="col-sm-5">
-                        <div class="input-group">
-                            <input type="number" name="inputWeigth" class="form-control" 
-                                   min="0" max="100"
-                                   ng-model="factor.Weight" required>
-                            <span class="input-group-addon">%</span>
-                        </div>
-                        <span class="help-block has-error">
-                            <span class="error" ng-show="factorForm.inputWeigth.$error.required">
-                                Factor weigth is required.
-                            </span>
-                            <span class="error" ng-show="factorForm.inputWeigth.$error.number">
-                                Not valid number!
-                            </span>
-                            <span class="error" ng-show="factorForm.inputWeigth.$error.min">
-                                Factor weigth min is  0!
-                            </span>
-                            <span class="error" ng-show="factorForm.inputWeigth.$error.max">
-                                Factor weigth max is  100!
-                            </span>
-                        </span>
-                    </div>
-                    <div class="form-actions">
-                        <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <button type="submit" class="btn btn-primary"
-                                        ng-click="save()"
-                                        ng-disabled="factorForm.$invalid && factorForm.$dirty">
-                                    Save
-                                </button>
-                                <button type="submit" class="btn btn-default" ng-if="false"
-                                        ng-click="cancel(factorForm)">
-                                    Cancel
-                                </button>
-                                <button type="submit" class="btn btn-default"
-                                        ng-click="back()">
-                                    Back To List
-                                </button>
-                            </div>
+                <div class="form-actions">
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="submit" class="btn btn-primary"
+                                    ng-click="save()"
+                                    ng-disabled="factorForm.$invalid && factorForm.$dirty">
+                                Save
+                            </button>
+                            <button type="submit" class="btn btn-default" ng-if="false"
+                                    ng-click="cancel(factorForm)">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-default"
+                                    ng-click="back()">
+                                Back To List
+                            </button>
                         </div>
                     </div>
+                </div>
             </fieldset>
         </form>
     </div>

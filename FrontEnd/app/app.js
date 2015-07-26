@@ -39,10 +39,24 @@ angular
               url: '/models/edit/:modelId',
               controller: "ModelEditCtrl"
           })
-          .state("modelDetail", {
+          .state("modelInfo", {
               url: "/models/:modelId",
+              templateUrl: "app/views/model/modelInfo.html"
+          })
+          .state("modelInfo.detail", {
+              url: "/detail",
               templateUrl: "app/views/model/modelDetail.html",
               controller: "ModelDetailCtrl"
+          })
+          .state('modelInfo.factors', {
+              templateUrl: 'app/views/factor/factorList.html',
+              url: '/factors',
+              controller: "FactorListCtrl"
+          })
+          .state('modelInfo.ratings', {
+              templateUrl: 'app/views/rating/ratingList.html',
+              url: '/ratings',
+              controller: "RatingListCtrl"
           })
         .state('factorList', {
             templateUrl: 'app/views/factor/factorList.html',

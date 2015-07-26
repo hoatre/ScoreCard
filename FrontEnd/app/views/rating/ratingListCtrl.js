@@ -18,7 +18,7 @@
                     if ($scope.choiceModel != '') {
                         $scope.modelChanged($scope.choiceModel);
                     }
-                })        
+                })
 
         // Mode select change
         $scope.modelChanged = function (modelid) {
@@ -36,7 +36,7 @@
                     $scope.model = $scope.models[i];
                 }
             }
-            
+
             // Get rating by modelId
             $http.get(appSettings.serverPath + "/rating/getmodelid" + "/" + modelid)
                 .success(function (data) {
@@ -116,6 +116,31 @@
                 }
             }
             popupService.showMessage("Rating in model true!");
+        }
+
+        // Add data
+        $scope.add = function () {
+
+            $scope.rating.statusname = $scope.rating.status;
+            $scope.rating.note = '';
+
+            var ratingobj = {
+                modelid: $stateParams.modelId,
+                codein: $scope.rating
+            };
+
+            $http.post(appSettings.serverPath + "/rating/add", angular.toJson(ratingobj))
+                .success(function (data, status, headers, config) {
+                    if (data.Rating.header.code == 0) {
+                        $scope.ratings.push($scope.rating);
+                        $scope.rating = {};
+                        popupService.showMessage('Insert Success!');
+                    }
+                })
+                .error(function (data, status, headers, config) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
         }
     }
 }());

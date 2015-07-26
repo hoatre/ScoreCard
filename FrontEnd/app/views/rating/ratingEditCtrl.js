@@ -29,19 +29,19 @@
 
 
         // Get model by id
-        $http.post(appSettings.serverPath + "/modelinfo/getbymodelinfoid", { _id: $stateParams.modelId }).
-		success(function (data, status, headers, config) {
-		    if (data["getModelInfoByIdJSON"]["header"].code == 0) {
-		        $scope.model = data.getModelInfoByIdJSON.body[0];
-		    }
-		    else {
-		        alert(data["getModelInfoByIdJSON"]["header"].message);
-		    }
-		}).
-		error(function (data, status, headers, config) {
-		    // called asynchronously if an error occurs
-		    // or server returns response with an error status.
-		});
+        $http.post(appSettings.serverPath + "/modelinfo/getbymodelinfoid", { _id: $stateParams.modelId })
+		    .success(function (data, status, headers, config) {
+		        if (data["getModelInfoByIdJSON"]["header"].code == 0) {
+		            $scope.model = data.getModelInfoByIdJSON.body[0];
+		        }
+		        else {
+		            alert(data["getModelInfoByIdJSON"]["header"].message);
+		        }
+		    })
+		    .error(function (data, status, headers, config) {
+		        // called asynchronously if an error occurs
+		        // or server returns response with an error status.
+		    });
 
 
         // Save data

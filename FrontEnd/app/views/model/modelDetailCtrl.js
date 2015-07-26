@@ -10,7 +10,7 @@
         $scope.model = {};
 
         // Load data from cache
-        $scope.model = shareServices.getCurrentObject();
+        //$scope.model = shareServices.getCurrentObject();
 
 
         // Load data form server

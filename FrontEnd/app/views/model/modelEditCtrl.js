@@ -9,7 +9,7 @@
     function ModelEditCtrl($scope, $http, $state, $stateParams, appSettings, shareServices, popupService) {
         $scope.model = {};
 
-        $scope.model = shareServices.getCurrentObject();
+        //$scope.model = shareServices.getCurrentObject();
         $scope.originalModel = angular.copy($scope.model);
 
 

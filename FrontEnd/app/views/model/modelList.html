@@ -7,9 +7,66 @@
     </div>
     <!-- /.row -->
     <div class="row">
-        <div class="form-group">
-            <a ui-sref="modelEdit({modelId: ''})" class="btn btn-primary">Add</a>
+        <div class="portlet portlet-basic" ng-init="isCollapsed = true">
+            <div class="portlet-heading">
+                <div class="portlet-title">
+                    <h4>Model Information</h4>
+                </div>
+                <div class="portlet-widgets">
+                    <a href="" ng-click="isCollapsed = !isCollapsed">
+                        <i class="fa" ng-class="isCollapsed? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                    </a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div collapse="isCollapsed">
+                <br class="space-4" />
+                <form class="form-horizontal" id="modelForm" name="modelForm" novalidate>
+                    <div class="form-group"
+                         ng-class="{'has-error':modelForm.inputName.$invalid &&
+                                    modelForm.inputName.$dirty}">
+                        <label class="col-sm-3 control-label" for="name">Name:</label>
+                        <div class="col-sm-5">
+                            <input name="inputName" type="text" class="form-control"
+                                   ng-model="model.name" placeholder="Model Name (required)"
+                                   required ng-minlength="5" ng-maxlength="50">
+                            <span class="help-block has-error">
+                                <span ng-show="modelForm.inputName.$error.required">
+                                    Model name is required.
+                                </span>
+                                <span ng-show="modelForm.inputName.$error.minlength">
+                                    Model name must be at least 5 characters in length.
+                                </span>
+                                <span ng-show="modelForm.inputName.$error.maxlength">
+                                    Model name cannot exceed 50 characters in length.
+                                </span>
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="inputDescription">Description:</label>
+                        <div class="col-sm-5">
+                            <textarea name="inputDescription" class="form-control" rows="3"
+                                      ng-model="model.description" placeholder="Description"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-5">
+                                <button type="submit" class="btn btn-primary"
+                                        ng-click="add()"
+                                        ng-disabled="modelForm.$invalid && modelForm.$dirty">
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
+    </div>
+    <div class="row">
         <div class="form-group">
             <table class="table table-bordered table-hover tc-table">
                 <thead>
@@ -25,7 +82,7 @@
                 <tbody>
                     <tr ng-repeat="model in models">
                         <td>
-                            <a ui-sref="modelDetail({modelId: model._id})">
+                            <a ui-sref="modelInfo.detail({modelId: model._id})">
                                 {{model.name}}
                             </a>
                         </td>
@@ -51,5 +108,5 @@
                 </tbody>
             </table>
         </div>
-    </div>    
+    </div>
 </div>

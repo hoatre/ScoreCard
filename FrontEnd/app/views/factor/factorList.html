@@ -17,57 +17,165 @@
                     <option value="">Please select</option>
                 </select>
             </div>
-        </div>        
-    </div>
-    <div class="row" ng-show='choiceModel != ""? true : false'>
-        <br />
-        <div class="col-sm-8">
-            <table class="table table-bordered table-hover tc-table">
-                <tbody>
-                    <tr>
-                        <td class="hidden-xs">
-                            Status
-                        </td>
-                        <td class="hidden-xs">
-                            {{model.status}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="hidden-xs">
-                            Minimum Score
-                        </td>
-                        <td class="hidden-xs">
-                            {{model.min}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="hidden-xs">
-                            Maximum Score
-                        </td>
-                        <td class="hidden-xs">
-                            {{model.max}}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
-        <div class="col-sm-4">
-            <div class="form-group" ng-show="model.status != 'publish'">
-                <button type="button" id="btnGennerateScoringRange" class="btn btn-default"
-                        ng-click='gennerateScoringRange()'>
-                    Generate Scoring Range
-                </button>
-                <button type="button" id="btnValidateModel" class="btn btn-default"
-                        ng-click='validateModel()'>
-                    Validate Model
-                </button>
+    </div>
+    <div class="row" ng-show='choiceModel != null && choiceModel != ""? true : false'>
+        <br />
+        <div class="portlet portlet-basic" ng-init="isCollapsed = true">
+            <div class="portlet-heading">
+                <div class="portlet-title">
+                    <h4>Model Information</h4>
+                </div>
+                <div class="portlet-widgets">
+                    <a href="" ng-click="isCollapsed = !isCollapsed">
+                        <i class="fa" ng-class="isCollapsed? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                    </a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div collapse="isCollapsed">
+                <br class="space-4" />
+                <div class="row">
+                    <div class="col-sm-7 col-sm-offset-1">
+                        <table class="table table-bordered table-hover tc-table">
+                            <tbody>
+                                <tr>
+                                    <td class="hidden-xs">
+                                        Status
+                                    </td>
+                                    <td class="hidden-xs">
+                                        {{model.status}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="hidden-xs">
+                                        Minimum Score
+                                    </td>
+                                    <td class="hidden-xs">
+                                        {{model.min}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="hidden-xs">
+                                        Maximum Score
+                                    </td>
+                                    <td class="hidden-xs">
+                                        {{model.max}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group" ng-show="model.status != 'publish'">
+                            <button type="button" id="btnGennerateScoringRange" class="btn btn-primary"
+                                    ng-click='gennerateScoringRange()'>
+                                Generate Scoring Range
+                            </button>
+                            <button type="button" id="btnValidateModel" class="btn btn-default"
+                                    ng-click='validateModel()'>
+                                Validate Model
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-show='choiceModel != null && choiceModel != ""? true : false'>
+        <br />
+        <div class="portlet portlet-basic" ng-init="isCollapsedFactor = true">
+            <div class="portlet-heading">
+                <div class="portlet-title">
+                    <h4>Factor Information</h4>
+                </div>
+                <div class="portlet-widgets">
+                    <a href="" ng-click="isCollapsedFactor = !isCollapsedFactor">
+                        <i class="fa" ng-class="isCollapsedFactor? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                    </a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div collapse="isCollapsedFactor">
+                <br class="space-4" />
+                <form class="form-horizontal" id="factorForm" name="factorForm" novalidate>
+                    <fieldset>
+                        <legend>Factor Information</legend>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Parent Factor:</label>
+                            <div class="col-sm-5">
+                                <select id="cboFactor" class="form-control" name="cboFactor"
+                                        ng-model="choiceFactor"
+                                        ng-options="fact._id as fact.FactorName for fact in factors">
+                                    <option value="">Please select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group"
+                             ng-class="{'has-error':factorForm.inputName.$invalid &&
+                                    factorForm.inputName.$dirty}">
+                            <label class="col-sm-3 control-label">Name:</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="inputName" class="form-control"
+                                       ng-model="factor.FactorName" placeholder="Factor Name (required)" required>
+                            </div>
+                            <span class="help-block has-error">
+                                <span class="error" ng-show="factorForm.inputName.$error.required">
+                                    Factor name is required.
+                                </span>
+                            </span>
+                        </div>
+                        <div class="form-group"
+                             ng-class="{'has-error':factorForm.inputWeigth.$invalid &&
+                                    factorForm.inputWeigth.$dirty}">
+                            <label class="col-sm-3 control-label">Weight:</label>
+                            <div class="col-sm-5">
+                                <div class="input-group">
+                                    <input type="number" name="inputWeigth" class="form-control"
+                                           min="0" max="100"
+                                           ng-model="factor.Weight" required>
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                            <span class="help-block has-error">
+                                <span class="error" ng-show="factorForm.inputWeigth.$error.required">
+                                    Factor weigth is required.
+                                </span>
+                                <span class="error" ng-show="factorForm.inputWeigth.$error.number">
+                                    Not valid number!
+                                </span>
+                                <span class="error" ng-show="factorForm.inputWeigth.$error.min">
+                                    Factor weigth min is  0!
+                                </span>
+                                <span class="error" ng-show="factorForm.inputWeigth.$error.max">
+                                    Factor weigth max is  100!
+                                </span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="subscription">Description:</label>
+                            <div class="col-sm-5">
+                                <textarea name="inputDescription" class="form-control" rows="3"
+                                          ng-model="factor.Description" placeholder="Description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button type="submit" class="btn btn-primary"
+                                            ng-click="add()"
+                                            ng-disabled="factorForm.$invalid && factorForm.$dirty">
+                                        Add
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="form-group" ng-show="model.status == 'draft'">
-            <a id="btnInsert" class="btn btn-primary" ui-sref="factorEdit({modelId: choiceModel, factorId: ''})">Add</a>
-        </div>
         <div class="form-group">
             <!--tree-->
             <div id="treeGrid">
@@ -82,10 +190,10 @@
         $('table th input:checkbox').on('click', function () {
             var that = this;
             $(this).closest('table').find('tr > td:first-child input:checkbox')
-					.each(function () {
-					    this.checked = that.checked;
-					    $(this).closest('tr').toggleClass('selected');
-					});
+                    .each(function () {
+                        this.checked = that.checked;
+                        $(this).closest('tr').toggleClass('selected');
+                    });
 
         });
     });

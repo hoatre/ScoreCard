@@ -32,38 +32,59 @@
         // Model select change
         $scope.modelChanged = function (id) {
             //console.log(id);
+            if (id == null || id == '') {
+                $scope.model = {};
+                $scope.factors = {};
+                $scope.bindTreeData($scope.factors);
+                return;
+            }
 
+            // Selected model
             for (var i = 0; i < $scope.models.length; i++) {
                 if ($scope.models[i]._id == id) {
                     $scope.model = $scope.models[i];
-                    //console.log($scope.model.min);
                 }
             }
 
             $http.post(appSettings.serverPath + "/modelinfo/view", { _id: $scope.model._id }).
                 success(function (data, status, headers, config) {
 
-                    var factorTreeList = [];
-                    //alert(data["viewModelInfo"]["header"].code);
                     if (data["viewModelInfo"]["header"].code == 0) {
-                        for (var i = 0; i < data["viewModelInfo"]["body"].length; i++) {
-                            var factortree = {
-                                "factorid": data["viewModelInfo"]["body"][i]._id,
-                                "parentid": data["viewModelInfo"]["body"][i].Parentid,
-                                "name": data["viewModelInfo"]["body"][i].FactorName,
-                                "description": data["viewModelInfo"]["body"][i].Description,
-                                "weight": data["viewModelInfo"]["body"][i].Weight + "%",
-                                "status": data["viewModelInfo"]["body"][i].Status
-                            };
-                            factorTreeList.push(factortree);
-                        }
+                        $scope.factors = data.viewModelInfo.body;
+    
+                        $scope.bindTreeData($scope.factors);
                     }
                     else {
                         //alert(data["viewModelInfo"]["header"].message);
                     }
-                    //console.log(1);
-                    // prepare the data
-                    var source =
+
+                    
+                })
+                .error(function (data, status, headers, config) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
+        }
+
+        // Bind tree data
+        $scope.bindTreeData = function (factors) {
+
+            var factorTreeList = [];
+
+            for (var i = 0; i < factors.length; i++) {
+                var factor = factors[i];
+                var factortree = {
+                    "factorid": factor._id,
+                    "parentid": factor.Parentid,
+                    "name": factor.FactorName,
+                    "description": factor.Description,
+                    "weight": factor.Weight + "%",
+                    "status": factor.Status
+                };
+                factorTreeList.push(factortree);
+            }
+
+            var source =
                     {
                         dataType: "json",
                         dataFields: [
@@ -82,54 +103,46 @@
                         id: 'factorid',
                         localData: factorTreeList
                     };
-                    //console.log(2);
-                    var dataAdapter = new $.jqx.dataAdapter(source);
-                    // create Tree Grid
-                    $("#treeGrid").jqxTreeGrid(
-                        {
-                            width: "100%",
-                            source: dataAdapter,
-                            sortable: true,
-                            ready: function () {
-                                $("#treeGrid").jqxTreeGrid('expandRow', '2');
-                            },
-                            rendered: function () {
-                                $(".deleteButtons").click(function (event) {
-                                    // end edit and cancel changes.
-                                    var factorId = event.target.getAttribute('data-row');
-                                    $scope.factorDelete(factorId);                                     
-                                });
 
-                            },
-                            columns: [
-                                { text: 'Name', columnGroup: 'name', dataField: 'name', width: 500 },
-                                { text: 'Description', dataField: 'description' },
-                                { text: 'Weight', columnGroup: 'weight', dataField: 'weight', width: 80 },
-                                {
-                                    text: 'Action', cellsAlign: 'center', align: "center", width: 130, columnType: 'none', editable: false, sortable: false, dataField: null, cellsRenderer: function (row, column, value) {
-                                        // render custom column.
-                                        //console.log($scope.model.Status);
-                                        if ($scope.model.status == 'draft') {
-                                            return "<a href='#/factors/edit/" + $scope.model._id + "/" + row + "'>edit</a>|"
-                                                + "<a  data-row='" + row + "' class='deleteButtons'>delete</a>";
-                                        }
-                                        else {
-                                            return "";
-                                        }
-                                    }
-                                }
-                            ],
-                            /*columnGroups: [
-                                { text: 'Name', name: 'Name' }
-                            ]*/
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            // create Tree Grid
+            $("#treeGrid").jqxTreeGrid(
+                {
+                    width: "100%",
+                    source: dataAdapter,
+                    sortable: true,
+                    ready: function () {
+                        $("#treeGrid").jqxTreeGrid('expandRow', '3');
+                    },
+                    rendered: function () {
+                        $(".deleteButtons").click(function (event) {
+                            // end edit and cancel changes.
+                            var factorId = event.target.getAttribute('data-row');
+                            $scope.factorDelete(factorId);
                         });
-                    //console.log(3);
-                })
-                .error(function (data, status, headers, config) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+
+                    },
+                    columns: [
+                        { text: 'Name', columnGroup: 'name', dataField: 'name', width: 500 },
+                        { text: 'Description', dataField: 'description' },
+                        { text: 'Weight', columnGroup: 'weight', dataField: 'weight', width: 80 },
+                        {
+                            text: 'Action', cellsAlign: 'center', align: "center", width: 130, columnType: 'none', editable: false, sortable: false, dataField: null, cellsRenderer: function (row, column, value) {
+                                // render custom column.
+                                //console.log($scope.model.Status);
+                                if ($scope.model.status == 'draft') {
+                                    return "<a href='#/factors/edit/" + $scope.model._id + "/" + row + "'>Edit</a>|"
+                                        + "<a  data-row='" + row + "' class='deleteButtons'>Delete</a>";
+                                }
+                                else {
+                                    return "";
+                                }
+                            }
+                        }
+                    ],
                 });
-        }
+        }               
 
         // Generator scoring range
         $scope.gennerateScoringRange = function () {
@@ -182,6 +195,37 @@
                       });
             }
         }
-    }
 
+        // add data
+        $scope.add = function () {
+            var factors = {};
+
+            if (typeof $scope.factor._id == 'undefined' || $scope.factor._id == '') {
+                $scope.factor.ModelId = $scope.choiceModel;
+                $scope.factor.Parentid = $scope.choiceFactor;
+                $scope.factor.ParentName = '';
+                $scope.factor.Name = $scope.factor.FactorName;
+                $scope.factor.Ordinal = 0;
+                $scope.factor.Status = 'status';
+                $scope.factor.Note = '';
+            }
+
+            $http.post(appSettings.serverPath + "/factor/insert", $scope.factor)
+              .success(function (data, status, headers, config) {
+                  if (data.insertFactor.header.code == 0) {
+                      $scope.factors.push(data.insertFactor.body);
+                      $scope.bindTreeData($scope.factors);
+                      popupService.showMessage('Insert success!');
+                      $scope.factor = {};
+                  }
+                  else {
+                      console.log(data.insertFactor.header.message);
+                  }
+              })
+              .error(function (data, status, headers, config) {
+                  // called asynchronously if an error occurs
+                  // or server returns response with an error status.
+              });
+        }
+    }    
 }());

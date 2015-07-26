@@ -41,6 +41,30 @@
                     });
             }
         }
+
+        // Add
+        $scope.add = function () {
+
+            if (!$scope.modelForm.$valid) {
+                return;
+            }
+            if ($scope.model._id == null || $scope.model._id == 'undefined' || $scope.model._id == '') {
+                $scope.model.status = 'draft';
+
+                $http.post(appSettings.serverPath + "/modelinfo/insert", $scope.model).
+                    success(function (data, status, headers, config) {
+                        //console.log(data.insertModelInfo.body)
+                        $scope.models.push(data.insertModelInfo.body);
+                        popupService.showMessage('Insert Success!');
+                        $scope.model = {};
+
+                    }).
+                    error(function (data, status, headers, config) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                    });
+            }            
+        }
         
         $scope.getAllModel();
     }

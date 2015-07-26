@@ -102,6 +102,35 @@
             }
         }
 
-        //$scope.modellistbymodelsatusangular();
+        // Add data
+        $scope.add = function () {
+
+            if (!$scope.factorOptionForm.$valid) {
+                return;
+            }
+
+            if (typeof $scope.factorOption.FactorOptionId == 'undefined' || $scope.factorOption.FactorOptionId == '') {
+                
+                $scope.factorOption.FactorId = $scope.choiceFactor;
+                $scope.factorOption.Status = "";
+            }
+
+            $http.post(appSettings.serverPath + "/factoroption/insertoption", $scope.factorOption)
+              .success(function (data, status, headers, config) {
+                  if (data.insertFactorOption.header.code == 0) {
+
+                      $scope.factorOptions.push(data.insertFactorOption.body);
+                      popupService.showMessage("Insert Success!");
+                      $scope.factorOption = {};
+                  }
+                  else {
+                      console.log(data.insertFactorOption.header.message);
+                  }
+              })
+              .error(function (data, status, headers, config) {
+                  // called asynchronously if an error occurs
+                  // or server returns response with an error status.
+              });
+        }
     }
 }());

@@ -1,14 +1,14 @@
 ﻿<div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Factor Optotions</h1>
+            <h1 class="page-header">Factor Options</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
     <!-- /.row -->
     <div class="row">
         <div class="form-group">
-            <label class="col-sm-3 control-label">Model:</label>
+            <label class="col-sm-2 control-label">Model:</label>
             <div class="col-sm-5">
                 <select id="cboModel" class="form-control" name="cboModel"
                         ng-model="choiceModel"
@@ -17,10 +17,18 @@
                     <option value="">Please select</option>
                 </select>
             </div>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-primary"
+                        ng-click='validateModel()'
+                        ng-if="factorOptions.length > 0"
+                        ng-if="choiceModel != null && choiceModel != ''">
+                    Validate Model
+                </button>
+            </div>
         </div>
         <br />
         <div class="form-group">
-            <label class="col-sm-3 control-label">Factor:</label>
+            <label class="col-sm-2 control-label">Factor:</label>
             <div class="col-sm-5">
                 <select id="cboFactor" class="form-control" name="cboFactor"
                         ng-model="choiceFactor"
@@ -31,17 +39,90 @@
                 </select>
             </div>
         </div>
+    </div>
+    <div class="row">
         <br />
-        <div class="form-group" ng-if="choiceModel != ''">
-            <a id="btnInsert" class="btn btn-primary"
-               ui-sref="factorOptionEdit({modelId: choiceModel,factorId: choiceFactor})"
-               ng-if="choiceFactor != '' && model.status == 'draft' ">Add</a>
-            <button type="button" class="btn btn-default"
-                    ng-click='validateModel()'
-                    ng-if="factorOptions.length > 0">
-                Validate Model
-            </button>
+        <div class="portlet portlet-basic" ng-init="isCollapsed = true">
+            <div class="portlet-heading">
+                <div class="portlet-title">
+                    <h4>Model Information</h4>
+                </div>
+                <div class="portlet-widgets">
+                    <a href="" ng-click="isCollapsed = !isCollapsed">
+                        <i class="fa" ng-class="isCollapsed? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                    </a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div collapse="isCollapsed">
+                <br class="space-4" />
+                <form class="form-horizontal" id="factorOptionForm" name="factorOptionForm" novalidate>
+                    <div class="form-group"
+                         ng-class="{'has-error':factorOptionForm.inputName.$invalid &&
+                                    factorOptionForm.inputName.$dirty}">
+                        <label class="col-sm-3 control-label">Name:</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="inputName" class="form-control"
+                                   ng-model="factorOption.FactorOptionName"
+                                   placeholder="Factor Option Name (required)" required>
+                        </div>
+                        <span class="help-block has-error">
+                            <span class="error" ng-show="factorOptionForm.inputName.$error.required">
+                                Factor option name is required.
+                            </span>
+                        </span>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{'has-error':factorOptionForm.inputScore.$invalid &&
+                                    factorOptionForm.inputScore.$dirty}">
+                        <label class="col-sm-3 control-label">Score:</label>
+                        <div class="col-sm-5">
+                            <input type="number" name="inputScore" class="form-control"
+                                   ng-model="factorOption.Score"
+                                   min="0" max="1000" required>
+                        </div>
+                        <span class="help-block has-error">
+                            <span class="error" ng-show="factorOptionForm.inputScore.$error.number">
+                                Not valid number!
+                            </span>
+                            <span class="error" ng-show="factorOptionForm.inputScore.$error.min">
+                                Factor option score min is 0!
+                            </span>
+                            <span class="error" ng-show="factorOptionForm.inputScore.$error.required">
+                                Factor option score is required.
+                            </span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Fatal:</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="inputFatal" class="form-control"
+                                   ng-model="factorOption.Fatal">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Description:</label>
+                        <div class="col-sm-5">
+                            <textarea class="form-control" name="inputDescription" rows="3"
+                                      ng-model="factorOption.Description"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="submit" class="btn btn-primary"
+                                        ng-click="add()"
+                                        ng-disabled="factorOptionForm.$invalid && factorOptionForm.$dirty">
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
+    </div>
+    <div class="row">
         <table class="table table-bordered table-hover tc-table">
             <thead>
                 <tr>
@@ -53,23 +134,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="factorOption in factorOptions">
+                <tr ng-repeat="factorOpt in factorOptions">
                     <td>
-                        {{factorOption.FactorOptionName}}
+                        {{factorOpt.FactorOptionName}}
                     </td>
                     <td class="hidden-xs">
-                        {{factorOption.Description}}
+                        {{factorOpt.Description}}
                     </td>
                     <td class="hidden-xs">
-                        {{factorOption.Score}}
+                        {{factorOpt.Score}}
                     </td>
                     <td class="hidden-xs">
-                        {{factorOption.Fatal}}
+                        {{factorOpt.Fatal}}
                     </td>
                     <td class="col-medium center">
                         <div class="btn-group btn-group-xs " ng-show="{{model.status == 'draft'?true:false}}">
-                            <a ui-sref="factorOptionEdit({modelId: choiceModel, factorId: choiceFactor, factorOptionId: factorOption.FactorOptionId})" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
-                            <a ng-click='factorOptionDelete(factorOption.FactorOptionId,choiceFactor)' class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
+                            <a ui-sref="factorOptionEdit({modelId: choiceModel, factorId: choiceFactor, factorOptionId: factorOpt.FactorOptionId})" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a ng-click='factorOptionDelete(factorOpt.FactorOptionId,choiceFactor)' class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
                         </div>
                     </td>
                 </tr>
