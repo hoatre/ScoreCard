@@ -10,6 +10,7 @@
 
         $scope.choiceModel = '';
         $scope.model = {};
+        $scope.factors = {};
 
         // ModeId
         if ($stateParams.modelId != '') {
