@@ -51,14 +51,14 @@
 
                     if (data["viewModelInfo"]["header"].code == 0) {
                         $scope.factors = data.viewModelInfo.body;
-    
+
                         $scope.bindTreeData($scope.factors);
                     }
                     else {
                         //alert(data["viewModelInfo"]["header"].message);
                     }
 
-                    
+
                 })
                 .error(function (data, status, headers, config) {
                     // called asynchronously if an error occurs
@@ -142,7 +142,7 @@
                         }
                     ],
                 });
-        }               
+        }
 
         // Generator scoring range
         $scope.gennerateScoringRange = function () {
@@ -200,15 +200,18 @@
         $scope.add = function () {
             var factors = {};
 
-            if (typeof $scope.factor._id == 'undefined' || $scope.factor._id == '') {
-                $scope.factor.ModelId = $scope.choiceModel;
-                $scope.factor.Parentid = $scope.choiceFactor;
-                $scope.factor.ParentName = '';
-                $scope.factor.Name = $scope.factor.FactorName;
-                $scope.factor.Ordinal = 0;
-                $scope.factor.Status = 'status';
-                $scope.factor.Note = '';
+            if ($scope.choiceModel == null || $scope.choiceModel == '') {
+                console.log('Model not null!');
+                return;
             }
+
+            $scope.factor.ModelId = $scope.choiceModel;
+            $scope.factor.Parentid = $scope.choiceFactor == null ? '' : $scope.choiceFactor;
+            $scope.factor.ParentName = '';
+            $scope.factor.Name = $scope.factor.FactorName;
+            $scope.factor.Ordinal = 0;
+            $scope.factor.Status = 'status';
+            $scope.factor.Note = '';
 
             $http.post(appSettings.serverPath + "/factor/insert", $scope.factor)
               .success(function (data, status, headers, config) {
@@ -227,5 +230,5 @@
                   // or server returns response with an error status.
               });
         }
-    }    
+    }
 }());
