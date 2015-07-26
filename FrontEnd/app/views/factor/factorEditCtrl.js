@@ -77,8 +77,8 @@
                 strMsg = "updateFactor";
             }
 
-            $http.post(url, angular.toJson(factors)).
-              success(function (data, status, headers, config) {
+            $http.post(url, angular.toJson(factors))
+              .success(function (data, status, headers, config) {
                   if (data[strMsg]["header"].code == 0) {
                       popupService.showMessage(strMsg + ' success!');
                       $scope.back();
@@ -86,8 +86,8 @@
                   else {
                       alert(data[strMsg]["header"].message);
                   }
-              }).
-              error(function (data, status, headers, config) {
+              })
+              .error(function (data, status, headers, config) {
                   // called asynchronously if an error occurs
                   // or server returns response with an error status.
               });

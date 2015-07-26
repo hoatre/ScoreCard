@@ -66,7 +66,7 @@ angular
         })
         .state('ratingList', {
             templateUrl: 'app/views/rating/ratingList.html',
-            url: '/ratings',
+            url: '/ratings/:modelId',
             controller: "RatingListCtrl"
         })
         .state('ratingEdit', {

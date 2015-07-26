@@ -35,8 +35,12 @@
         <div class="form-group" ng-if="choiceModel != ''">
             <a id="btnInsert" class="btn btn-primary"
                ui-sref="factorOptionEdit({modelId: choiceModel,factorId: choiceFactor})"
-               ng-if="choiceFactor != ''">Add</a>
-            <button type="button" ng-click='validateModel()' class="btn btn-default">Validate Model</button>
+               ng-if="choiceFactor != '' && model.status == 'draft' ">Add</a>
+            <button type="button" class="btn btn-default"
+                    ng-click='validateModel()'
+                    ng-if="factorOptions.length > 0">
+                Validate Model
+            </button>
         </div>
         <table class="table table-bordered table-hover tc-table">
             <thead>
@@ -63,7 +67,7 @@
                         {{factorOption.Fatal}}
                     </td>
                     <td class="col-medium center">
-                        <div class="btn-group btn-group-xs " ng-show="{{factorOption.status=='draft'?true:false}}">
+                        <div class="btn-group btn-group-xs " ng-show="{{model.status == 'draft'?true:false}}">
                             <a ui-sref="factorOptionEdit({modelId: choiceModel, factorId: choiceFactor, factorOptionId: factorOption.FactorOptionId})" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
                             <a ng-click='factorOptionDelete(factorOption.FactorOptionId,choiceFactor)' class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
                         </div>

@@ -11,7 +11,7 @@
             <label class="col-sm-2 control-label">Model:</label>
             <div class="col-sm-5">
                 <div class="clearfix">
-                    <select id="cboModel" style="width:200px" name="cboModel"
+                    <select id="cboModel" class="form-control" name="cboModel"
                             ng-change="cboModelChange(selectModel)"
                             ng-model="selectModel"
                             ng-options="model._id as model.name for model in models">

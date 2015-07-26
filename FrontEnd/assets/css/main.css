@@ -1,4 +1,4 @@
-/* Space out content a bit */
+﻿/* Space out content a bit */
 body {
     padding-bottom: 20px;
 }
@@ -91,3 +91,8 @@ background-color: #eee;
 .unstyled {
     list-style: outside none none;
 }
+
+input[type="radio"] {
+    float:left;
+}
+

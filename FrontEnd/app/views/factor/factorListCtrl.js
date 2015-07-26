@@ -11,10 +11,12 @@
         $scope.choiceModel = '';
         $scope.model = {};
 
-        //load form list factorlist
+        // ModeId
         if ($stateParams.modelId != '') {
             $scope.choiceModel = $stateParams.modelId;
         }
+
+        // Get all model
         $http.get(appSettings.serverPath + "/modelinfo/getall")
                .success(function (data) {
                    //console.log(data);
@@ -24,9 +26,10 @@
                    if ($scope.choiceModel != '') {
                        $scope.modelChanged($scope.choiceModel);
                    }
-               })
+               });
 
 
+        // Model select change
         $scope.modelChanged = function (id) {
             //console.log(id);
 
@@ -40,9 +43,7 @@
             $http.post(appSettings.serverPath + "/modelinfo/view", { _id: $scope.model._id }).
                 success(function (data, status, headers, config) {
 
-                    //$scope.model = data["SUCCESS"];
-                    //console.log(data);
-                    var factortreelist = [];
+                    var factorTreeList = [];
                     //alert(data["viewModelInfo"]["header"].code);
                     if (data["viewModelInfo"]["header"].code == 0) {
                         for (var i = 0; i < data["viewModelInfo"]["body"].length; i++) {
@@ -54,7 +55,7 @@
                                 "weight": data["viewModelInfo"]["body"][i].Weight + "%",
                                 "status": data["viewModelInfo"]["body"][i].Status
                             };
-                            factortreelist.push(factortree);
+                            factorTreeList.push(factortree);
                         }
                     }
                     else {
@@ -79,7 +80,7 @@
                             parentDataField: { name: 'parentid' }
                         },
                         id: 'factorid',
-                        localData: factortreelist
+                        localData: factorTreeList
                     };
                     //console.log(2);
                     var dataAdapter = new $.jqx.dataAdapter(source);
