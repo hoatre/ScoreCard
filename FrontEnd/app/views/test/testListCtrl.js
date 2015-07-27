@@ -3,20 +3,21 @@
     angular
         .module("sbAdminApp")
         .controller("TestListCtrl",
-                    ["$scope", "$http", "appSettings", "modelResource",
+                    ["$scope", "$http", "$stateParams", "appSettings", "modelResource",
                      TestListCtrl]);
 
-    function TestListCtrl($scope, $http, appSettings, modelResource) {
+    function TestListCtrl($scope, $http, $stateParams, appSettings, modelResource) {
 
         $scope.models = [];
         $scope.factors = [];
         $scope.ratings = [];
-        $scope.selectModel = '';
+        $scope.selectModel = $stateParams.modelId;
 
         $scope.currentModel = {};
 
         $scope.message = '';
         $scope.messageClass = 'col-md-6 wel bg-info';
+
 
         $scope.getAllModels = function () {
             //$http.get(appSettings.serverPath + "/modelinfo/getall")
@@ -28,6 +29,10 @@
             modelResource.getAll.query(
                 function (data) {
                     $scope.models = data.getModelInfoJSON.body;
+
+                    if ($scope.selectModel != null && $scope.selectModel != '' && $scope.models.length > 0) {
+                        $scope.cboModelChange($scope.selectModel);
+                    }
                 },
             function (response) {
                 $scope.message = response.statusText + "\r\n";

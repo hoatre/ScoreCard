@@ -9,6 +9,7 @@
     function RatingListCtrl($scope, $http, $state, $stateParams, appSettings, popupService) {
 
         $scope.choiceModel = $stateParams.modelId;
+        $scope.rating = {};
 
         $http.get(appSettings.serverPath + "/modelinfo/getall")
                 .success(function (data) {
@@ -120,12 +121,16 @@
 
         // Add data
         $scope.add = function () {
-
+            
+            if ($scope.choiceModel == null || $scope.choiceModel == '') {
+                popupService.showMessage('You must choise model!')
+                return;
+            }
             $scope.rating.statusname = $scope.rating.status;
             $scope.rating.note = '';
 
             var ratingobj = {
-                modelid: $stateParams.modelId,
+                modelid: $scope.choiceModel,
                 codein: $scope.rating
             };
 

@@ -143,6 +143,12 @@
                         }
                     ],
                 });
+
+            var rows = $("#treeGrid").jqxTreeGrid('getRows');
+            for (var i = 0; i < rows.length; i++) {
+                var key = $("#treeGrid").jqxTreeGrid('getKey', rows[i]);
+                $("#treeGrid").jqxTreeGrid('expandRow', key);
+            }
         }
 
         // Generator scoring range
@@ -178,9 +184,8 @@
             if (popupService.showPopup('Are you sure delete this factor?')) {
                 $http.post(appSettings.serverPath + "/factor/delete", { _id: factorId })
                       .success(function (data, status, headers, config) {
-                          //console.log(data);
                           //$scope.factors.splice(index, 1);
-                          if (data["deleteFactor"]["header"].code == 0) {
+                          if (data.deleteFactor.header.code == 0) {
                               $("#treeGrid").jqxTreeGrid('deleteRow', factorId);
                               return true;
                           }

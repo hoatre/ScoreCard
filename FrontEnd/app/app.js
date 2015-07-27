@@ -17,7 +17,7 @@ angular
     'ngSanitize'
   ])
     .constant("appSettings", {
-        serverPath: "http://10.15.171.35:8080"
+        serverPath: "http://localhost:8080"
     })
   .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
@@ -26,7 +26,7 @@ angular
           events: true,
       });
 
-      $urlRouterProvider.otherwise('/home');
+      $urlRouterProvider.otherwise('/models');
 
       $stateProvider
           .state('modelList', {
@@ -58,6 +58,11 @@ angular
               url: '/ratings',
               controller: "RatingListCtrl"
           })
+          .state('modelInfo.active', {
+              templateUrl: 'app/views/active/active.html',
+              url: '/active',
+              controller: "TestListCtrl"
+          })
         .state('factorList', {
             templateUrl: 'app/views/factor/factorList.html',
             url: '/factors/:modelId',
@@ -88,12 +93,12 @@ angular
             url: '/ratings/edit/:modelId/:ratingCode',
             controller: "RatingEditCtrl"
         })
-        .state('test', {
+        .state('testList', {
             templateUrl: 'app/views/test/test.html',
             url: '/test',
             controller: "TestListCtrl"
         })
-        .state('active', {
+        .state('activeList', {
             templateUrl: 'app/views/active/active.html',
             url: '/active',
             controller: "TestListCtrl"

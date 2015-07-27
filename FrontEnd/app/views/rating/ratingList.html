@@ -82,7 +82,7 @@
             </div>
         </div>
     </div>
-    <div class="row" ng-show='choiceModel != null && choiceModel != ""? true : false'>
+    <div class="row" ng-if='choiceModel != null && choiceModel != "" && model.max != 0'>
         <br />
         <div class="portlet portlet-basic" ng-init="isCollapsedFactor = true">
             <div class="portlet-heading">
@@ -214,22 +214,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="rating in ratings">
+                <tr ng-repeat="rptRating in ratings">
                     <td class="hidden-xs">
-                        {{rating.code}}
+                        {{rptRating.code}}
                     </td>
                     <td class="hidden-xs">
-                        {{rating.scorefrom}}
+                        {{rptRating.scorefrom}}
                     </td>
                     <td class="hidden-xs">
-                        {{rating.scoreto}}
+                        {{rptRating.scoreto}}
                     </td>
                     <td class="hidden-xs">
-                        {{rating.status}}
+                        {{rptRating.status}}
                     </td>
                     <td class="col-medium center">
                         <div class="btn-group btn-group-xs " ng-show="{{model.status=='draft'?true:false}}">
-                            <a ui-sref="ratingEdit({modelId: choiceModel, ratingCode: rating.code})" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a ui-sref="ratingEdit({modelId: choiceModel, ratingCode: rptRating.code})" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
                             <a ng-click='ratingDelete($index)' class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
                         </div>
                     </td>

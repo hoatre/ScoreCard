@@ -33,7 +33,12 @@
             if (popupService.showPopup('Are you sure delete this model?')) {
                 $http.post(appSettings.serverPath + "/modelinfo/delete", { _id: $scope.models[index]._id })
                     .success(function (data, status, headers, config) {
-                        $scope.models.splice(index, 1);
+                        if (data.deleteModelInfo.header.code == 0) {
+                            $scope.models.splice(index, 1);
+                        }
+                        else {
+                            popupService.showMessage(data.deleteModelInfo.header.message);
+                        }
                     })
                     .error(function (data, status, headers, config) {
                         // called asynchronously if an error occurs
@@ -53,10 +58,15 @@
 
                 $http.post(appSettings.serverPath + "/modelinfo/insert", $scope.model).
                     success(function (data, status, headers, config) {
-                        //console.log(data.insertModelInfo.body)
-                        $scope.models.push(data.insertModelInfo.body);
-                        popupService.showMessage('Insert Success!');
-                        $scope.model = {};
+                        if (data.insertModelInfo.header.code == 0) {
+                            $scope.models.push(data.insertModelInfo.body);
+                            popupService.showMessage('Insert Success!');
+                            $scope.model = {};
+                            modelForm.$setPristine();
+                        }
+                        else {
+                            popupService.showMessage(data.insertModelInfo.header.message);
+                        }
 
                     }).
                     error(function (data, status, headers, config) {
