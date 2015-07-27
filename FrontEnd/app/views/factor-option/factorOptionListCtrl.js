@@ -11,7 +11,7 @@
         $scope.model = {};
         $scope.factors = {};
         $scope.factorOption = {};
-        $scope.factorOption.Fatal = 'yes';
+        $scope.factorOption.Fatal = 'no';
         $scope.factorOptions = {};
 
         $scope.choiceModel = $stateParams.modelId;
@@ -124,7 +124,7 @@
                       $scope.factorOptions.push(data.insertFactorOption.body);
                       //popupService.showMessage("Insert Success!");
                       $scope.factorOption = {};
-                      $scope.factorOption.Fatal = 'yes';
+                      $scope.factorOption.Fatal = 'no';
                       editForm.$setPristine();
                   }
                   else {
