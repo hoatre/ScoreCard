@@ -50,43 +50,25 @@
                         });
                     }
                     else {
-                        //console.log('AA');
                         $scope.modelRatings = [];
                         $scope.ratings = [];
                     }
 
-                })
-
-        }
-
-        // Vadlidate rating
-        $scope.ratingCheckRating = function () {
-            $scope.ratingCheckRating = function () {
-                for (var i = 0; i < ($scope.ratings.length - 1) ; i++) {
-                    if ($scope.ratings[i].scoreto != $scope.ratings[i + 1].scorefrom) {
-                        console.log("Rating in model false!");
-                        return false;
-                    }
-                }
-                console.log("Rating in model true!");
-            }
+                });
         }
 
         // Generator scoring range
         $scope.gennerateScoringRange = function () {
-            $scope.gennerateScoringRange = function (index) {
-                //console.log(url_modelrangerandupdateangular_scala);
-                $http.post(url_modelrangerandupdateangular_scala, { id: $scope.model._id })
-                    .success(function (data, status, headers, config) {
-                        $scope.model = data["SUCCESS"];
-                        //console.log($scope.model.name+"-->"+$scope.model.min);
-                    })
-                    .error(function (data, status, headers, config) {
-                        // called asynchronously if an error occurs
-                        // or server returns response with an error status.
-                    });
+            $http.post(url_modelrangerandupdateangular_scala, { id: $scope.model._id })
+                .success(function (data, status, headers, config) {
+                    $scope.model = data["SUCCESS"];
+                    //console.log($scope.model.name+"-->"+$scope.model.min);
+                })
+                .error(function (data, status, headers, config) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
 
-            }
         }
 
         $scope.validateModel = function () {
@@ -97,10 +79,15 @@
 
         // Delete data
         $scope.ratingDelete = function (index) {
-            if (popupService.showPopup('Are you sure delete this model?')) {
+            if (popupService.showPopup('Are you sure delete this rating?')) {
                 $http.post(appSettings.serverPath + "/rating/delete", { modelid: $scope.choiceModel, code: $scope.ratings[index].code })
                     .success(function (data, status, headers, config) {
-                        $scope.ratings.splice(index, 1);
+                        if (data.deleteRating.header.code == 0) {
+                            $scope.ratings.splice(index, 1);
+                        }
+                        else {
+                            popupService.showMessage(data.deleteRating.header.message);
+                        }
                     })
                     .error(function (data, status, headers, config) {
                         // called asynchronously if an error occurs
@@ -120,8 +107,8 @@
         }
 
         // Add data
-        $scope.add = function () {
-            
+        $scope.add = function (editForm) {
+
             if ($scope.choiceModel == null || $scope.choiceModel == '') {
                 popupService.showMessage('You must choise model!')
                 return;
@@ -139,7 +126,11 @@
                     if (data.Rating.header.code == 0) {
                         $scope.ratings.push($scope.rating);
                         $scope.rating = {};
-                        popupService.showMessage('Insert Success!');
+                        //popupService.showMessage('Insert Success!');
+                        editForm.$setPristine();
+                    }
+                    else {
+                        popupService.showMessage(data.Rating.header.message);
                     }
                 })
                 .error(function (data, status, headers, config) {

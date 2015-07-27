@@ -144,10 +144,8 @@
                     ],
                 });
 
-            var rows = $("#treeGrid").jqxTreeGrid('getRows');
-            for (var i = 0; i < rows.length; i++) {
-                var key = $("#treeGrid").jqxTreeGrid('getKey', rows[i]);
-                $("#treeGrid").jqxTreeGrid('expandRow', key);
+            for (var i = 0; i < factorTreeList.length; i++) {
+                $("#treeGrid").jqxTreeGrid('expandRow', factorTreeList[i].factorid);
             }
         }
 
@@ -190,7 +188,7 @@
                               return true;
                           }
                           else {
-
+                              popupService.showMessage(data.deleteFactor.header.message);
                               return false;
                           }
                       })
@@ -203,7 +201,7 @@
         }
 
         // add data
-        $scope.add = function () {
+        $scope.add = function (editForm) {
             var factors = {};
 
             if ($scope.choiceModel == null || $scope.choiceModel == '') {
@@ -224,11 +222,12 @@
                   if (data.insertFactor.header.code == 0) {
                       $scope.factors.push(data.insertFactor.body);
                       $scope.bindTreeData($scope.factors);
-                      popupService.showMessage('Insert success!');
+                      //popupService.showMessage('Insert success!');
                       $scope.factor = {};
+                      editForm.$setPristine();
                   }
                   else {
-                      console.log(data.insertFactor.header.message);
+                      popupService.showMessage(data.insertFactor.header.message);
                   }
               })
               .error(function (data, status, headers, config) {

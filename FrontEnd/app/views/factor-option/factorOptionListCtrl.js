@@ -82,7 +82,7 @@
                   success(function (data, status, headers, config) {
                       //console.log(data);
                       //window.location.assign("/factorOptions.html")
-                      if (data["deleteOptionFactor"]["header"].code == 0) {
+                      if (data.deleteOptionFactor.header.code == 0) {
                           for (var i = 0; i < $scope.factorOptions.length; i++) {
                               if ($scope.factorOptions[i].FactorOptionId == _id) {
                                   $scope.factorOptions.splice(i, 1);
@@ -90,7 +90,7 @@
                           }
                       }
                       else {
-                          alert(data["deleteOptionFactor"]["header"].message);
+                          popupService.showMessage(data.deleteOptionFactor.header.message);
                       }
 
 
@@ -103,7 +103,7 @@
         }
 
         // Add data
-        $scope.add = function () {
+        $scope.add = function (editForm) {
 
             if (!$scope.factorOptionForm.$valid) {
                 return;
@@ -120,11 +120,12 @@
                   if (data.insertFactorOption.header.code == 0) {
 
                       $scope.factorOptions.push(data.insertFactorOption.body);
-                      popupService.showMessage("Insert Success!");
+                      //popupService.showMessage("Insert Success!");
                       $scope.factorOption = {};
+                      editForm.$setPristine();
                   }
                   else {
-                      console.log(data.insertFactorOption.header.message);
+                      popupService.showMessage(data.insertFactorOption.header.message);
                   }
               })
               .error(function (data, status, headers, config) {

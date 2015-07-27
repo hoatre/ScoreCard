@@ -82,7 +82,7 @@
             </div>
         </div>
     </div>
-    <div class="row" ng-if='choiceModel != null && choiceModel != "" && model.max != 0'>
+    <div class="row" ng-if='choiceModel != null && choiceModel != "" && model.max != 0 && model.status != "publish"'>
         <br />
         <div class="portlet portlet-basic" ng-init="isCollapsedFactor = true">
             <div class="portlet-heading">
@@ -99,98 +99,98 @@
             <div collapse="isCollapsedFactor">
                 <br class="space-4" />
                 <form class="form-horizontal" id="ratingForm" name="ratingForm" novalidate>
-                        <div class="form-group"
-                             ng-class="{'has-error':ratingForm.inputCode.$invalid &&
+                    <div class="form-group"
+                         ng-class="{'has-error':ratingForm.inputCode.$invalid &&
                                     ratingForm.inputCode.$dirty}">
-                            <label class="col-sm-3 control-label">Code:</label>
-                            <div class="col-sm-5">
-                                <input type="text" name="inputCode" class="form-control"
-                                       ng-model="rating.code" placeholder="Rating Code (required)" required>
-                            </div>
-                            <span class="help-block has-error">
-                                <span class="error" ng-show="ratingForm.inputCode.$error.required">
-                                    Rating code is required.
-                                </span>
-                            </span>
+                        <label class="col-sm-3 control-label">Code:</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="inputCode" class="form-control"
+                                   ng-model="rating.code" placeholder="Rating Code (required)" required>
                         </div>
-                        <div class="form-group"
-                             ng-class="{'has-error':ratingForm.inputScoreFrom.$invalid &&
+                        <span class="help-block has-error">
+                            <span class="error" ng-show="ratingForm.inputCode.$error.required">
+                                Rating code is required.
+                            </span>
+                        </span>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{'has-error':ratingForm.inputScoreFrom.$invalid &&
                                     ratingForm.inputScoreFrom.$dirty
                                     || (rating.scorefrom < model.min)
                                     || (rating.scorefrom > model.max)}">
-                            <label class="col-sm-3 control-label">From:</label>
-                            <div class="col-sm-5">
-                                <input type="number" class="form-control" name="inputScoreFrom"
-                                       ng-model="rating.scorefrom"
-                                       placeholder="Rating score number (required)" required>
-                            </div>
-                            <span class="help-block has-error">
-                                <span class="error" ng-show="ratingForm.inputScoreFrom.$error.required">
-                                    Rating score To is required.
-                                </span>
-                                <span class="error" ng-show="ratingForm.inputScoreFrom.$error.number">
-                                    Not valid number!
-                                </span>
-                                <span class="error" ng-show="rating.scorefrom < model.min">
-                                    Rating score From min is {{model.min}}!
-                                </span>
-                                <span class="error" ng-show="rating.scorefrom > model.max">
-                                    Rating score Form max is {{model.max}}!
-                                </span>
-                            </span>
+                        <label class="col-sm-3 control-label">From:</label>
+                        <div class="col-sm-5">
+                            <input type="number" class="form-control" name="inputScoreFrom"
+                                   ng-model="rating.scorefrom"
+                                   placeholder="Rating score number (required)" required>
                         </div>
-                        <div class="form-group"
-                             ng-class="{'has-error':(ratingForm.inputScoreTo.$invalid &&
+                        <span class="help-block has-error">
+                            <span class="error" ng-show="ratingForm.inputScoreFrom.$error.required">
+                                Rating score To is required.
+                            </span>
+                            <span class="error" ng-show="ratingForm.inputScoreFrom.$error.number">
+                                Not valid number!
+                            </span>
+                            <span class="error" ng-show="rating.scorefrom < model.min">
+                                Rating score From min is {{model.min}}!
+                            </span>
+                            <span class="error" ng-show="rating.scorefrom > model.max">
+                                Rating score Form max is {{model.max}}!
+                            </span>
+                        </span>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{'has-error':(ratingForm.inputScoreTo.$invalid &&
                                     ratingForm.inputScoreTo.$dirty)
                                     || (rating.scoreto <= rating.scorefrom)
                                     || (rating.scoreto < model.min)
                                     || (rating.scoreto > model.max)}">
-                            <label class="col-sm-3 control-label">Up To:</label>
-                            <div class="col-sm-5">
-                                <input type="number" class="form-control" name="inputScoreTo"
-                                       ng-model="rating.scoreto"
-                                       placeholder="Rating score number (required)" required>
-                            </div>
-                            <span class="help-block has-error">
-                                <span class="error" ng-show="ratingForm.inputScoreTo.$error.required">
-                                    Rating score To is required.
-                                </span>
-                                <span class="error" ng-show="ratingForm.inputScoreTo.$error.number">
-                                    Not valid number!
-                                </span>
-                                <span class="error" ng-show="rating.scoreto < model.min">
-                                    Rating score To min is {{model.min}}!
-                                </span>
-                                <span class="error" ng-show="rating.scoreto > model.max">
-                                    Rating score To max is {{model.max}}!
-                                </span>
-                                <span class="error" ng-show="rating.scoreto <= rating.scorefrom">
-                                    Rating score To great From!
-                                </span>
+                        <label class="col-sm-3 control-label">Up To:</label>
+                        <div class="col-sm-5">
+                            <input type="number" class="form-control" name="inputScoreTo"
+                                   ng-model="rating.scoreto"
+                                   placeholder="Rating score number (required)" required>
+                        </div>
+                        <span class="help-block has-error">
+                            <span class="error" ng-show="ratingForm.inputScoreTo.$error.required">
+                                Rating score To is required.
                             </span>
+                            <span class="error" ng-show="ratingForm.inputScoreTo.$error.number">
+                                Not valid number!
+                            </span>
+                            <span class="error" ng-show="rating.scoreto < model.min">
+                                Rating score To min is {{model.min}}!
+                            </span>
+                            <span class="error" ng-show="rating.scoreto > model.max">
+                                Rating score To max is {{model.max}}!
+                            </span>
+                            <span class="error" ng-show="rating.scoreto <= rating.scorefrom">
+                                Rating score To great From!
+                            </span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Status:</label>
+                        <div class="col-sm-5">
+                            <select id="cboStatus" name="cboStatus" class="form-control" ng-model="rating.status" required>
+                                <option value="Approve">Approve</option>
+                                <option value="Underwriting">Underwriting</option>
+                                <option value="Reject">Reject</option>
+                            </select>
                         </div>
+                    </div>
+                    <div class="form-actions">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Status:</label>
-                            <div class="col-sm-5">
-                                <select id="cboStatus" name="cboStatus" class="form-control" ng-model="rating.status" required>
-                                    <option value="Approve">Approve</option>
-                                    <option value="Underwriting">Underwriting</option>
-                                    <option value="Reject">Reject</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <div class="form-group">
-                                <div class="col-sm-offset-3 col-sm-9">
-                                    <button type="submit" class="btn btn-primary"
-                                            ng-click="add()"
-                                            ng-disabled="ratingForm.$invalid && ratingForm.$dirty
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="submit" class="btn btn-primary"
+                                        ng-click="add(ratingForm)"
+                                        ng-disabled="ratingForm.$invalid && ratingForm.$dirty
                                     &&(rating.scoreto <= rating.scorefrom)">
-                                        Add
-                                    </button>
-                                </div>
+                                    Add
+                                </button>
                             </div>
                         </div>
+                    </div>
                 </form>
             </div>
         </div>

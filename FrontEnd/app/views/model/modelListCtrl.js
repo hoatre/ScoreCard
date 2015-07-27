@@ -48,7 +48,7 @@
         }
 
         // Add
-        $scope.add = function () {
+        $scope.add = function (editForm) {
 
             if (!$scope.modelForm.$valid) {
                 return;
@@ -60,9 +60,9 @@
                     success(function (data, status, headers, config) {
                         if (data.insertModelInfo.header.code == 0) {
                             $scope.models.push(data.insertModelInfo.body);
-                            popupService.showMessage('Insert Success!');
+                            //popupService.showMessage('Insert Success!');
                             $scope.model = {};
-                            modelForm.$setPristine();
+                            editForm.$setPristine();
                         }
                         else {
                             popupService.showMessage(data.insertModelInfo.header.message);

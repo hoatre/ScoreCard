@@ -96,6 +96,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Fatal:</label>
                         <div class="col-sm-5">
+                            <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">
                             <input type="text" name="inputFatal" class="form-control"
                                    ng-model="factorOption.Fatal">
                         </div>
@@ -111,7 +112,7 @@
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
                                 <button type="submit" class="btn btn-primary"
-                                        ng-click="add()"
+                                        ng-click="add(factorOptionForm)"
                                         ng-disabled="factorOptionForm.$invalid && factorOptionForm.$dirty">
                                     Add
                                 </button>
