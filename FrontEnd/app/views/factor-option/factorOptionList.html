@@ -96,9 +96,14 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Fatal:</label>
                         <div class="col-sm-5">
-                            <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">
-                            <input type="text" name="inputFatal" class="form-control"
-                                   ng-model="factorOption.Fatal">
+                            <label class="col-sm-2">
+                                <input type="radio" ng-model="factorOption.Fatal" value="yes" checked>
+                                Yes
+                            </label>
+                            <label class="col-sm-2">
+                                <input type="radio" ng-model="factorOption.Fatal" value="no">
+                                No
+                            </label>
                         </div>
                     </div>
                     <div class="form-group">
