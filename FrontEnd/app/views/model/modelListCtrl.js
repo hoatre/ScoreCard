@@ -4,7 +4,13 @@
         .module("sbAdminApp")
         .controller("ModelListCtrl",
                     ["$scope", "$http", "$state", "appSettings", "shareServices", "popupService",
-                     ModelListCtrl]);
+                     ModelListCtrl])
+        .run(function (paginationConfig) {
+            paginationConfig.firstText = '«';
+            paginationConfig.previousText = 'Prev';
+            paginationConfig.nextText = 'Next';
+            paginationConfig.lastText = '»';
+        });
 
     function ModelListCtrl($scope, $http, $state, appSettings, shareServices, popupService) {
 
@@ -25,8 +31,34 @@
                 .success(function (data) {
                     //console.log(data);
                     $scope.models = data.getModelInfoJSON.body;
+                    $scope.pagination($scope.models);
                 });
         }
+
+        $scope.pagination = function (list) {
+            $scope.filteredList = [];
+            $scope.currentPage = 1;
+            $scope.itemsPerPage = 5;
+            $scope.maxSize = 20;
+            $scope.pagedItems = [];
+            $scope.totalItems = list.length;
+            $scope.numPages = function () {
+                return Math.ceil(list.length / $scope.itemsPerPage);
+            };
+            //$scope.setPage = function (pageNo) {
+            //    $scope.currentPage = pageNo;
+            //};        //$scope.pageChanged = function () {
+            //    $scope.figureOutTodosToDisplay();
+            //};        $scope.$watch('currentPage + itemsPerPage', function () {
+
+            $scope.$watch('currentPage', function () {
+                var begin = (($scope.currentPage - 1) * $scope.itemsPerPage),
+                end = begin + $scope.itemsPerPage;
+
+                $scope.filteredList = list.slice(begin, end);
+            });            
+        }
+        
 
         // Delete
         $scope.modelDelete = function (index) {
@@ -35,6 +67,7 @@
                     .success(function (data, status, headers, config) {
                         if (data.deleteModelInfo.header.code == 0) {
                             $scope.models.splice(index, 1);
+                            $scope.pagination($scope.models);
                         }
                         else {
                             popupService.showMessage(data.deleteModelInfo.header.message);
@@ -60,6 +93,8 @@
                     success(function (data, status, headers, config) {
                         if (data.insertModelInfo.header.code == 0) {
                             $scope.models.push(data.insertModelInfo.body);
+
+                            $scope.pagination($scope.models);
                             //popupService.showMessage('Insert Success!');
                             $scope.model = {};
                             editForm.$setPristine();

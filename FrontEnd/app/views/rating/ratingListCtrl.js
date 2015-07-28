@@ -45,9 +45,9 @@
                     if (data.getbymodelid.header.code == 0) {
                         $scope.modelRatings = data.getbymodelid.body;
                         //console.log(data.getbymodelid.body);
-                        $scope.ratings = data.getbymodelid.body[0].codein.sort(function (a, b) {
-                            return a.scorefrom - b.scorefrom;
-                        });
+                        $scope.ratings = data.getbymodelid.body[0].codein;
+
+                        $scope.sortRating();
                     }
                     else {
                         $scope.modelRatings = [];
@@ -55,6 +55,13 @@
                     }
 
                 });
+        }
+
+        // Sort ratings
+        $scope.sortRating = function () {
+            $scope.ratings = $scope.ratings.sort(function (a, b) {
+                return a.scorefrom - b.scorefrom;
+            });
         }
 
         // Generator scoring range
@@ -125,6 +132,8 @@
                 .success(function (data, status, headers, config) {
                     if (data.Rating.header.code == 0) {
                         $scope.ratings.push($scope.rating);
+                        $scope.sortRating();
+
                         $scope.rating = {};
                         //popupService.showMessage('Insert Success!');
                         editForm.$setPristine();
@@ -136,6 +145,7 @@
                 .error(function (data, status, headers, config) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
+                    popupService.showMessage("failure message: " + JSON.stringify({ data: data }));
                 });
         }
     }

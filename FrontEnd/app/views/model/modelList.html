@@ -79,8 +79,28 @@
                         <th class="col-medium center">Action</th>
                     </tr>
                 </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="6">
+                            <div class="pagination-container">
+                                <div class="pull-left">
+                                    <pagination ng-model="currentPage"
+                                                items-per-page="itemsPerPage"
+                                                data-total-items="totalItems"
+                                                data-max-size="maxSize"
+                                                class="pagination-sm"
+                                                data-boundary-links="true"
+                                                rotate="false"></pagination>
+                                </div>
+                                <div class="pull-right">
+                                    <div class="pagination pagination-sm">Page: {{currentPage}} of {{numPages}} - Total items: {{totalItems}}</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
                 <tbody>
-                    <tr ng-repeat="model in models">
+                    <tr ng-repeat="model in filteredList">
                         <td>
                             <a ui-sref="modelInfo.detail({modelId: model._id})">
                                 {{model.name}}
