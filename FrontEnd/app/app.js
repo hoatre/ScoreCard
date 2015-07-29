@@ -18,6 +18,7 @@ angular
   ])
     .constant("appSettings", {
         serverPath: "http://10.15.171.35:8080"
+        //serverPath: "http://localhost:8080"
     })
   .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
@@ -97,6 +98,16 @@ angular
             templateUrl: 'app/views/test/test.html',
             url: '/test',
             controller: "TestListCtrl"
+        })
+        .state('riskassessment', {
+            templateUrl: 'app/views/riskassessment/riskassessment.html',
+            url: '/riskassessment',
+            controller: "RiskAssessmentCtrl"
+        })
+        .state('personalinformation', {
+            templateUrl: 'app/views/personalinformation/personalinformation.html',
+            url: '/personalinformation',
+            controller: "PersonalInformationCtrl"
         })
         .state('activeList', {
             templateUrl: 'app/views/active/active.html',
