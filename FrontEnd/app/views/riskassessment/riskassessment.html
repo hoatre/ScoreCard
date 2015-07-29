@@ -1,0 +1,545 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Risk Assessment</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Result:</label>
+            <div class="col-sm-5">
+                <select id="cboCustomer" class="form-control" name="cboCustomer"
+                        ng-model="customer._id"
+                        ng-options="customer._id as customer._id for customer in customers"
+                        ng-change="customerChanged(customer._id)">
+                    <option value="">Please select</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row" ng-show='showFactorParent'>
+        <tabset>
+            <tab heading="Risk Rating">
+                <div class="col-lg-6">
+                    <div class="portlet portlet-basic" ng-init="isCollapsed1 = false">
+                        <div class="portlet-heading">
+                            <div class="portlet-title">
+                                <!--<h4>{{factor.FactorName}}</h4>-->
+                            </div>
+                            <div class="portlet-widgets">
+                                <a href="" ng-click="isCollapsed1 = !isCollapsed1">
+                                    <i class="fa" ng-class="isCollapsed1? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div collapse="isCollapsed1">
+                            <br class="space-4" />
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered table-hover tc-table">
+                                        <tbody>
+                                            <tr>
+                                                <td class="hidden-xs" width="40%">
+                                                    Bank Relationship:
+                                                </td>
+                                                <td class="hidden-xs"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="hidden-xs">
+                                                    Borrower Industry:
+                                                </td>
+                                                <td class="hidden-xs"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--loan detail-->
+                    <div class="portlet portlet-basic" ng-init="isCollapsed2 = false">
+                        <div class="portlet-heading">
+                            <div class="portlet-title">
+                                <h4>Loan Details</h4>
+                            </div>
+                            <div class="portlet-widgets">
+                                <a href="" ng-click="isCollapsed2 = !isCollapsed2">
+                                    <i class="fa" ng-class="isCollapsed2? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div collapse="isCollapsed2">
+                            <br class="space-4" />
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered table-hover tc-table">
+                                        <tbody>
+                                            <tr>
+                                                <td class="hidden-xs" width="40%">
+                                                    Back-To-Back:
+                                                </td>
+                                                <td class="hidden-xs">
+                                                    <input type="text" name="inputBackToBack" class="form-control" ng-model="Loan.BackToBack">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="hidden-xs">
+                                                    Non-Risk-Lending:
+                                                </td>
+                                                <td class="hidden-xs">
+                                                    <input type="text" name="inputNonRiskLending" class="form-control" ng-model="Loan.NonRiskLending">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="hidden-xs">
+                                                    Other Credit Lines(Total):
+                                                </td>
+                                                <td class="hidden-xs">
+                                                    <input type="text" name="inputOtherCreditLines" class="form-control" ng-model="Loan.OtherCreditLines">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="hidden-xs">
+                                                    Sucured:
+                                                </td>
+                                                <td class="hidden-xs">
+                                                    <input type="text" name="inputSucured" class="form-control" ng-model="Loan.Sucured">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="hidden-xs">
+                                                    Unsucured:
+                                                </td>
+                                                <td class="hidden-xs">
+                                                    <input type="text" name="inputUnsucured" class="form-control" ng-model="Loan.Unsucured">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--loan detail-->
+                    <!--Default Risk Rate-->
+                    <div class="portlet portlet-basic" ng-init="isCollapsed3 = false">
+                        <div class="portlet-heading">
+                            <div class="portlet-title">
+                                <h4>Default Risk Rate</h4>
+                            </div>
+                            <div class="portlet-widgets">
+                                <a href="" ng-click="isCollapsed3 = !isCollapsed3">
+                                    <i class="fa" ng-class="isCollapsed3? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div collapse="isCollapsed3">
+                            <br class="space-4" />
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered table-hover tc-table">
+                                        <tbody>
+                                            <tr>
+                                                <td class="hidden-xs">
+                                                    Default Risk Rate:
+                                                </td>
+                                                <td class="hidden-xs">
+                                                    <input type="text" name="inputDefaultRiskRate" class="form-control" ng-model="Loan.DefaultRiskRate">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="hidden-xs" colspan="2">
+                                                    Justification: Ability to Replay
+                                                    <textarea name="inputDescription" class="form-control" rows="3"
+                                                              ng-model="Loan.Ability"></textarea>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Default Risk Rate-->
+                    <!--Default Risk Rate-->
+                    <div class="portlet portlet-basic" ng-init="isCollapsed4 = false">
+                        <div class="portlet-heading">
+                            <div class="portlet-title">
+                                <h4>Overall Risk Rating</h4>
+                            </div>
+                            <div class="portlet-widgets">
+                                <a href="" ng-click="isCollapsed4 = !isCollapsed4">
+                                    <i class="fa" ng-class="isCollapsed4? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div collapse="isCollapsed4">
+                            <br class="space-4" />
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered table-hover tc-table">
+                                        <tbody>
+                                            <tr>
+                                                <td class="hidden-xs">
+                                                    Overall Risk Rating:
+                                                </td>
+                                                <td class="hidden-xs">
+                                                    <input type="text" name="inputOverallRiskRating" class="form-control" ng-model="Loan.OverallRiskRating">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Default Risk Rate-->
+                </div>
+                <div class="col-lg-6">
+                    <div class="portlet portlet-basic" ng-init="isCollapsed5 = false">
+                        <div class="portlet-heading">
+                            <div class="portlet-title">
+                                <!--<h4>{{factor.FactorName}}</h4>-->
+                            </div>
+                            <div class="portlet-widgets">
+                                <a href="" ng-click="isCollapsed5 = !isCollapsed5">
+                                    <i class="fa" ng-class="isCollapsed5? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div collapse="isCollapsed5">
+                            <br class="space-4" />
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered table-hover tc-table">
+                                        <tbody>
+                                            <tr>
+                                                <td class="hidden-xs" width="40%">
+                                                    Financial Analysis Model:
+                                                </td>
+                                                <td class="hidden-xs">Scale Financial Model</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="hidden-xs">
+                                                    Financial Analysis Industry:
+                                                </td>
+                                                <td class="hidden-xs"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--collateral detail-->
+                    <div class="portlet portlet-basic" ng-init="isCollapsed6 = false">
+                        <div class="portlet-heading">
+                            <div class="portlet-title">
+                                <h4>Collateral details(Maximum Collateral Loan Value)</h4>
+                            </div>
+                            <div class="portlet-widgets">
+                                <a href="" ng-click="isCollapsed6 = !isCollapsed6">
+                                    <i class="fa" ng-class="isCollapsed6? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div collapse="isCollapsed6">
+                            <br class="space-4" />
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered table-hover tc-table">
+                                        <tbody>
+                                            <tr>
+                                                <td class="hidden-xs" width="40%">
+                                                    Back To Back Collateral:
+                                                </td>
+                                                <td class="hidden-xs"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="hidden-xs">
+                                                    Non-Risk-Lending Collateral:
+                                                </td>
+                                                <td class="hidden-xs">
+                                                    <input type="text" name="inputNonRiskLending" class="form-control" ng-model="Loan.NonRiskLending">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="hidden-xs">
+                                                    Other Credit Lines Collateral:
+                                                </td>
+                                                <td class="hidden-xs">
+                                                    <input type="text" name="inputOtherCreditLines" class="form-control" ng-model="Loan.OtherCreditLines">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--collateral detail-->
+                    <!--collateral detail-->
+                    <div class="portlet portlet-basic" ng-init="isCollapsed7 = false">
+                        <div class="portlet-heading">
+                            <div class="portlet-title">
+                                <h4>Default Risk Amount</h4>
+                            </div>
+                            <div class="portlet-widgets">
+                                <a href="" ng-click="isCollapsed7 = !isCollapsed7">
+                                    <i class="fa" ng-class="isCollapsed7? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div collapse="isCollapsed7">
+                            <br class="space-4" />
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered table-hover tc-table">
+                                        <tbody>
+                                            <tr>
+                                                <td class="hidden-xs">
+                                                    Default Risk Amount:
+                                                </td>
+                                                <td class="hidden-xs">
+                                                    <input type="text" name="inputDefaultRiskAmount" class="form-control" ng-model="Loan.DefaultRiskAmount">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="hidden-xs" colspan="2">
+                                                    Second Way Out: Recoverability
+                                                    <textarea name="inputDescription" class="form-control" rows="3"
+                                                              ng-model="Loan.Recoverability"></textarea>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--collateral detail-->
+                    <!--Default Risk Rate-->
+                    <div class="portlet portlet-basic" ng-init="isCollapsed8 = false">
+                        <div class="portlet-heading">
+                            <div class="portlet-title">
+                                <h4>Justification</h4>
+                            </div>
+                            <div class="portlet-widgets">
+                                <a href="" ng-click="isCollapsed8 = !isCollapsed8">
+                                    <i class="fa" ng-class="isCollapsed8? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div collapse="isCollapsed8">
+                            <br class="space-4" />
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table class="table table-bordered table-hover tc-table">
+                                        <tbody>
+                                            <tr>
+                                                <td class="hidden-xs">
+                                                    Justification:
+                                                    <textarea name="inputJustification" class="form-control" rows="3"
+                                                              ng-model="Loan.Justification"></textarea>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Default Risk Rate-->
+                </div>
+            </tab>
+            <!--score card-->
+            <tab heading="Score Card">
+                <!--<div ng-repeat="factor in factors">-->
+                <div class="portlet portlet-basic" ng-init="isCollapsed = false">
+                    <div class="portlet-heading">
+                        <div class="portlet-title">
+                            <!--<h4>{{factor.FactorName}}</h4>-->
+                        </div>
+                        <div class="portlet-widgets">
+                            <a href="" ng-click="isCollapsed = !isCollapsed">
+                                <i class="fa" ng-class="isCollapsed? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div collapse="isCollapsed">
+                        <br class="space-4" />
+                        <div class="row">
+                            <div class="col-sm-7 col-sm-offset-1">
+                                <table class="table table-bordered table-hover tc-table">
+                                    <tbody>
+                                        <tr ng-repeat="factor in factors" ng-if="factor.Parentid == ''">
+                                            <td class="hidden-xs">
+                                                <a href="" ng-click="showFactorOptionComment(factor._id)">
+                                                    {{factor.FactorName}}
+                                                </a>
+                                            </td>
+                                            <td class="hidden-xs">
+                                                {{factor.Weight}}%
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--</div>-->
+            </tab>
+            <!--score card-->
+            <tab heading="Pricing">
+                <div class="portlet portlet-basic" ng-init="isCollapsedPricing = false">
+                    <div class="portlet-heading">
+                        <div class="portlet-title">
+                            <!--<h4>{{factor.FactorName}}</h4>-->
+                        </div>
+                        <div class="portlet-widgets">
+                            <a href="" ng-click="isCollapsedPricing = !isCollapsedPricing">
+                                <i class="fa" ng-class="isCollapsedPricing? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div collapse="isCollapsedPricing">
+                        <br class="space-4" />
+                        <div class="row">
+                            <div class="col-sm-7 col-sm-offset-1">
+                                <table class="table table-bordered table-hover tc-table">
+                                    <tbody>
+                                        <tr>
+                                            <td class="hidden-xs" width="40%">
+                                                <label class="col-sm-12 control-label" for="subscription">Country Risk Premium:</label>
+                                            </td>
+                                            <td class="hidden-xs">
+                                                <input type="text" name="inputCountryRiskPremium" class="form-control" ng-model="Pricing.CountryRiskPremium">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="hidden-xs" width="40%">
+                                                <label class="col-sm-12 control-label" for="subscription">Industry Risk Premium:</label>
+                                            </td>
+                                            <td class="hidden-xs">
+                                                <input type="text" name="inputIndustryRiskPremium" class="form-control" ng-model="Pricing.IndustryRiskPremium">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="hidden-xs" width="40%">
+                                                <label class="col-sm-12 control-label" for="subscription">Borrower Risk Premium:</label>
+                                            </td>
+                                            <td class="hidden-xs">
+                                                <input type="text" name="inputBorrowerRiskPremium" class="form-control" ng-model="Pricing.BorrowerRiskPremium">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="hidden-xs" width="40%">
+                                                <label class="col-sm-12 control-label" for="subscription">Total Risk Premium:</label>
+                                            </td>
+                                            <td class="hidden-xs">
+                                                <input type="text" name="inputTotalRiskPremium" class="form-control" ng-model="Pricing.TotalRiskPremium">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+
+        <!--<tab heading="Management Assessment">Management Assessment</tab>
+        <tab heading="Financial Condition">Financial Condition</tab>
+        <tab heading="Operations Assessment">Operations Assessment</tab>
+        <tab heading="Borrower Quality">Borrower Quality</tab>
+        <tab heading="Collateral Quality">Collateral Quality</tab>
+        <tab heading="Facility Structure">Facility Structure</tab>-->
+
+    </div>
+
+    <!-- factor-option-->
+    <div class="row" ng-show='showFactorOption'>
+        <tabset>
+            <tab heading="Score Card">
+                <div class="portlet portlet-basic" ng-init="isCollapsed = false">
+
+                    <div collapse="isCollapsed">
+                        <br class="space-4" />
+                        <button type="button" id="btnBack" class="btn btn-primary"
+                                ng-click='back()'>
+                            Back
+                        </button>
+                        <button type="button" id="btnSave" class="btn btn-primary"
+                                ng-click='save()'>
+                            Save
+                        </button>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered table-hover tc-table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Comment</th>
+                                            <th class="hidden-xs">Weightage</th>
+                                            <th class="hidden-xs">Rating</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="factorLv2 in factorsLv2">
+                                            <td class="hidden-xs" width="20%">
+                                                {{factorLv2.FactorName}}
+                                            </td>
+                                            <td class="hidden-xs" width="40%">
+                                                <input type="text" name="inputName" class="form-control" ng-model="factorLv2.Comment" placeholder="">
+                                            </td>
+                                            <td class="hidden-xs" width="10%">
+                                                <div class="input-group">
+                                                    <input type="number" name="inputWeigth" class="form-control"
+                                                           min="0" max="100"
+                                                           ng-model="factorLv2.factor_score" required>
+                                                </div>
+                                            </td>
+                                            <td class="hidden-xs" width="30%">
+                                                <select id="cboFactorOption" class="form-control" name="cboFactorOption"
+                                                        ng-model="factorLv2.factor_option_id"
+                                                        ng-options="factorOption.FactorOptionId as factorOption.FactorOptionName for factorOption in factorLv2.FactorOption"
+                                                        ng-change="factorOptionChanged(factorLv2.factor_option_id)">
+                                                    <option value="">Please select</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+
+        <!--<tab heading="Management Assessment">Management Assessment</tab>
+        <tab heading="Financial Condition">Financial Condition</tab>
+        <tab heading="Operations Assessment">Operations Assessment</tab>
+        <tab heading="Borrower Quality">Borrower Quality</tab>
+        <tab heading="Collateral Quality">Collateral Quality</tab>
+        <tab heading="Facility Structure">Facility Structure</tab>-->
+
+    </div>
+    <!-- factor-option-->
+</div>
