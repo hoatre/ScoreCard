@@ -16,36 +16,89 @@
             <!--<li ui-sref-active="active">
                 <a ui-sref="home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>-->
-            <li ui-sref-active="active">
-                <a ui-sref="modelList"><i class="fa fa-bar-chart-o fa-fw"></i> Models<span></span></a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="factorList"><i class="fa fa-table fa-fw"></i> Factors</a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="factorOptionList"><i class="fa fa-edit fa-fw"></i> Factor Options</a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="ratingList"><i class="fa fa-edit fa-fw"></i> Ratings</a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="testList"><i class="fa fa-edit fa-fw"></i> Test</a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="activeList"><i class="fa fa-edit fa-fw"></i> Active</a>
-            </li>
-            <li ui-sref-active="riskassessment">
-                <a ui-sref="riskassessment"><i class="fa fa-edit fa-fw"></i> Risk Assessment</a>
-            </li>
-            <li ui-sref-active="personalinformation">
-                <a ui-sref="personalinformation"><i class="fa fa-edit fa-fw"></i> Personal Information</a>
-            </li>
-            <!--<li ng-class="{active: collapseVar==1}">
+            <li ng-class="{active: collapseVar==1}">
                 {{dropDown}}
                 <a href="" ng-click="check(1)">
-                    <i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span>
+                    <i class="fa fa-wrench fa-fw"></i> System Management<span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=1">
+                    <li ui-sref-active="active">
+                        <a ui-sref="functionList"><i class="fa fa-bar-chart-o fa-fw"></i> Functions<span></span></a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="groupList"><i class="fa fa-bar-chart-o fa-fw"></i> Groups<span></span></a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="roleList"><i class="fa fa-bar-chart-o fa-fw"></i> Roles<span></span></a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="roleGroupList"><i class="fa fa-bar-chart-o fa-fw"></i> Role Group<span></span></a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="userGroupList"><i class="fa fa-bar-chart-o fa-fw"></i> User Group<span></span></a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="groupFunctionList"><i class="fa fa-bar-chart-o fa-fw"></i> Group Function<span></span></a>
+                    </li>
+                </ul>
+            </li>
+            <li ng-class="{active: collapseVar==2}">
+                {{dropDown}}
+                <a href="" ng-click="check(2)">
+                    <i class="fa fa-wrench fa-fw"></i> Score Card Management<span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=2">
+                    <li ui-sref-active="active">
+                        <a ui-sref="modelList"><i class="fa fa-bar-chart-o fa-fw"></i> Models<span></span></a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="factorList"><i class="fa fa-table fa-fw"></i> Factors</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="factorOptionList"><i class="fa fa-edit fa-fw"></i> Factor Options</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="ratingList"><i class="fa fa-edit fa-fw"></i> Ratings</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="testList"><i class="fa fa-edit fa-fw"></i> Test</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="activeList"><i class="fa fa-edit fa-fw"></i> Active</a>
+                    </li>
+                </ul>
+            </li>
+            <li ng-class="{active: collapseVar==3}">
+                {{dropDown}}
+                <a href="" ng-click="check(3)">
+                    <i class="fa fa-wrench fa-fw"></i> Risk Management<span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=3">
+                    <li ui-sref-active="riskassessment">
+                        <a ui-sref="riskassessment"><i class="fa fa-edit fa-fw"></i> Risk Assessment</a>
+                    </li>
+                    <li ui-sref-active="personalinformation">
+                        <a ui-sref="personalinformation"><i class="fa fa-edit fa-fw"></i> Personal Information</a>
+                    </li>
+                </ul>
+            </li>
+            <li ng-class="{active: collapseVar==4}">
+                {{dropDown}}
+                <a href="" ng-click="check(4)">
+                    <i class="fa fa-wrench fa-fw"></i> Loan Application<span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=4">
+                    <li ui-sref-active="loadFE">
+                        <a ui-sref="loadFEList"><i class="fa fa-edit fa-fw"></i> Load Wizard</a>
+                    </li>
+                </ul>
+            </li>
+            <!--<li ng-class="{active: collapseVar==100}">
+                {{dropDown}}
+                <a href="" ng-click="check(100)">
+                    <i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=100">
                     <li ui-sref-active="active">
                         <a ui-sref="panels-wells">Panels and Wells</a>
                     </li>
@@ -66,8 +119,8 @@
                     </li>
                 </ul>
             </li>
-            <li ng-class="{active: collapseVar==2}">
-                <a href="" ng-click="check(2)">
+            <li ng-class="{active: collapseVar==200}">
+                <a href="" ng-click="check(200)">
                     <i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=2">
@@ -92,11 +145,11 @@
                             <li>
                                 <a href="">Third Level Item</a>
                             </li>
-                        </ul>                       
+                        </ul>
                     </li>
                 </ul>
             </li>
-            <li ng-class="{active:collapseVar==4}">
+            <li ng-class="{active:collapseVar==400}">
                 <a href="" ng-click="check(4)">
                     <i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span>
                 </a>
