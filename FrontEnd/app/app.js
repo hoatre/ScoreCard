@@ -114,8 +114,18 @@ angular
             url: '/active',
             controller: "TestListCtrl"
         })
+        .state('uploadFile', {
+            templateUrl: 'app/views/upload/home.html',
+            url: '/upload',
+            controller: "UploadCtrl"
+        })
+        .state('dashboardHome', {
+            templateUrl: 'app/views/dashboard/home.html',
+            url: '/dashboard',
+            controller: "DashboardCtrl"
+        })
       .state('dashboard', {
-          url: '/dashboard',
+          url: '/dashboard2',
           templateUrl: 'views/dashboard/main.html',
           resolve: {
               loadMyDirectives: function ($ocLazyLoad) {
