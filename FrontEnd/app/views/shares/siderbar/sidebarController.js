@@ -10,8 +10,8 @@
 angular.module('sbAdminApp')
   .controller('SidebarController', ['$scope', function ($scope) {
 
-      $scope.selectedMenu = 'home';
-      $scope.collapseVar = 0;
+      $scope.selectedMenu = 'models';
+      $scope.collapseVar = 2;
       $scope.multiCollapseVar = 0;
 
       $scope.check = function (x) {
