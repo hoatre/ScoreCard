@@ -7,7 +7,7 @@
                      DashboardCtrl]);
 
     function DashboardCtrl($scope, $http, $state, $stateParams, appSettings, popupService) {
-
+        
         $scope.bar = {
             labels: ['2006', '2007', '2008', '2009', '2010', '2011', '2012'],
             series: ['Series A', 'Series B'],
