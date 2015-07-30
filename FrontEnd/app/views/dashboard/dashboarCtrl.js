@@ -7,17 +7,42 @@
                      DashboardCtrl]);
 
     function DashboardCtrl($scope, $http, $state, $stateParams, appSettings, popupService) {
-        
-        $scope.bar = {
-            labels: ['2006', '2007', '2008', '2009', '2010', '2011', '2012'],
-            series: ['Series A', 'Series B'],
 
-            data: [
-                [65, 59, 80, 81, 56, 55, 40],
-                [28, 48, 40, 19, 86, 27, 90]
-            ]
+        $scope.bars = {};
 
-        };
+        $http.post(appSettings.serverPath + "/spark/scoringrange", { _id: "c69f764e-d651-42ab-8046-b09e9e2c412e" })
+            .success(function (data) {
+                $scope.bars = data.ScoringRange.body;
+                $scope.chart = new CanvasJS.Chart("chartContainer", {
+                    theme: 'theme1',
+                    title:{
+                        text: "Scoring Range Chart"
+                    },
+                    axisY: {
+                        title: "million units",
+                        labelFontSize: 16,
+                    },
+                    axisX: {
+                        labelFontSize: 16,
+                    },
+                    data: [
+                        {
+                            type: "column",
+                            dataPoints: [
+                                { label: $scope.bars[0].rating_code, y: $scope.bars[0].application_count }
+                            ]
+                        }
+                    ]
+                });
+
+                $scope.chart.render(); //render the chart for the first time
+
+                $scope.changeChartType = function(chartType) {
+                    $scope.chart.options.data[0].type = chartType;
+                    $scope.chart.render(); //re-render the chart to display the new layout
+                }
+            });
+
     }
 
 }());
