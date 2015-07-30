@@ -4,6 +4,6 @@
     angular
         .module("common.services", ["ngResource"])
         .constant("appSettings", {
-            serverPath: "http://localhost:8080"
+            serverPath: "http://10.15.171.35:8080"
         });
 }());
