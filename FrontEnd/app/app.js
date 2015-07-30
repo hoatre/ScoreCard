@@ -17,8 +17,8 @@ angular
     'ngSanitize'
   ])
     .constant("appSettings", {
-        serverPath: "http://10.15.171.35:8080"
-        //serverPath: "http://localhost:8080"
+        //serverPath: "http://10.15.171.35:8080"
+        serverPath: "http://localhost:8080"
     })
   .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
@@ -47,7 +47,22 @@ angular
           .state("modelInfo.detail", {
               url: "/detail",
               templateUrl: "app/views/model/modelDetail.html",
-              controller: "ModelDetailCtrl"
+              controller: "ModelDetailCtrl",
+              resolve: {
+                  loadMyFile: function ($ocLazyLoad) {
+                      return $ocLazyLoad.load({
+                          name: 'chart.js',
+                          files: [
+                            'bower_components/angular-chart.js/dist/angular-chart.min.js',
+                            'bower_components/angular-chart.js/dist/angular-chart.css'
+                          ]
+                      }),
+                      $ocLazyLoad.load({
+                          name: 'sbAdminApp',
+                          files: ['scripts/controllers/chartContoller.js']
+                      })
+                  }
+              }
           })
           .state('modelInfo.factors', {
               templateUrl: 'app/views/factor/factorList.html',

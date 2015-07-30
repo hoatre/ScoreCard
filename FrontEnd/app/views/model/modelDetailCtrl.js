@@ -7,6 +7,12 @@
                      ModelDetailCtrl]);
 
     function ModelDetailCtrl($scope, $http, $state, $stateParams, appSettings, shareServices, popupService) {
+
+        $scope.pie = {
+            labels: ["Download Sales", "In-Store Sales", "Mail-Order Sales"],
+            data: [300, 500, 100]
+        };
+
         $scope.model = {};
 
         // Load data from cache

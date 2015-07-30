@@ -7,79 +7,89 @@
     </div>
     <!-- /.row -->
     <div class="row">
-        <form class="form-horizontal" id="modelForm" name="modelForm" novalidate>
-            <div class="form-group"
-                 ng-class="{'has-error':modelForm.inputName.$invalid &&
+        <div class="col-lg-6 col-sm-12">
+            <form class="form-horizontal" id="modelForm" name="modelForm" novalidate>
+                <div class="form-group"
+                     ng-class="{'has-error':modelForm.inputName.$invalid &&
                                     modelForm.inputName.$dirty}">
-                <label class="col-sm-3 control-label" for="name">Name:</label>
-                <div class="col-sm-5">
-                    <input name="inputName" type="text" class="form-control" disabled
-                           ng-model="model.name" placeholder="Model Name (required)"
-                           required ng-minlength="4" ng-maxlength="120">
-                </div>
-                <span class="help-block has-error">
-                    <span ng-show="modelForm.inputName.$error.required">
-                        Model name is required.
+                    <label class="col-sm-3 control-label" for="name">Name:</label>
+                    <div class="col-sm-5">
+                        <input name="inputName" type="text" class="form-control" disabled
+                               ng-model="model.name" placeholder="Model Name (required)"
+                               required ng-minlength="4" ng-maxlength="120">
+                    </div>
+                    <span class="help-block has-error">
+                        <span ng-show="modelForm.inputName.$error.required">
+                            Model name is required.
+                        </span>
+                        <span ng-show="modelForm.inputName.$error.minlength">
+                            Model name must be at least 5 characters in length.
+                        </span>
+                        <span ng-show="modelForm.inputName.$error.maxlength">
+                            Model name cannot exceed 120 characters in length.
+                        </span>
                     </span>
-                    <span ng-show="modelForm.inputName.$error.minlength">
-                        Model name must be at least 5 characters in length.
-                    </span>
-                    <span ng-show="modelForm.inputName.$error.maxlength">
-                        Model name cannot exceed 120 characters in length.
-                    </span>
-                </span>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="inputDescription">Description:</label>
-                <div class="col-sm-5">
-                    <textarea name="inputDescription" class="form-control" rows="3" disabled
-                              ng-model="model.description" placeholder="Description"></textarea>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">Status:</label>
-                <div class="col-sm-5">
-                    <label class="col-sm-3 control-label" ng-if="true">{{model.status}}</label>
-                    <select id="cboStatus" class="form-control" name="cboStatus" ng-model="model.status" required ng-if="false">
-                        <option value="draft">draft</option>
-                        <option value="active">active</option>
-                        <option value="publish">publish</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">Minimum Score:</label>
-                <div class="col-sm-5">
-                    <label class="col-sm-3 control-label">{{model.min}}</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">Maximum Score:</label>
-                <div class="col-sm-5">
-                    <label class="col-sm-3 control-label">{{model.max}}</label>
-                </div>
-            </div>
-            <div class="form-actions">
                 <div class="form-group">
-                    <div class="col-sm-offset-3 col-sm-5">
-                        <button type="submit" class="btn btn-primary"
-                                ng-click="back()">
-                            Back To List
-                        </button>
-                        <button type="submit" class="btn btn-default"
-                                ng-click="publish()"
-                                ng-if="true">
-                            {{model.status == 'draft'? 'Publish' : 'Unpublish'}}
-                        </button>
+                    <label class="col-sm-3 control-label" for="inputDescription">Description:</label>
+                    <div class="col-sm-5">
+                        <textarea name="inputDescription" class="form-control" rows="3" disabled
+                                  ng-model="model.description" placeholder="Description"></textarea>
                     </div>
                 </div>
-            </div>
-            <div class="form-group"
-                 ng-show="vm.message">
-                <div class="col-md-6">
-                    <pre style="font: inherit">{{message}}</pre>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Status:</label>
+                    <div class="col-sm-5">
+                        <label class="col-sm-3 control-label" ng-if="true">{{model.status}}</label>
+                        <select id="cboStatus" class="form-control" name="cboStatus" ng-model="model.status" required ng-if="false">
+                            <option value="draft">draft</option>
+                            <option value="active">active</option>
+                            <option value="publish">publish</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Minimum Score:</label>
+                    <div class="col-sm-5">
+                        <label class="col-sm-3 control-label">{{model.min}}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Maximum Score:</label>
+                    <div class="col-sm-5">
+                        <label class="col-sm-3 control-label">{{model.max}}</label>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-5">
+                            <button type="submit" class="btn btn-primary"
+                                    ng-click="back()">
+                                Back To List
+                            </button>
+                            <button type="submit" class="btn btn-default"
+                                    ng-click="publish()"
+                                    ng-if="true">
+                                {{model.status == 'draft'? 'Publish' : 'Unpublish'}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group"
+                     ng-show="vm.message">
+                    <div class="col-md-6">
+                        <pre style="font: inherit">{{message}}</pre>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-6 col-sm-12" id="pie-chart">
+            <div class="panel panel-default">
+                <div class="panel-heading">Pie Chart</div>
+                <div class="panel-body">
+                    <canvas id="pie" class="chart chart-pie chart-xs" data="pie.data" labels="pie.labels"></canvas>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </div>    
 </div>
