@@ -14,7 +14,8 @@ angular
     'ui.bootstrap',
     'angular-loading-bar',
     'common.services',
-    'ngSanitize'
+    'ngSanitize',
+    'ui.bootstrap-slider'
   ])
     .constant("appSettings", {
         serverPath: "http://10.15.171.35:8080"
