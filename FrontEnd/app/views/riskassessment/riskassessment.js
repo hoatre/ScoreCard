@@ -12,6 +12,8 @@
         $scope.choiceFactorOption = '';
         $scope.showFactorParent = false;
         $scope.showFactorOption = false;
+        $scope.showCustomer = true;
+        $scope.showCustomerShow = false;
         $scope.customer = {};
         $scope.model = {};
         $scope.modelList = [];
@@ -30,11 +32,14 @@
 
         });
 
-        $scope.customerChanged = function (id) {
+        $scope.customerChanged = function (index) {
+            var id= $scope.customers[index]._id;
             $http.get(appSettings.serverPath + "/scoreresult/result/" + id)
             .success(function (data) {
+                $scope.showCustomer = false;
                 $scope.showFactorOption = false;
                 $scope.showFactorParent = true;
+                $scope.showCustomerShow = true;
                 if (id == null || id == '') {
                     $scope.showFactorParent = false;
                     return;
@@ -49,49 +54,6 @@
             });
         }
 
-
-        /*$http.get(appSettings.serverPath + "/modelinfo/getall")
-        .success(function (data) {
-            //console.log(data);
-            $scope.models = data.getModelInfoJSON.body;
-        });
-
-        //load factor and factoroption by model change
-        $scope.modelChanged = function (id) {
-            //console.log(id);
-            $scope.model = {};
-            $scope.factors = {};
-            if (id == null || id == '') {
-                $scope.showFactorParent = false;
-                return;
-            }
-            $scope.showFactorOption = false;
-            $scope.showFactorParent = true;
-            // Selected model
-            for (var i = 0; i < $scope.models.length; i++) {
-                if ($scope.models[i]._id == id) {
-                    $scope.model = $scope.models[i];
-                }
-            }
-
-            $http.post(appSettings.serverPath + "/modelinfo/view", { _id: $scope.model._id }).
-            success(function (data, status, headers, config) {
-
-                if (data["viewModelInfo"]["header"].code == 0) {
-                    $scope.factors = data.viewModelInfo.body;
-                }
-                else {
-                    //alert(data["viewModelInfo"]["header"].message);
-                }
-
-
-            })
-            .error(function (data, status, headers, config) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-            });
-        }*/
-
         $scope.factorOptionChanged = function (id) {
 
         }
@@ -99,6 +61,15 @@
         $scope.back = function () {
             $scope.showFactorParent = true;
             $scope.showFactorOption = false;
+            $scope.showCustomer = false;
+            $scope.showCustomerShow = true;
+        }
+
+        $scope.customerShow = function () {
+            $scope.showFactorParent = false;
+            $scope.showFactorOption = false;
+            $scope.showCustomer = true;
+            $scope.showCustomerShow = false;
         }
 
         $scope.save = function () {
@@ -113,6 +84,8 @@
         $scope.showFactorOptionComment = function (id) {
             $scope.showFactorParent = false;
             $scope.showFactorOption = true;
+            $scope.showCustomer = false;
+            $scope.showCustomerShow = true;
             $scope.factorsLv2 = [];
             for (var i = 0; i < $scope.factors.length; i++) {
                 //alert($scope.factors[i].Parentid + ":" + id);

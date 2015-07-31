@@ -7,18 +7,39 @@
  *
  * Main module of the application.
  */
-angular
+var myapp = angular
   .module('sbAdminApp', [
     'oc.lazyLoad',
     'ui.router',
     'ui.bootstrap',
     'angular-loading-bar',
     'common.services',
-    'ngSanitize'
+    'ngSanitize',
+    'ui.bootstrap-slider'
   ])
+    .run(function ($rootScope, $state) {
+        $rootScope.$state = $state; //Get state info in view
+
+        if (window.sessionStorage["userInfo"]) {
+            $rootScope.userInfo = JSON.parse(window.sessionStorage["userInfo"]);
+        }
+
+        //Check session and redirect to specific page
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+            if (toState && toState.data && toState.data.auth && !window.sessionStorage["userInfo"]) {
+                event.preventDefault();
+                window.location.href = "#login";
+            }
+
+            if (!toState && !toState.data && !toState.data.auth && window.sessionStorage["userInfo"]) {
+                event.preventDefault();
+                window.location.href = "#models";
+            }
+        });
+    })
     .constant("appSettings", {
-        //serverPath: "http://10.15.171.35:8080"
-        serverPath: "http://localhost:8080"
+        serverPath: "http://10.15.171.35:8080"
+        //serverPath: "http://localhost:8080"
     })
   .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
@@ -27,7 +48,13 @@ angular
           events: true,
       });
 
-      $urlRouterProvider.otherwise('/models');
+      if (!window.sessionStorage["userInfo"]) {
+          $urlRouterProvider.otherwise("/login");
+      } else {
+          $urlRouterProvider.otherwise("/models");
+      }
+
+      //$urlRouterProvider.otherwise('/models');
 
       $stateProvider
           .state('modelList', {
@@ -232,8 +259,10 @@ angular
           url: '/blank'
       })
       .state('login', {
-          templateUrl: 'views/pages/login.html',
-          url: '/login'
+          //templateUrl: 'views/pages/login.html',
+          templateUrl: 'app/views/shares/login/home.html',
+          url: '/login',
+          controller: 'loginController as vm'
       })
       .state('chart', {
           templateUrl: 'views/chart.html',
@@ -284,5 +313,4 @@ angular
           url: '/grid'
       })
   }]);
-
 

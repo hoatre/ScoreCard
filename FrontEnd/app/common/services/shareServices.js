@@ -37,10 +37,10 @@
         this.showPopup = function (msg) {
             return $window.confirm(msg);
         }
-        
+
         this.showMessage = function (msg) {
             return $window.alert(msg);
         }
-    }])
+    }]);
 
 }());

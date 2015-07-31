@@ -1,0 +1,694 @@
+﻿
+<style>
+    .full button span {
+        background-color: limegreen;
+        border-radius: 32px;
+        color: black;
+    }
+
+    .partially button span {
+        background-color: orange;
+        border-radius: 32px;
+        color: black;
+    }
+</style>
+<progressbar class="progress-striped active" max="7" value="value" type="{{type}}"><span style="white-space:nowrap;font-weight:bold">{{formname}}</span></progressbar>
+<tabset>
+    <tab heading="1.Personal Information" active="active.tab1" ng-click="changetab(1)">
+        <!--Personal Information-->
+        <div class="col-lg-12">
+            <form class="form-horizontal" id="personalInformationForm" name="personalInformationForm" novalidate>
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    <div class="form-group"
+                         ng-class="{'has-error':personalInformationForm.inputFirstName.$invalid &&
+                                    personalInformationForm.inputFirstName.$dirty}">
+                        <label class="col-sm-3 control-label">First Name:</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="inputName" class="form-control"
+                                   ng-model="personalinformation.FirstName" placeholder="First Name (required)" required>
+                        </div>
+                        <span class="help-block has-error">
+                            <span class="error" ng-show="personalInformationForm.inputFirstName.$error.required">
+                                First name is required.
+                            </span>
+                        </span>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{'has-error':personalInformationForm.inputLastName.$invalid &&
+                                    personalInformationForm.inputLastName.$dirty}">
+                        <label class="col-sm-3 control-label">Last Name:</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="inputName" class="form-control"
+                                   ng-model="personalinformation.LastName" placeholder="Last Name (required)" required>
+                        </div>
+                        <span class="help-block has-error">
+                            <span class="error" ng-show="personalInformationForm.inputLastName.$error.required">
+                                Last name is required.
+                            </span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Date of Birth:</label>
+                        <div class="col-md-5">
+                            <p class="input-group">
+                                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{'has-error':personalInformationForm.inputNationalPassport.$invalid &&
+                                    personalInformationForm.inputNationalPassport.$dirty}">
+                        <label class="col-sm-3 control-label">National ID/Passport Number:</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="inputName" class="form-control"
+                                   ng-model="personalinformation.NationalPassport" placeholder="National Passport (required)" required>
+                        </div>
+                        <span class="help-block has-error">
+                            <span class="error" ng-show="personalInformationForm.inputNationalPassport.$error.required">
+                                National ID/Passport Number is required.
+                            </span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Gender:</label>
+                        <div class="col-sm-5">
+                            <label class="col-sm-5">
+                                <input type="radio" name="Gender"
+                                       id="radioMale" ng-model="personalinformation.Gender"
+                                       value='Male' class=" tc" checked>
+                                <span class="col-sm-6 labels"> Male</span>
+                            </label>
+                            <label class="col-sm-5">
+                                <input type="radio" name="Gender"
+                                       id="radioFemale" ng-model="personalinformation.Gender"
+                                       value='Female' class="tc">
+                                <span class="col-sm-6 labels"> Female</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Register Residence Address:</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="inputAddress" class="form-control"
+                                   ng-model="personalinformation.Address" placeholder="Address" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Months in the current address:</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="inputCurrentAddress" class="form-control"
+                                   ng-model="personalinformation.CurrentAddress" placeholder="Current Address" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Email Address:</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="inputEmail" class="form-control"
+                                   ng-model="personalinformation.Email" placeholder="Email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Subscribe to:</label>
+                        <div class="col-sm-5">
+                            <div class="tcb">
+                                <label class="tcb-inline">
+                                    <input type="checkbox" name="checkboxNewsettler" id="checkboxNewsettler" ng-model="personalinformation.SubscribeNewsettler" value="checked" class="tc">
+                                    <span class="labels"> Latest Bank's Newsettler </span>
+                                </label>
+                                <label class="tcb-inline">
+                                    <input type="checkbox" name="checkboxSubscribe" id="checkboxSubscribe" ng-model="personalinformation.SubscribePromotions" value="checked" class="tc">
+                                    <span class="labels"> Bank's Loan Promotions and Offers</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">If you wish Bank's staff to contact back, please leave your message here:</label>
+                        <div class="col-sm-5">
+                            <textarea class="form-control" name="inputDescription" rows="3"
+                                      ng-model="factorOption.Description"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Customer's Acknowledgement:</label>
+                        <div class="col-sm-5">
+                            <div class="tcb">
+                                <label class="tcb-inline">
+                                    <input type="checkbox" name="checkboxAccept" id="checkboxAccept" ng-model="personalInformationAccept" class="tc">
+                                    <span class="labels"> I have read and accept the policy </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button class="btn btn-sm btn-primary" type="button" ng-click="changetab(2)">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <!--End Personal Information-->
+    </tab>
+    <tab heading="2.Creadit Information" ng-click="changetab(2)" active="active.tab2">
+        <!--Creadit Information-->
+        <!--Creadit Information-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <legend>Credit Information</legend>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row" ng-init="getModelByStatus('publish')">
+                <form id="frmMain">
+                    <!--<div class="form-group">
+                    <label class="col-sm-2 control-label">Model:</label>
+                    <div class="col-sm-5">
+                        <div class="clearfix">
+                            <select id="cboModel" class="form-control" name="cboModel"
+                                    ng-change="getFactorByModelId(selectModel)"
+                                    ng-model="selectModel"
+                                    ng-options="model._id as model.name for model in models">
+                                <option value="">Please select</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>-->
+                    <div class="form-group"
+                         ng-show="message">
+                        <div ng-class="messageClass" ng-bind-html="message">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <!-- START YOUR CONTENT HERE -->
+                        <ul class="unstyled" id="myTree">
+                            <li ng-repeat='factor1 in getFactorByParentId("")'>
+                                <a href="javascript:;" class="accordion-toggle" data-toggle="collapse"
+                                   data-target="#sub-menu2{{factor1._id}}">
+                                    <label class="col-sm-12 control-label">
+                                        <i class="fa fa-angle-double-right"></i>{{factor1.FactorName}}
+                                    </label>
+                                    <!--<label class="col-sm-6">Weight: {{factor1.Weight}}%</label>-->
+
+                                </a>
+                                <ul class="unstyled collapse in" id="sub-menu2{{factor1._id}}">
+                                    <li ng-repeat='factor2 in getFactorByParentId(factor1._id)'>
+                                        <a href="javascript:;" class="accordion-toggle has-success" data-toggle="collapse"
+                                           data-target="#sub-menu3{{factor2._id}},#sub-menu32{{factor2._id}}">
+                                            <label class="col-sm-12 control-label">
+                                                <i class="fa fa-angle-double-right"></i>{{factor2.FactorName}}
+                                            </label>
+                                            <!--<label class="col-sm-6 control-label">Weight: {{factor2.Weight}}%</label>-->
+
+                                        </a>
+                                        <ul class="unstyled collapse in" id="sub-menu3{{factor2._id}}" ng-show="factor2['FactorOption'].length == 0">
+                                            <li ng-repeat='factor3 in getFactorByParentId(factor2._id)'>
+                                                <a href="javascript:;" class="accordion-toggle has-warning" data-toggle="collapse"
+                                                   data-target="#sub-menu4{{factor3._id}}">
+                                                    <label class="col-sm-6 control-label">
+                                                        <i class="fa fa-angle-double-right"></i>{{factor3.FactorName}}
+                                                    </label>
+                                                    <label class="col-sm-6 control-label">Weight: {{factor3.Weight}}%</label>
+
+                                                </a>
+                                                <ul class="unstyled collapse in" id="sub-menu4{{factor3._id}}">
+                                                    <li ng-repeat="factorOption in factor3['FactorOption']">
+                                                        <label class="col-sm-10">
+                                                            <input type="radio" name="{{factor3._id}}"
+                                                                   id="{{factorOption.FactorOptionId}}"
+                                                                   value='{"factorid": "{{factor3._id}}", "factor_name": "{{factor3.FactorName}}", "factor_option_id": "{{factorOption.FactorOptionId}}", "factor_option_name": "{factorOption.FactorOptionName}}", "score": "{{factorOption.Score}}"}' class="tc">
+                                                            <span class="col-sm-9 labels"> {{factorOption.FactorOptionName}}</span>
+                                                            <!--<span class="col-sm-6">Score: {{factorOption.Score}}</span>-->
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <ul class="unstyled collapse in" id="sub-menu32{{factor2._id}}" ng-show="factor2['FactorOption'].length > 0">
+                                            <li ng-repeat="factorOption in factor2['FactorOption']">
+                                                <label class="col-sm-6">
+                                                    <input type="radio" name="{{factor2._id}}"
+                                                           id="{{factorOption.factor_option_id}}"
+                                                           value='{"factorid": "{{factor2._id}}", "factor_name": "{{factor2.FactorName}}", "factor_option_id": "{{factorOption.FactorOptionId}}", "factor_option_name": "{factorOption.FactorOptionName}}", "score": "{{factorOption.Score}}"}' class="tc">
+                                                    <span class="col-sm-9 labels"> {{factorOption.FactorOptionName}}</span>
+                                                    <!--<span class="col-sm-3">Score: {{factorOption.Score}}</span>-->
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <!-- END YOUR CONTENT HERE -->
+
+                    </div>
+                    <!--<div class="form-group">
+                    <div class="col-sm-5">
+                        <button class="btn btn-primary" type="submit" id="btnGetChecked"
+                                onclick="return CheckValidate();"
+                                ng-click="submit()"
+                                ng-disabled="CheckValidate()">
+                            Get Checked
+                        </button>
+                    </div>
+                </div>-->
+                </form>
+            </div>
+        </div>
+        <script language="javascript">
+
+            function CheckValidate() {
+                var check = false;
+                if ($('#frmMain input:radio:checked').length == 0) {
+                    alert('You must choose!');
+                    return false;
+                }
+
+                return true;
+            }
+
+            function getOptionChecked() {
+
+                var result = '';
+                $('#frmMain input:radio:checked').each(function () {
+                    result += "," + $(this).val();
+                });
+                //alert('{listresult: [' + result.substring(1) + ']}');
+                return '{listresult: [' + result.substring(1) + ']}';
+            }
+        </script>
+        <div class="form-actions">
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button class="btn button-previous" type="button" ng-click="changetab(1)">Back</button>
+                    <button class="btn btn-sm btn-primary" type="button" ng-click="changetab(3)">Next</button>
+                </div>
+            </div>
+        </div>
+        <!--End Creadit Information-->
+    </tab>
+    <tab heading="3.Collateral" ng-click="changetab(3)" active="active.tab3">
+        <!--Collateral-->
+        <form class="form-horizontal" id="collateralForm" name="collateralForm" novalidate>
+            <fieldset>
+                <legend>Collateral</legend>
+                <div class="col-lg-8">
+                    <div class="portlet portlet-basic" ng-init="isCollapsed1 = false">
+                        <div class="portlet-heading">
+                            <div class="portlet-title">
+                                <h4>Collateral Information</h4>
+                            </div>
+                            <div class="portlet-widgets">
+                                <a href="" ng-click="isCollapsed1 = !isCollapsed1">
+                                    <i class="fa" ng-class="isCollapsed1? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div collapse="isCollapsed1">
+                            <br class="space-4" />
+                            <div class="form-group"
+                                 ng-class="{'has-error':collateralForm.selectTypeCollateral.$invalid &&
+                                    collateralForm.selectTypeCollateral.$dirty}">
+                                <label class="col-sm-5 control-label">Type of Collateral:</label>
+                                <div class="col-sm-5">
+                                    <select ng-model="collateral.TypeCollateral" name="selectTypeCollateral" class="form-control">
+                                        <option>Land</option>
+                                        <option>Appartment</option>
+                                        <option>Studio</option>
+                                        <option>Leasing</option>
+                                        <option>On Purchase</option>
+                                    </select>
+                                </div>
+                                <span class="help-block has-error">
+                                    <span class="error" ng-show="collateralForm.selectTypeCollateral.$error.required">
+                                        Type of Collateral is required.
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">Collateral Information (i.e: Location):</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="inputCollateralInformation" class="form-control"
+                                           ng-model="collateral.CollateralInformation" placeholder="Collateral Information (required)" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">Have the property been used as collateral before:</label>
+                                <div class="col-sm-5">
+                                    <label class="col-sm-5">
+                                        <input type="radio" name="CollateralBefor"
+                                               id="radioCollateralBeforYes" ng-model="collateral.CollateralBefor"
+                                               value='Yes' class=" tc" checked>
+                                        <span class="col-sm-6 labels"> Yes </span>
+                                    </label>
+                                    <label class="col-sm-5">
+                                        <input type="radio" name="CollateralBefor"
+                                               id="radioCollateralBeforNo" ng-model="collateral.CollateralBefor"
+                                               value='No' class="tc">
+                                        <span class="col-sm-6 labels"> No </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-5 control-label">Property's Pricing (User's Defined):</label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="inputCollateralPropertyPricing" class="form-control" ng-model="collateral.CollateralPropertyPricing">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet portlet-basic" ng-init="isCollapsed2 = false">
+                        <div class="portlet-heading">
+                            <div class="portlet-title">
+                                <h4>Collateral Documents</h4>
+                            </div>
+                            <div class="portlet-widgets">
+                                <a href="" ng-click="isCollapsed2 = !isCollapsed2">
+                                    <i class="fa" ng-class="isCollapsed2? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div collapse="isCollapsed2">
+                            <br class="space-4" />
+                            <div class="well">
+                                <div>
+                                    <div style="float:right;">
+                                        <button ng-click="btn_upload()">Upload</button>
+                                        <button ng-click="btn_clean()">Remove all</button>
+                                    </div>
+                                    <input type="file" id="file1" multiple />
+                                </div>
+                                <div ng-repeat="file in files" style="margin-top: 20px;border-bottom-color: antiquewhite;border-bottom-style: double;">
+                                    <div>
+                                        <span>{{file.name}}</span><div style="float:right;"><span>{{file.humanSize}}</span><a ng-click="btn_remove(file)" title="Remove from list to be uploaded"><i class="icon-remove"></i></a></div>
+                                    </div>
+                                    <progress style="width:400px;" value="{{file.loaded}}" max="{{file.size}}"></progress>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="portlet portlet-basic" ng-init="isCollapsed3 = false">
+                        <div class="portlet-heading">
+                            <div class="portlet-title">
+                                <h4>Market Evaluation</h4>
+                            </div>
+                            <div class="portlet-widgets">
+                                <a href="" ng-click="isCollapsed3 = !isCollapsed3">
+                                    <i class="fa" ng-class="isCollapsed3? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div collapse="isCollapsed3">
+
+                            <div class="form-group">
+                                <div class="col-sm-12"><progressbar value="80" max="100" style=" height: 60px; text-align: match-parent"><span style="color:white; white-space:nowrap;font-weight:bold">Partner: CBRE<br /> Evaluation Price: 1,5 B<br /> 80%</span></progressbar></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12"><progressbar value="70" max="100" style=" height: 60px; text-align: match-parent"><span style="color:white; white-space:nowrap;font-weight:bold">Partner: Empire<br /> Evaluation Price: 1,4 B <br /> 70%</span></progressbar></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="portlet portlet-basic" ng-init="isCollapsed4 = false">
+                        <div class="portlet-heading">
+                            <div class="portlet-title">
+                                <h4>Bank Decision</h4>
+                            </div>
+                            <div class="portlet-widgets">
+                                <a href="" ng-click="isCollapsed4 = !isCollapsed4">
+                                    <i class="fa" ng-class="isCollapsed4? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div collapse="isCollapsed4">
+
+                            <div class="form-group">
+                                <div class="col-sm-12"><progressbar value="60" max="100" style=" height: 50px; text-align: match-parent"><span style="color:white; white-space:nowrap;font-weight:bold">Final Evaluation Price: 1,4 B <br /> Allowance: 60%</span></progressbar></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12"><progressbar value="100" max="100" style=" height: 50px; text-align: match-parent"><span style="color:white; white-space:nowrap;font-weight:bold">Maximum Loan Amount: 1B</span></progressbar></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button class="btn button-previous" type="button" ng-click="changetab(2)">Back</button>
+                            <button class="btn btn-sm btn-primary" type="button" ng-click="changetab(4)">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <!--End Collateral-->
+    </tab>
+    <tab heading="4.Loan Information" ng-click="changetab(4)" active="active.tab4">
+        <!--Loan Information-->
+        <form class="form-horizontal" id="loanInformationForm" name="loanInformationForm" novalidate>
+            <fieldset>
+                <legend>Loan Information</legend>
+                <div class="col-lg-8">
+                    <div class="portlet portlet-basic" ng-init="isCollapsedLoanCalculator = false">
+                        <div class="portlet-heading">
+                            <div class="portlet-title">
+                                <h4>Loan Calculator</h4>
+                            </div>
+                            <div class="portlet-widgets">
+                                <a href="" ng-click="isCollapsedLoanCalculator = !isCollapsedLoanCalculator">
+                                    <i class="fa" ng-class="isCollapsedLoanCalculator? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div collapse="isCollapsedLoanCalculator">
+                            <br class="space-4" />
+                            <div class="form-group">
+
+                                <label class="col-sm-3 control-label">I'd like to borrow:</label>
+                                <div class="col-sm-9">
+                                    <slider class="col-sm-12" slidestop="executeMe()" ng-model="loanInformation.Borrow" min="{{optionborrow.min}}" step="{{optionborrow.step}}" max="{{optionborrow.max}}"></slider>
+                                    {{loanInformation.Borrow}},000,000.00 VND
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Over a period of:</label>
+                                <div class="col-sm-9">
+                                    <slider class="col-sm-12" slidestop="executeMe()" ng-model="loanInformation.Period" min="{{optionperiod.min}}" step="{{optionperiod.step}}" max="{{optionperiod.max}}"></slider>
+                                    {{loanInformation.Period}} Months
+                                </div>
+
+                            </div>
+                            <div class="well bg-default">
+                                The total amount payable is <strong>VND XXX,XXX,XXX</strong>. The illustrative cost of borrowing <strong>VND XXX,XXX,XXX</strong> over <strong>XX</strong>36 months at our competitive rate of <strong>X.X% APR</strong> representative (fixed) for our main current account customers. Calculation for illustrative purposes only. This quote was produced on <strong>DD/MM/YYYY</strong> and is valid for today only.
+                            </div>
+                            <div class="form-actions">
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3 col-sm-9">
+                                        <button type="button" class="btn btn-info">Repayment Schedule</button>
+                                        <button type="button" class="btn btn-info">Infographic</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="portlet portlet-basic" ng-init="isCollapsedLoanSummary = false">
+                        <div class="portlet-heading">
+                            <div class="portlet-title">
+                                <h4>Loan Summary</h4>
+                            </div>
+                            <div class="portlet-widgets">
+                                <a href="" ng-click="isCollapsedLoanSummary = !isCollapsedLoanSummary">
+                                    <i class="fa" ng-class="isCollapsedLoanSummary? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div collapse="isCollapsedLoanSummary">
+                            <br class="space-4" />
+                            <table class="table-responsive">
+                                <tbody>
+                                    <tr>
+                                        <td class="col-sm-12">
+                                            <label class="control-label"> Customer Rating:</label>
+                                        </td>
+                                        <td class="col-sm-4">
+                                            A
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-12">
+                                            <label class="control-label"> Loan Rate:</label>
+                                        </td>
+                                        <td class="col-sm-4">
+                                            5.67%
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-12">
+                                            <label class="control-label"> Administration Fee:</label>
+                                        </td>
+                                        <td class="col-sm-4">
+                                            3.50%
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-12">
+                                            <label class="control-label"> Monthly Repayment:</label>
+
+                                        </td>
+                                        <td class="col-sm-4">
+                                            15.6M
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-12">
+                                            <label class="control-label"> Other Fees:</label>
+                                        </td>
+                                        <td class="col-sm-4">
+                                            -
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-sm-12">
+                                            <br class="space-4" />
+                                            <label class="control-label"> Total Repayment:</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="well bg-primary" style="background-color: #337AB7; ">
+                                                <h3><center> 125,760,000</center></h3>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="portlet portlet-basic" ng-init="isCollapsedLoanMoreThan = false">
+                        <div class="portlet-heading">
+                            <div class="portlet-title">
+                                <h4>Looking for a loan for more than 5 years</h4>
+                            </div>
+                            <div class="portlet-widgets">
+                                <a href="" ng-click="isCollapsedLoanMoreThan = !isCollapsedLoanMoreThan">
+                                    <i class="fa" ng-class="isCollapsedLoanMoreThan? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div collapse="isCollapsedLoanMoreThan">
+                            <br class="space-4" />
+                            <table>
+                                <tr>
+                                    <td class="col-sm-12" colspan=3>
+                                        If you need a Personal Loan for longer than 5 years, you'll need to provide us with a few details so that we can give you a personalised loan quote. Please click apply now (or retrieve a quote you've started) to begin the online application. You'll be offered a no-obligation personal loan quote that won't affect your credit rating.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="separator"></td>
+                                </tr>
+                                <tr style="padding-top:6px">
+
+                                    <td class="col-sm-3 ">
+                                        <button type="button" class="btn btn-info btn-line"><i class="fa fa-comments icon-only"> Talk to our consultants</i></button>
+                                    </td>
+                                    <td class="col-sm-3">
+                                        <button type="button" class="btn btn-info btn-line"><i class="fa fa-bookmark icon-only"> Retrieve a Quote from Us</i></button>
+                                    </td>
+                                    <td class="col-sm-3">
+                                        <button type="button" class="btn btn-info btn-line"><i class="fa fa-info icon-only"> Check out current Loan products and offers</i></button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button class="btn button-previous" type="button" ng-click="changetab(3)">Back</button>
+                            <button class="btn btn-sm btn-primary" type="button" ng-click="changetab(5)">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <!--End Loan Information-->
+    </tab>
+    <tab heading="5.Submission" active="active.tab5" ng-click="changetab(5)">
+        <!--Submission-->
+        <form class="form-horizontal" id="collateralForm" name="collateralForm" novalidate>
+            <fieldset>
+                <legend>Submission</legend>
+                <div class="form-actions">
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button class="btn button-previous" type="button" ng-click="changetab(4)">Back</button>
+                            <button class="btn btn-sm btn-primary" type="button" ng-click="changetab(6)">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <!--End Submission-->
+    </tab>
+    <tab heading="6.Application Approval" active="active.tab6" ng-click="changetab(6)">
+        <!--Application Approval-->
+        <form class="form-horizontal" id="collateralForm" name="collateralForm" novalidate>
+            <fieldset>
+                <legend>Collateral</legend>
+                <div class="form-actions">
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button class="btn button-previous" type="button" ng-click="changetab(5)">Back</button>
+                            <button class="btn btn-sm btn-primary" type="button" ng-click="changetab(7)">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <!--End Application Approval-->
+    </tab>
+    <tab heading="7.Finish" active="active.tab7" ng-click="changetab(7)">
+        <!--Finish-->
+        <form class="form-horizontal" id="collateralForm" name="collateralForm" novalidate>
+            <fieldset>
+                <legend>Collateral</legend>
+                <div class="form-actions">
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button class="btn btn-sm btn-primary" type="button" ng-click="finish()">Finish</button>
+                            <button class="btn button-previous" type="button" ng-click="changetab(6)">Back</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <!--End Finish-->
+    </tab>
+</tabset>

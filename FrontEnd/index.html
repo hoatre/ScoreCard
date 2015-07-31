@@ -64,6 +64,8 @@
     <script src="app/app.js"></script>
 
     <!-- Score Card Controllers -->
+    <script src="app/views/shares/login/loginCtrl.js"></script>
+    <script src="app/views/shares/login/users.js"></script>
     <script src="app/views/shares//siderbar/sidebarController.js"></script>
     <script src="app/views/active/activeListCtrl.js"></script>
     <script src="app/views/factor/factorListCtrl.js"></script>
@@ -77,12 +79,20 @@
     <script src="app/views/rating/ratingEditCtrl.js"></script>
     <script src="app/views/test/testListCtrl.js"></script>
     <script src="app/views/riskassessment/riskassessment.js"></script>
-    <script src="app/views/riskassessment/riskassessment.js"></script>
+    <script src="app/views/personalinformation/personalinformation.js"></script>
     <script src="app/views/dashboard/dashboarCtrl.js"></script>
+    <script src="app/views/upload/uploadCtrl.js"></script>
     <script src="app/views/dashboard/canvasjs.min.js"></script>
     <script src="js/sb-admin-2.js"></script>
 
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/themes/style.css" />
+
+    <script type="text/javascript" src="scripts/controllers/uploader.js"></script>
+    <!-- angular-slider include -->
+    <link href="assets/css/bootstrap-slider.css" rel="stylesheet" />
+    <script type="text/javascript" src="scripts/controllers/bootstrap-slider.js"></script>
+    <script type="text/javascript" src="scripts/controllers/slider.js"></script>
+    <!-- angular-slider include -->
     <!-- endbuild -->
 
     <script>
@@ -107,7 +117,7 @@
         <div id="wrapper">
             <!-- Navigation -->
             <!--<header>-->
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" ng-show="userInfo">
                 <div class="navbar-header" ng-include="'app/views/shares/header.html'"></div>
                 <div ng-include="'app/views/shares/notification.html'"></div>
                 <div class="navbar-default sidebar" role="navigation" ng-include="'app/views/shares/siderbar/sidebar.html'">

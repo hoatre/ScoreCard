@@ -9,11 +9,14 @@
     function ModelDetailCtrl($scope, $http, $state, $stateParams, appSettings, shareServices, popupService) {
 
         $scope.pie = {
-            labels: ["Download Sales", "In-Store Sales", "Mail-Order Sales"],
-            data: [300, 500, 100]
+            //labels: ["Download Sales", "In-Store Sales", "Mail-Order Sales"],
+            //data: [300, 500, 100]
         };
+        $scope.pie.labels = [];
+        $scope.pie.data = [];
 
         $scope.model = {};
+        $scope.factors = {};
 
         // Load data from cache
         //$scope.model = shareServices.getCurrentObject();
@@ -21,9 +24,17 @@
 
         // Load data form server
         if ($scope.model._id == undefined && $stateParams.modelId != '' && $stateParams.modelId != undefined) {
-            $http.post(appSettings.serverPath + "/modelinfo/getbymodelinfoid", { _id: $stateParams.modelId })
+            $http.get(appSettings.serverPath + '/modelinfo/factor/'+ $stateParams.modelId)
                 .success(function (data) {
-                    $scope.model = data.getModelInfoByIdJSON.body[0];
+                    $scope.model = data.modelinfo.body.model;
+                    $scope.factors = data.modelinfo.body.factor;
+
+                    for (var i in $scope.factors) {
+                        var factor = $scope.factors[i];
+                        console.log(factor.FactorName);
+                        $scope.pie.labels.push(factor.FactorName);
+                        $scope.pie.data.push(factor.Weight);
+                    }
                 });
         }
 
