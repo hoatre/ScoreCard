@@ -5,9 +5,13 @@
         </div>
         <!-- /.col-lg-12 -->
     </div>
-    <div class="row">
+    <button type="button" id="btnShowCustomer" class="btn btn-primary" ng-show='showCustomerShow'
+            ng-click='customerShow()'>
+        Customer Show 
+    </button>
+    <div class="row" ng-show='showCustomer'>
         <div class="form-group">
-            <label class="col-sm-3 control-label">Result:</label>
+            <!--<label class="col-sm-3 control-label">Result:</label>
             <div class="col-sm-5">
                 <select id="cboCustomer" class="form-control" name="cboCustomer"
                         ng-model="customer._id"
@@ -15,7 +19,31 @@
                         ng-change="customerChanged(customer._id)">
                     <option value="">Please select</option>
                 </select>
-            </div>
+            </div>-->
+            <table class="table table-bordered table-hover tc-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="customer in customers">
+                        <td class="hidden-xs">
+                            {{customer._id}}
+
+                        </td>
+                        <td class="hidden-xs">
+                            <button type="button" id="btnCustomerChanged" class="btn btn-primary"
+                                    ng-click='customerChanged($index)'>
+                                View
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     <hr />

@@ -12,6 +12,8 @@
         $scope.choiceFactorOption = '';
         $scope.showFactorParent = false;
         $scope.showFactorOption = false;
+        $scope.showCustomer = true;
+        $scope.showCustomerShow = false;
         $scope.customer = {};
         $scope.model = {};
         $scope.modelList = [];
@@ -30,11 +32,14 @@
 
         });
 
-        $scope.customerChanged = function (id) {
+        $scope.customerChanged = function (index) {
+            var id= $scope.customers[index]._id;
             $http.get(appSettings.serverPath + "/scoreresult/result/" + id)
             .success(function (data) {
+                $scope.showCustomer = false;
                 $scope.showFactorOption = false;
                 $scope.showFactorParent = true;
+                $scope.showCustomerShow = true;
                 if (id == null || id == '') {
                     $scope.showFactorParent = false;
                     return;
@@ -56,6 +61,15 @@
         $scope.back = function () {
             $scope.showFactorParent = true;
             $scope.showFactorOption = false;
+            $scope.showCustomer = false;
+            $scope.showCustomerShow = true;
+        }
+
+        $scope.customerShow = function () {
+            $scope.showFactorParent = false;
+            $scope.showFactorOption = false;
+            $scope.showCustomer = true;
+            $scope.showCustomerShow = false;
         }
 
         $scope.save = function () {
@@ -70,6 +84,8 @@
         $scope.showFactorOptionComment = function (id) {
             $scope.showFactorParent = false;
             $scope.showFactorOption = true;
+            $scope.showCustomer = false;
+            $scope.showCustomerShow = true;
             $scope.factorsLv2 = [];
             for (var i = 0; i < $scope.factors.length; i++) {
                 //alert($scope.factors[i].Parentid + ":" + id);
