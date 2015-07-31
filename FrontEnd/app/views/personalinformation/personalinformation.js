@@ -9,67 +9,59 @@
     //load all model
     function PersonalInformationCtrl($scope, $http, $state, $stateParams, appSettings, popupService, modelResource) {
         //----------------------control-------------------------------
-        $scope.tab1 = false;
-        $scope.tab2 = false;
-        $scope.tab3 = false;
-        $scope.tab4 = false;
-        $scope.tab5 = false;
-        $scope.tab6 = false;
-        $scope.tab7 = false;
-
+        $scope.active = {
+            tab1: true,
+            tab2: false,
+            tab3: false,
+            tab4: false,
+            tab5: false,
+            tab6: false,
+            tab7: false
+        };
+  
         $scope.changetab = function (stt) {
-            //stt = stt + 1;
             $scope.progressdisplay(stt);
         };
 
-
         $scope.progressdisplay = function (stt) {
-            
             $scope.type = 'info';
             $scope.value = stt;
-            $scope.tab1 = false;
-            $scope.tab2 = false;
-            $scope.tab3 = false;
-            $scope.tab4 = false;
-            $scope.tab5 = false;
-            $scope.tab6 = false;
-            $scope.tab7 = false;
             $scope.formname = '1.Personal Infomation';
             if (stt == 1) {
                 $scope.type = 'info';
                 $scope.formname = "1.Personal Infomation";
-                $scope.tab1 = true;
+                $scope.active.tab1 = true;
             }
             else if (stt == 2) {
                 $scope.type = 'info';
                 $scope.formname = "2.Creadit Infomation";
-                $scope.tab2 = true;
+                $scope.active.tab2 = true;
             }
             else if (stt == 3) {
                 
                 $scope.type = 'info';
                 $scope.formname = "3.Collateral";
-                $scope.tab3 = true;
+                $scope.active.tab3 = true;
             }
             else if (stt == 4) {
                 $scope.type = 'info';
                 $scope.formname = "4.Loan Infomation";
-                $scope.tab4 = true;
+                $scope.active.tab4 = true;
             }
             else if (stt == 5) {
                 $scope.type = 'info';
                 $scope.formname = "5.Submission";
-                $scope.tab5 = true;
+                $scope.active.tab5 = true;
             }
             else if (stt == 6) {
                 $scope.type = 'info';
                 $scope.formname = "6.Application Approval";
-                $scope.tab6 = true;
+                $scope.active.tab6 = true;
             }
             else {
                 $scope.type = 'success';
                 $scope.formname = "7.Finish";
-                $scope.tab7 = true;
+                $scope.active.tab7 = true;
             }
         }
 
