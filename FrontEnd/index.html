@@ -64,6 +64,8 @@
     <script src="app/app.js"></script>
 
     <!-- Score Card Controllers -->
+    <script src="app/views/shares/login/loginCtrl.js"></script>
+    <script src="app/views/shares/login/users.js"></script>
     <script src="app/views/shares//siderbar/sidebarController.js"></script>
     <script src="app/views/active/activeListCtrl.js"></script>
     <script src="app/views/factor/factorListCtrl.js"></script>
@@ -115,7 +117,7 @@
         <div id="wrapper">
             <!-- Navigation -->
             <!--<header>-->
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" ng-show="userInfo">
                 <div class="navbar-header" ng-include="'app/views/shares/header.html'"></div>
                 <div ng-include="'app/views/shares/notification.html'"></div>
                 <div class="navbar-default sidebar" role="navigation" ng-include="'app/views/shares/siderbar/sidebar.html'">

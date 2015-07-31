@@ -19,7 +19,7 @@
                     if ($scope.choiceModel != '') {
                         $scope.modelChanged($scope.choiceModel);
                     }
-                })
+                });
 
         // Mode select change
         $scope.modelChanged = function (modelid) {
