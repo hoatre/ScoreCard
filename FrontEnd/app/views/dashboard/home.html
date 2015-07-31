@@ -17,15 +17,106 @@
     <!-- /.panel -->
     <div class="row">
         <!--- Chart -->
-        <div class="col-lg-12">
-            <div id="chartContainer"></div>
-            <div class="clear"></div>
+        <div class="col-lg-9">
+            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+        </div>
+        <div class="col-lg-3">
+            <div id="chartPie" style="height: 250px; width: 100%;"></div>
         </div>
     </div>
     <div class="row">
         <!--- Chart -->
-        <div class="col-lg-12">
-            <h1 class="page-header">Dashboard 2</h1>
+        <div class="col-lg-6">
+            <h2><center>{{topbot1T[0].factor_option_name}}</center></h2>
+            <table class="table table-bordered table-hover tc-table">
+                <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Score</th>
+                    <th>Rating</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td colspan="2">
+                        <B><center>Top</center></B>
+                    </td>
+                </tr>
+                <tr ng-repeat="rpt1T in topbot1T">
+                    <td>
+                        {{rpt1T.customer_name}}
+                    </td>
+                    <td>
+                        {{rpt1T.scoring}}
+                    </td>
+                    <td>
+                        {{rpt1T.rating_code}}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <B><center>Bottom</center></B>
+                    </td>
+                </tr>
+                <tr ng-repeat="rpt1B in topbot1B">
+                    <td>
+                        {{rpt1B.customer_name}}
+                    </td>
+                    <td>
+                        {{rpt1B.scoring}}
+                    </td>
+                    <td>
+                        {{rpt1B.rating_code}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-6">
+            <h2><center>{{topbot2T[0].factor_option_name}}</center></h2>
+            <table class="table table-bordered table-hover tc-table">
+                <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Score</th>
+                    <th>Rating</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td colspan="2">
+                        <B><center>Top</center></B>
+                    </td>
+                </tr>
+                <tr ng-repeat="rpt2T in topbot2T">
+                    <td>
+                        {{rpt2T.customer_name}}
+                    </td>
+                    <td>
+                        {{rpt2T.scoring}}
+                    </td>
+                    <td>
+                        {{rpt2T.rating_code}}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <B><center>Bottom</center></B>
+                    </td>
+                </tr>
+                <tr ng-repeat="rpt2B in topbot2B">
+                    <td>
+                        {{rpt2B.customer_name}}
+                    </td>
+                    <td>
+                        {{rpt2B.scoring}}
+                    </td>
+                    <td>
+                        {{rpt2B.rating_code}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     <!-- /.row -->
