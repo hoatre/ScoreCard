@@ -327,6 +327,7 @@
         //---------------------------Finish---------------------------
         $scope.finish = function () {
             //alert($scope.personalinformation.FirstName);
+            $scope.submit();
         }
         //---------------------------End Finish-----------------------
     }
