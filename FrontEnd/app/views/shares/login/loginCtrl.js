@@ -27,16 +27,10 @@
         }
 
         function login(username, password) {
-            //UserFactory.login(username, password).then(function sucess(response) {
-            //    $scope.user = response.data.user;
-            //    //console.log('Ctrl login: ' + response.data.token);
-            //}, handerError);
-
-            $scope.user = {
-                "firstName": "John",
-                "lastName": "Smith",
-                "email": "mail2asik@gmail.com"
-            };
+            UserFactory.login(username, password).then(function sucess(response) {
+                $scope.user = response.data.user;
+                //console.log('Ctrl login: ' + response.data.token);
+            }, handerError);
         }
 
         function logout() {

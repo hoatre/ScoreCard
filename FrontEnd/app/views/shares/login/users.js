@@ -26,15 +26,22 @@
         $scope.doLogin = function () {
 
             if ($scope.loginForm.$valid) {
-                userServices.login($scope.login).then(function (result) {
-                    $scope.data = result;
-                    console.log(result);
-                    if (!result.error) {
-                        window.sessionStorage["userInfo"] = JSON.stringify(result.data);
-                        $rootScope.userInfo = JSON.parse(window.sessionStorage["userInfo"]);
-                        $location.path("/models");
-                    }
-                });
+                //userServices.login($scope.login).then(function (result) {
+                //    $scope.data = result;
+                //    console.log(result);
+                //    if (!result.error) {
+                //        window.sessionStorage["userInfo"] = JSON.stringify(result.data);
+                //        console.log(JSON.stringify(result.data));
+                //        $rootScope.userInfo = JSON.parse(window.sessionStorage["userInfo"]);
+                //        $location.path("/models");
+                //    }
+                //});
+                //{"success":true,"data":{"firstName":"John","lastName":"Smith","email":"mail2asik@gmail.com"}}
+                var data = '{ "firstName": "John",  "lastName": "Smith", "email": "mail2asik@gmail.com" }';
+
+                window.sessionStorage["userInfo"] = JSON.stringify(data);
+                $rootScope.userInfo = JSON.parse(window.sessionStorage["userInfo"]);
+                $location.path("/models");
             }
         };
     }]);
