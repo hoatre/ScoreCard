@@ -82,7 +82,8 @@
                 <tfoot>
                     <tr>
                         <td colspan="6">
-                            <div class="pagination-container">
+                            <pagination boundary-links="true" total-items="totalItems" items-per-page="itemsPerPage" ng-change="pageChanged()" max-size="maxSize" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+                            <!--<div class="pagination-container">
                                 <div class="pull-left">
                                     <pagination ng-model="currentPage"
                                                 items-per-page="itemsPerPage"
@@ -95,12 +96,12 @@
                                 <div class="pull-right">
                                     <div class="pagination pagination-sm">Page: {{currentPage}} of {{numPages}} - Total items: {{totalItems}}</div>
                                 </div>
-                            </div>
+                            </div>-->
                         </td>
                     </tr>
                 </tfoot>
                 <tbody>
-                    <tr ng-repeat="model in filteredList">
+                    <tr ng-repeat="model in models">
                         <td>
                             <a ui-sref="modelInfo.detail({modelId: model._id})">
                                 {{model.name}}

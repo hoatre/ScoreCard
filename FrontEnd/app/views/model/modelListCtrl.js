@@ -5,14 +5,36 @@
         .controller("ModelListCtrl",
                     ["$scope", "$http", "$state", "appSettings", "shareServices", "popupService",
                      ModelListCtrl])
-        .run(function (paginationConfig) {
-            paginationConfig.firstText = '«';
-            paginationConfig.previousText = 'Prev';
-            paginationConfig.nextText = 'Next';
-            paginationConfig.lastText = '»';
-        });
-
+    /*.run(function (paginationConfig) {
+        paginationConfig.firstText = '«';
+        paginationConfig.previousText = 'Prev';
+        paginationConfig.nextText = 'Next';
+        paginationConfig.lastText = '»';
+    });*/
     function ModelListCtrl($scope, $http, $state, appSettings, shareServices, popupService) {
+
+        //-----------paging--------------
+        $scope.totalItems = 0;
+        $scope.currentPage = 1;
+        $scope.maxSize = 20;
+        $scope.itemsPerPage = 10;
+        $scope.pageChanged = function () {
+            $scope.getModelPage($scope.currentPage, $scope.itemsPerPage);
+        };
+        $scope.getModelPage = function (currentPage, pageSize) {
+            //console.log(appSettings.serverPath);
+            $http.get(appSettings.serverPath + "/modelinfo/search?pageIndex=" + currentPage + "&pageSize=" + pageSize)
+                .success(function (data) {
+                    //console.log(data);
+                    $scope.models = data.modelinfo.body;
+                    //$scope.filteredList = data.modelinfo.body;
+                    $scope.totalItems = data.modelinfo.count;
+                    //$scope.pagination($scope.models);
+                });
+        }
+        $scope.getModelPage($scope.currentPage, $scope.itemsPerPage);
+        //-----------end paging--------------
+
 
         //Broadcast message
         $scope.goEdit = function (index) {
@@ -24,7 +46,7 @@
             }
         };
 
-        //load form list modellist
+        /*//load form list modellist
         $scope.getAllModel = function () {
             //console.log(appSettings.serverPath);
             $http.get(appSettings.serverPath + "/modelinfo/getall")
@@ -57,8 +79,8 @@
 
                 $scope.filteredList = list.slice(begin, end);
             });            
-        }
-        
+        }*/
+
 
         // Delete
         $scope.modelDelete = function (index) {
@@ -108,9 +130,9 @@
                         // called asynchronously if an error occurs
                         // or server returns response with an error status.
                     });
-            }            
+            }
         }
-        
-        $scope.getAllModel();
+
+        //$scope.getAllModel();
     }
 }());
