@@ -74,7 +74,13 @@
             //    AuthTokenFactory.setToken(response.data.token);
             //    return response;
             //});
-            return $http.post('app/views/shares/login/mock/login.json', loginReq).success(function (data) { return data; });
+            return $http.post('app/views/shares/login/mock/login.json', loginReq).success(function () {
+                return {
+                    "firstName": "John",
+                    "lastName": "Smith",
+                    "email": "mail2asik@gmail.com"
+                };
+            });
         }
 
         function logout() {
