@@ -27,10 +27,16 @@
         }
 
         function login(username, password) {
-            UserFactory.login(username, password).then(function sucess(response) {
-                $scope.user = response.data.user;
-                //console.log('Ctrl login: ' + response.data.token);
-            }, handerError);
+            //UserFactory.login(username, password).then(function sucess(response) {
+            //    $scope.user = response.data.user;
+            //    //console.log('Ctrl login: ' + response.data.token);
+            //}, handerError);
+
+            $scope.user = {
+                "firstName": "John",
+                "lastName": "Smith",
+                "email": "mail2asik@gmail.com"
+            };
         }
 
         function logout() {
@@ -74,13 +80,7 @@
             //    AuthTokenFactory.setToken(response.data.token);
             //    return response;
             //});
-            return $http.post('app/views/shares/login/mock/login.json', loginReq).success(function () {
-                return {
-                    "firstName": "John",
-                    "lastName": "Smith",
-                    "email": "mail2asik@gmail.com"
-                };
-            });
+            return $http.post('app/views/shares/login/mock/login.json', loginReq).success(function (data) { return data; });
         }
 
         function logout() {
