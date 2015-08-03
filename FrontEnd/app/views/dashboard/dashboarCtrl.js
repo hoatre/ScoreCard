@@ -10,37 +10,75 @@
 
         $scope.bars = {};
 
-        $http.post(appSettings.serverPath + "/spark/scoringrange", { _id: "c69f764e-d651-42ab-8046-b09e9e2c412e" })
+        $http.post(appSettings.serverPath + "/spark/scoringrange", { modelId: "cd602b77-b570-4a56-8590-eb65e55b8210" })
             .success(function (data) {
                 $scope.bars = data.ScoringRange.body;
+                var sumCount = 0;
+                for(var i = 0; i<$scope.bars.length; i++){
+                    sumCount = parseInt(sumCount) + parseInt($scope.bars[i].application_count)
+                }
+                var dataPoints = [];
+                for(var i = 0; i<$scope.bars.length; i++){
+                    dataPoints.push({
+                        label: $scope.bars[i].rating_code,
+                        y: (parseInt($scope.bars[i].application_count)/parseInt(sumCount))*100
+                    });
+                }
+                var dataPointsPie = [];
+                for(var i = 0; i<$scope.bars.length; i++){
+                    dataPointsPie.push({
+                        label: $scope.bars[i].rating_code,
+                        y: $scope.bars[i].application_count
+                    });
+                }
                 $scope.chart = new CanvasJS.Chart("chartContainer", {
                     theme: 'theme1',
                     title:{
                         text: "Scoring Range Chart"
                     },
                     axisY: {
-                        title: "million units",
-                        labelFontSize: 16,
-                    },
-                    axisX: {
-                        labelFontSize: 16,
+                        title: "percent"
                     },
                     data: [
                         {
                             type: "column",
-                            dataPoints: [
-                                { label: $scope.bars[0].rating_code, y: $scope.bars[0].application_count }
-                            ]
+                            dataPoints: dataPoints
                         }
                     ]
                 });
 
                 $scope.chart.render(); //render the chart for the first time
 
-                $scope.changeChartType = function(chartType) {
-                    $scope.chart.options.data[0].type = chartType;
-                    $scope.chart.render(); //re-render the chart to display the new layout
-                }
+                $scope.chartPie = new CanvasJS.Chart("chartPie", {
+                    theme: 'theme1',
+                    title:{
+                        text: ""
+                    },
+                    data: [
+                        {
+                            type: "pie",
+                            dataPoints: dataPointsPie
+                        }
+                    ]
+                });
+
+                $scope.chartPie.render(); //render the chart for the first time
+            });
+
+        $scope.topbot1T = {}
+        $scope.topbot1B = {}
+        $http.post(appSettings.serverPath + "/spark/topbot", { factorOptionId: "d848e3f9-9ae6-4c46-ba46-62adb892e94d" })
+            .success(function (data) {
+                $scope.topbot1T = data.ScoringRange.body[0].Top
+                $scope.topbot1B = data.ScoringRange.body[1].Bot
+            });
+
+        $scope.topbot2T = {}
+        $scope.topbot2B = {}
+        $http.post(appSettings.serverPath + "/spark/topbot", { factorOptionId: "878578e5-c9f4-430e-a129-446eaa69b374" })
+            .success(function (data) {
+                $scope.topbot2T = data.ScoringRange.body[0].Top
+                $scope.topbot2B = data.ScoringRange.body[1].Bot
             });
 
     }

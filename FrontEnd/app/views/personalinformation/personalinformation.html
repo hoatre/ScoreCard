@@ -170,18 +170,18 @@
             <div class="row" ng-init="getModelByStatus('publish')">
                 <form id="frmMain">
                     <!--<div class="form-group">
-                    <label class="col-sm-2 control-label">Model:</label>
-                    <div class="col-sm-5">
-                        <div class="clearfix">
-                            <select id="cboModel" class="form-control" name="cboModel"
-                                    ng-change="getFactorByModelId(selectModel)"
-                                    ng-model="selectModel"
-                                    ng-options="model._id as model.name for model in models">
-                                <option value="">Please select</option>
-                            </select>
+                        <label class="col-sm-2 control-label">Model:</label>
+                        <div class="col-sm-5">
+                            <div class="clearfix">
+                                <select id="cboModel" class="form-control" name="cboModel"
+                                        ng-change="getFactorByModelId(selectModel)"
+                                        ng-model="selectModel"
+                                        ng-options="model._id as model.name for model in models">
+                                    <option value="">Please select</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                </div>-->
+                    </div>-->
                     <div class="form-group"
                          ng-show="message">
                         <div ng-class="messageClass" ng-bind-html="message">
@@ -252,15 +252,15 @@
 
                     </div>
                     <!--<div class="form-group">
-                    <div class="col-sm-5">
-                        <button class="btn btn-primary" type="submit" id="btnGetChecked"
-                                onclick="return CheckValidate();"
-                                ng-click="submit()"
-                                ng-disabled="CheckValidate()">
-                            Get Checked
-                        </button>
-                    </div>
-                </div>-->
+                        <div class="col-sm-5">
+                            <button class="btn btn-primary" type="submit" id="btnGetChecked"
+                                    onclick="return CheckValidate();"
+                                    ng-click="submit()"
+                                    ng-disabled="CheckValidate()">
+                                Get Checked
+                            </button>
+                        </div>
+                    </div>-->
                 </form>
             </div>
         </div>
@@ -398,53 +398,53 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
                 <div class="col-lg-4">
-                    <div class="portlet portlet-basic" ng-init="isCollapsed3 = false">
-                        <div class="portlet-heading">
-                            <div class="portlet-title">
-                                <h4>Market Evaluation</h4>
+                    <div class="col-lg-12">
+                        <div class="portlet portlet-basic" ng-init="isCollapsed3 = false">
+                            <div class="portlet-heading">
+                                <div class="portlet-title">
+                                    <h4>Market Evaluation</h4>
+                                </div>
+                                <div class="portlet-widgets">
+                                    <a href="" ng-click="isCollapsed3 = !isCollapsed3">
+                                        <i class="fa" ng-class="isCollapsed3? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
-                            <div class="portlet-widgets">
-                                <a href="" ng-click="isCollapsed3 = !isCollapsed3">
-                                    <i class="fa" ng-class="isCollapsed3? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-                                </a>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div collapse="isCollapsed3">
+                            <div collapse="isCollapsed3">
 
-                            <div class="form-group">
-                                <div class="col-sm-12"><progressbar value="80" max="100" style=" height: 60px; text-align: match-parent"><span style="color:white; white-space:nowrap;font-weight:bold">Partner: CBRE<br /> Evaluation Price: 1,5 B<br /> 80%</span></progressbar></div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12"><progressbar value="70" max="100" style=" height: 60px; text-align: match-parent"><span style="color:white; white-space:nowrap;font-weight:bold">Partner: Empire<br /> Evaluation Price: 1,4 B <br /> 70%</span></progressbar></div>
+                                <div class="form-group">
+                                    <div class="col-sm-12"><progressbar value="80" max="100" style=" height: 60px; text-align: match-parent"><span style="color:white; white-space:nowrap;font-weight:bold">Partner: CBRE<br /> Evaluation Price: 1,5 B<br /> 80%</span></progressbar></div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12"><progressbar value="70" max="100" style=" height: 60px; text-align: match-parent"><span style="color:white; white-space:nowrap;font-weight:bold">Partner: Empire<br /> Evaluation Price: 1,4 B <br /> 70%</span></progressbar></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="portlet portlet-basic" ng-init="isCollapsed4 = false">
-                        <div class="portlet-heading">
-                            <div class="portlet-title">
-                                <h4>Bank Decision</h4>
+                    <div class="col-lg-12">
+                        <div class="portlet portlet-basic" ng-init="isCollapsed4 = false">
+                            <div class="portlet-heading">
+                                <div class="portlet-title">
+                                    <h4>Bank Decision</h4>
+                                </div>
+                                <div class="portlet-widgets">
+                                    <a href="" ng-click="isCollapsed4 = !isCollapsed4">
+                                        <i class="fa" ng-class="isCollapsed4? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
-                            <div class="portlet-widgets">
-                                <a href="" ng-click="isCollapsed4 = !isCollapsed4">
-                                    <i class="fa" ng-class="isCollapsed4? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-                                </a>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div collapse="isCollapsed4">
+                            <div collapse="isCollapsed4">
 
-                            <div class="form-group">
-                                <div class="col-sm-12"><progressbar value="60" max="100" style=" height: 50px; text-align: match-parent"><span style="color:white; white-space:nowrap;font-weight:bold">Final Evaluation Price: 1,4 B <br /> Allowance: 60%</span></progressbar></div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12"><progressbar value="100" max="100" style=" height: 50px; text-align: match-parent"><span style="color:white; white-space:nowrap;font-weight:bold">Maximum Loan Amount: 1B</span></progressbar></div>
+                                <div class="form-group">
+                                    <div class="col-sm-12"><progressbar value="60" max="100" style=" height: 50px; text-align: match-parent"><span style="color:white; white-space:nowrap;font-weight:bold">Final Evaluation Price: 1,4 B <br /> Allowance: 60%</span></progressbar></div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12"><progressbar value="100" max="100" style=" height: 50px; text-align: match-parent"><span style="color:white; white-space:nowrap;font-weight:bold">Maximum Loan Amount: 1B</span></progressbar></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -645,6 +645,148 @@
         <form class="form-horizontal" id="collateralForm" name="collateralForm" novalidate>
             <fieldset>
                 <legend>Submission</legend>
+                <div class="text-center">
+                    <h1 class="text-green">Congrats!</h1>
+                    <p>Your form <strong>ID-XXX-XX-XXX</strong> is about to finish and ready for review.</p>
+                    <p>Please upload all of your support document before submit your applications to the system so that we can fasten the process.</p>
+                </div>
+                <div class="portlet portlet-basic" ng-init="isCollapsedRequiredDocuments = false">
+                    <div class="portlet-heading">
+                        <div class="portlet-title">
+                            <h4>Required Documents</h4>
+                        </div>
+                        <div class="portlet-widgets">
+                            <a href="" ng-click="isCollapsedRequiredDocuments = !isCollapsedRequiredDocuments">
+                                <i class="fa" ng-class="isCollapsedRequiredDocuments? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div collapse="isCollapsedRequiredDocuments">
+                        <br class="space-4" />
+                        <div class="form-actions">
+                            <label class="col-sm-3 control-label">1. Copy of Identity Documents:</label>
+                            <div>
+                                <div style="float:right;">
+                                    <button ng-click="btn_upload()">Upload</button>
+                                    <button ng-click="btn_clean()">Remove all</button>
+                                </div>
+                                <input type="file" id="file1" multiple />
+                            </div>
+                            <div ng-repeat="file in files" style="margin-top: 20px;border-bottom-color: antiquewhite;border-bottom-style: double;">
+                                <div>
+                                    <span>{{file.name}}</span><div style="float:right;"><span>{{file.humanSize}}</span><a ng-click="btn_remove(file)" title="Remove from list to be uploaded"><i class="icon-remove"></i></a></div>
+                                </div>
+                                <progress style="width:400px;" value="{{file.loaded}}" max="{{file.size}}"></progress>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <label class="col-sm-3 control-label">2. Copy of Labour Contract:</label>
+                            <div>
+                                <div style="float:right;">
+                                    <button ng-click="btn_upload()">Upload</button>
+                                    <button ng-click="btn_clean()">Remove all</button>
+                                </div>
+                                <input type="file" id="file1" multiple />
+                            </div>
+                            <div ng-repeat="file in files" style="margin-top: 20px;border-bottom-color: antiquewhite;border-bottom-style: double;">
+                                <div>
+                                    <span>{{file.name}}</span><div style="float:right;"><span>{{file.humanSize}}</span><a ng-click="btn_remove(file)" title="Remove from list to be uploaded"><i class="icon-remove"></i></a></div>
+                                </div>
+                                <progress style="width:400px;" value="{{file.loaded}}" max="{{file.size}}"></progress>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <label class="col-sm-3 control-label">3. Copy of Marriage Certificate:</label>
+                            <div>
+                                <div style="float:right;">
+                                    <button ng-click="btn_upload()">Upload</button>
+                                    <button ng-click="btn_clean()">Remove all</button>
+                                </div>
+                                <input type="file" id="file1" multiple />
+                            </div>
+                            <div ng-repeat="file in files" style="margin-top: 20px;border-bottom-color: antiquewhite;border-bottom-style: double;">
+                                <div>
+                                    <span>{{file.name}}</span><div style="float:right;"><span>{{file.humanSize}}</span><a ng-click="btn_remove(file)" title="Remove from list to be uploaded"><i class="icon-remove"></i></a></div>
+                                </div>
+                                <progress style="width:400px;" value="{{file.loaded}}" max="{{file.size}}"></progress>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <label class="col-sm-3 control-label">4. Scan of Morgate papers</label>
+                            <div>
+                                <div style="float:right;">
+                                    <button ng-click="btn_upload()">Upload</button>
+                                    <button ng-click="btn_clean()">Remove all</button>
+                                </div>
+                                <input type="file" id="file1" multiple />
+                            </div>
+                            <div ng-repeat="file in files" style="margin-top: 20px;border-bottom-color: antiquewhite;border-bottom-style: double;">
+                                <div>
+                                    <span>{{file.name}}</span><div style="float:right;"><span>{{file.humanSize}}</span><a ng-click="btn_remove(file)" title="Remove from list to be uploaded"><i class="icon-remove"></i></a></div>
+                                </div>
+                                <progress style="width:400px;" value="{{file.loaded}}" max="{{file.size}}"></progress>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <p class="fa fa-info-circle"> It will be much easier for the bank to review and approve your loan application if you can provide us addition supported documents that can backed your information.Thus, if you have anything to add, please leave it here together with your notes</p>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-app"><i class="fa fa-save text-info"></i>Please Save it Here</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portlet portlet-basic" ng-init="isCollapsedSubmissionConfirmation = false">
+                    <div class="portlet-heading">
+                        <div class="portlet-title">
+                            <h4>Confirmation</h4>
+                        </div>
+                        <div class="portlet-widgets">
+                            <a href="" ng-click="isCollapsedSubmissionConfirmation = !isCollapsedSubmissionConfirmation">
+                                <i class="fa" ng-class="isCollapsedSubmissionConfirmation? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div collapse="isCollapsedSubmissionConfirmation">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="col-small center"><label><input type="checkbox" class="tc"><span class="labels"></span></label></td>
+                                    <td style="padding-left:6px">
+                                        <p> 1. I hereby confirms  that all information provided on this application form  is  correct  and I/we  agree to take  full  responsibilities  for the information provided</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-small center"><label><input type="checkbox" class="tc"><span class="labels"></span></label></td>
+                                    <td style="padding-left:6px">
+                                        <p> 2. I/We  abide  by  all  provisions  of  the  Vietnam  Bank  in  relation  to  the  terms  for  lending  and  loan collateral;</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-small center"><label><input type="checkbox" class="tc"><span class="labels"></span></label></td>
+                                    <td style="padding-left:6px">
+                                        <p> 3. I/we  agree  that THE BANK is entitled to use information on this Application to provide, introduce and support me/us on any relevant products or services of the Bank</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-small center"><label><input type="checkbox" class="tc"><span class="labels"></span></label></td>
+                                    <td style="padding-left:6px">
+                                        <p> 4. I have read the Terms and Conditions </p>
+                                    </td>
+                                </tr>
+                                </body>
+
+                        </table>
+                    </div>
+                </div>
                 <div class="form-actions">
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
@@ -682,8 +824,8 @@
                 <div class="form-actions">
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
-                            <button class="btn btn-sm btn-primary" type="button" ng-click="finish()">Finish</button>
                             <button class="btn button-previous" type="button" ng-click="changetab(6)">Back</button>
+                            <button class="btn btn-sm btn-primary" type="button" ng-click="finish()">Finish</button>
                         </div>
                     </div>
                 </div>
