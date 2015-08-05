@@ -32,6 +32,7 @@
                     });
                 }
                 $scope.chart = new CanvasJS.Chart("chartContainer", {
+                    animationEnabled: true,
                     theme: 'theme1',
                     title:{
                         text: "Scoring Range Chart"
@@ -50,6 +51,7 @@
                 $scope.chart.render(); //render the chart for the first time
 
                 $scope.chartPie = new CanvasJS.Chart("chartPie", {
+                    animationEnabled: true,
                     theme: 'theme1',
                     title:{
                         text: ""
