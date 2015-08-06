@@ -35,7 +35,7 @@
                     animationEnabled: true,
                     theme: 'theme1',
                     title:{
-                        text: "Scoring Range Chart (" + $scope.bars[0].modelId + ")"
+                        text: "Scoring Range Chart (" + $scope.bars[0].modelName + ")"
                     },
                     axisY: {
                         title: "percent"
