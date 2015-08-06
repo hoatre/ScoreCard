@@ -69,7 +69,7 @@
 
         $scope.topbot1T = {}
         $scope.topbot1B = {}
-        $http.post(appSettings.serverPath + "/spark/topbot", { factorOptionId: "d848e3f9-9ae6-4c46-ba46-62adb892e94d" })
+        $http.post(appSettings.serverPath + "/spark/topbot", { factorOptionId: "1a021ec7-83af-46ff-af31-70ba8600ff77" })
             .success(function (data) {
                 $scope.topbot1T = data.ScoringRange.body[0].Top
                 $scope.topbot1B = data.ScoringRange.body[1].Bot
@@ -77,7 +77,7 @@
 
         $scope.topbot2T = {}
         $scope.topbot2B = {}
-        $http.post(appSettings.serverPath + "/spark/topbot", { factorOptionId: "878578e5-c9f4-430e-a129-446eaa69b374" })
+        $http.post(appSettings.serverPath + "/spark/topbot", { factorOptionId: "9daa9841-c94a-498d-9a32-28cd8f91ec80" })
             .success(function (data) {
                 $scope.topbot2T = data.ScoringRange.body[0].Top
                 $scope.topbot2B = data.ScoringRange.body[1].Bot
