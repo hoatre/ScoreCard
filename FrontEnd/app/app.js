@@ -15,7 +15,8 @@ var myapp = angular
     'angular-loading-bar',
     'common.services',
     'ngSanitize',
-    'ui.bootstrap-slider'
+    'ui.bootstrap-slider',
+    'ui.grid.treeView'
   ])
     .run(function ($rootScope, $state) {
         $rootScope.$state = $state; //Get state info in view

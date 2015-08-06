@@ -10,7 +10,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">Model:</label>
             <div class="col-sm-5">
-                <select id="cboModel" class="form-control" name="cboModel"
+                <select id="cboModel" class="form-control" name="cboModel" onchange="expand()"
                         ng-model="choiceModel"
                         ng-options="model._id as model.name for model in models"
                         ng-change="modelChanged(choiceModel)">
@@ -176,17 +176,23 @@
         </div>
     </div>
     <div class="row">
-        <div class="form-group">
+        <div class="form-group" >
             <!--tree-->
-            <div id="treeGrid">
-            </div>
-            <!--tree-->
+            <!--<button id="expandAll" type="button" class="btn btn-success" ng-click="expandAll()">Expand All</button>-->
+            <div id="grid1" ui-grid="gridOptions" ui-grid-tree-view class="grid" ></div>
+            <!--<div id="treeGrid">-->
         </div>
+        <!--tree-->
     </div>
 </div>
+</div>
 <script>
+    function expand() {
+        //setTimeout(function () { angular.element(document.getElementById('grid1')).scope().expandAll(); }, 500);
+
+    }
     //for tables checkbox demo
-    jQuery(function ($) {
+    /*jQuery(function ($) {
         $('table th input:checkbox').on('click', function () {
             var that = this;
             $(this).closest('table').find('tr > td:first-child input:checkbox')
@@ -196,5 +202,5 @@
                     });
 
         });
-    });
+    });*/
 </script>

@@ -37,23 +37,44 @@
                     }
                 });
         }
-
+        $scope.coppy = function () {
+            if (popupService.showPopup('Are you sure coppy this model?')) {
+                $http.post(appSettings.serverPath + "/modelinfo/copymodel", { _id: $stateParams.modelId })
+                    .success(function (data, status, headers, config) {
+                        popupService.showMessage(data.copymodel.header.message);
+                        /*if (data.copymodel.header.code == 0) {
+                            popupService.showMessage(data.copymodel.header.message);
+                        }
+                        else {
+                            popupService.showMessage(data.copymodel.header.message);
+                        }*/
+                    })
+                    .error(function (data, status, headers, config) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                    });
+            }
+        }
         $scope.publish = function () {
-
+            var modelstatus = "draft";
             if ($scope.model.status == 'draft') {
-                $scope.model.status = 'publish';
+                modelstatus = 'active';
+            }
+            else if ($scope.model.status == 'active') {
+                modelstatus = 'publish';
             }
             else {
-                $scope.model.status = 'draft';
+                modelstatus = 'draft';
             }
             var strError = '';
-            if ($scope.model.status != 'draft') {
+            if (modelstatus != 'draft') {
                 $http.post(appSettings.serverPath + "/validate/checkweightrate", { modelid: $scope.model._id }).
                         success(function (data, status, headers, config) {
                             //console.log('data.checkweightrate.header.code');
                             var code = data.checkweightrate.header.code;
 
                             if (code == 0) {
+                                $scope.model.status = modelstatus;
                                 $scope.save();
                             }
                             else if (code == 1) {
@@ -98,6 +119,7 @@
                         });
             }
             else {
+                $scope.model.status = modelstatus;
                 $scope.save();
             }
         }
