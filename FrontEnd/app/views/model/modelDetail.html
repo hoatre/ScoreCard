@@ -62,7 +62,7 @@
                 </div>
                 <div class="form-actions">
                     <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-5">
+                        <div class="col-sm-offset-3 col-sm-12">
                             <button type="submit" class="btn btn-primary"
                                     ng-click="back()">
                                 Back To List
@@ -70,7 +70,12 @@
                             <button type="submit" class="btn btn-default"
                                     ng-click="publish()"
                                     ng-if="true">
-                                {{model.status == 'draft'? 'Publish' : 'Unpublish'}}
+                                {{model.status == 'draft'? 'Active' : model.status == 'active'?'Publish':'Unpublish'}}
+                            </button>
+                            <button type="submit" class="btn btn-default"
+                                    ng-click="coppy()"
+                                    ng-if="model.status == 'draft'? false : true">
+                                Coppy
                             </button>
                         </div>
                     </div>
