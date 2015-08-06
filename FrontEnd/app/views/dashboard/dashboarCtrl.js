@@ -14,18 +14,18 @@
             .success(function (data) {
                 $scope.bars = data.ScoringRange.body;
                 var sumCount = 0;
-                for(var i = 0; i<$scope.bars.length; i++){
+                for(var i = 1; i<$scope.bars.length; i++){
                     sumCount = parseInt(sumCount) + parseInt($scope.bars[i].application_count)
                 }
                 var dataPoints = [];
-                for(var i = 0; i<$scope.bars.length; i++){
+                for(var i = 1; i<$scope.bars.length; i++){
                     dataPoints.push({
                         label: $scope.bars[i].rating_code,
                         y: (parseInt($scope.bars[i].application_count)/parseInt(sumCount))*100
                     });
                 }
                 var dataPointsPie = [];
-                for(var i = 0; i<$scope.bars.length; i++){
+                for(var i = 1; i<$scope.bars.length; i++){
                     dataPointsPie.push({
                         label: $scope.bars[i].rating_code,
                         y: $scope.bars[i].application_count
