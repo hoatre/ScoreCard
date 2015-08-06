@@ -10,7 +10,7 @@
 
         $scope.bars = {};
 
-        $http.post(appSettings.serverPath + "/spark/scoringrange", { modelId: "cd602b77-b570-4a56-8590-eb65e55b8210" })
+        $http.post(appSettings.serverPath + "/spark/scoringrange", { modelId: "19028285-5fd1-40d7-be66-5e630f948ee5" })
             .success(function (data) {
                 $scope.bars = data.ScoringRange.body;
                 var sumCount = 0;
@@ -35,7 +35,7 @@
                     animationEnabled: true,
                     theme: 'theme1',
                     title:{
-                        text: "Scoring Range Chart"
+                        text: "Scoring Range Chart (" + $scope.bars[0].modelId + ")"
                     },
                     axisY: {
                         title: "percent"
