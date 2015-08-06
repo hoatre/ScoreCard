@@ -154,7 +154,7 @@
         $scope.currentModel = {};
 
         $scope.message = '';
-        $scope.messageClass = 'col-md-6 wel bg-info';
+        $scope.messageClass = 'col-md-12 wel bg-info';
 
 
         
@@ -218,24 +218,24 @@
                     console.log(data);
                     console.log(data['Status']);
                     if (data['Status'] == 'Approve') {
-                        $scope.messageClass = 'col-md-6 wel bg-success';
+                        $scope.messageClass = 'col-md-12 wel bg-success';
 
                         $scope.message = "<h5 class='text-uppercase heading'><strong>Congratulations!</strong></h5><br/> Your loan is approved subject to confirmation of the details you have provided.<br /> Check your mail for next steps.<br /> (Score: " + data['Score'] + ' ,Rating: ' + data['Rating'] + ' ,Status: ' + data['Status'] + ').';
                         console.log($scope.message);
                     }
                     else if (data['Status'] == 'Underwriting') {
-                        $scope.messageClass = 'col-md-6 wel bg-warning';
+                        $scope.messageClass = 'col-md-12 wel bg-warning';
 
                         $scope.message = "<h5 class='text-uppercase heading'><strong>Underwriting:</strong></h5><br/>Underwriting! <br /> (Score: " + data['Score'] + ' ,Rating: ' + data['Rating'] + ' ,Status: ' + data['Status'] + ').';
 
                     }
                     else if (data['Status'] == 'Reject') {
-                        $scope.messageClass = 'col-md-6 wel bg-danger';
+                        $scope.messageClass = 'col-md-12 wel bg-danger';
                         $scope.message = "<h5 class='text-uppercase heading'><strong>Reject:</strong></h5><br/>Reject! <br /> (Score: " + data['Score'] + ' ,Rating: ' + data['Rating'] + ' ,Status: ' + data['Status'] + ').';
 
                     }
                     else {
-                        $scope.messageClass = 'col-md-6 wel bg-info';
+                        $scope.messageClass = 'col-md-12 wel bg-info';
                         $scope.message = "<h5 class='text-uppercase heading'><strong>Warning:</strong></h5><br/>Please completed choose! <br /> (Score: " + data['Score'] + ' ,Rating: ' + data['Rating'] + ' ,Status: ' + data['Status'] + ').';
                         //console.log(data);
                     }
