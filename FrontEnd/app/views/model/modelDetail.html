@@ -77,6 +77,11 @@
                                     ng-if="model.status == 'draft'? false : true">
                                 Coppy
                             </button>
+                            <button type="submit" class="btn btn-default"
+                                    ng-click="running()"
+                                    ng-if="model.status != 'publish'? false : activetable.modelid==model._id?false:true">
+                                Running...
+                            </button>
                         </div>
                     </div>
                 </div>

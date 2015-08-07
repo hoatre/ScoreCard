@@ -37,6 +37,11 @@
                     }
                 });
         }
+        //get model running
+        $http.get(appSettings.serverPath + "/activetable")
+        .success(function (data) {
+            $scope.activetable = data.activetable.body;
+        });
         $scope.coppy = function () {
             if (popupService.showPopup('Are you sure coppy this model?')) {
                 $http.post(appSettings.serverPath + "/modelinfo/copymodel", { _id: $stateParams.modelId })
@@ -48,6 +53,18 @@
                         else {
                             popupService.showMessage(data.copymodel.header.message);
                         }*/
+                    })
+                    .error(function (data, status, headers, config) {
+                        // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                    });
+            }
+        }
+        $scope.running = function () {
+            if (popupService.showPopup('Are you sure running this model?')) {
+                $http.post(appSettings.serverPath + "/activetable", { modelid: $stateParams.modelId })
+                    .success(function (data, status, headers, config) {
+                        popupService.showMessage(data.copymodel.header.message);
                     })
                     .error(function (data, status, headers, config) {
                         // called asynchronously if an error occurs
