@@ -60,7 +60,7 @@ var myapp = angular
               templateUrl: 'app/views/model/modelList.html',
               url: '/models',
               controller: "ModelListCtrl",
-              authenticate: false
+              authenticate: true
           })
           .state('modelEdit', {
               templateUrl: 'app/views/model/modelEdit.html',
