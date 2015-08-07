@@ -25,8 +25,11 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/satellizer/satellizer.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/angular-strap/angular-strap.js"></script>
+    <script src="bower_components/angular-strap/angular-strap.tpl.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <script src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
     <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
@@ -36,26 +39,21 @@
     <script src="bower_components/angular-toggle-switch/angular-toggle-switch.min.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
 
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
 
-    <link rel="stylesheet" href="bower_components/jqwidgets/styles/jqx.base.css" type="text/css" />
-    <script type="text/javascript" src="bower_components/jqwidgets/jqxcore.js"></script>
-    <script type="text/javascript" src="bower_components/jqwidgets/jqxdata.js"></script>
-    <script type="text/javascript" src="bower_components/jqwidgets/jqxbuttons.js"></script>
-    <script type="text/javascript" src="bower_components/jqwidgets/jqxscrollbar.js"></script>
-    <script type="text/javascript" src="bower_components/jqwidgets/jqxdatatable.js"></script>
-    <script type="text/javascript" src="bower_components/jqwidgets/jqxtreegrid.js"></script>
-    <script type="text/javascript" src="bower_components/jqwidgets/demos.js"></script>
 
+    
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
 
-    <!-- Services -->
+    <!-- Services -->    
     <script src="app/common/services/common.services.js"></script>
     <script src="app/common/services/shareServices.js"></script>
     <script src="app/common/services/modelResource.js"></script>
@@ -65,7 +63,10 @@
 
     <!-- Score Card Controllers -->
     <script src="app/views/shares/login/loginCtrl.js"></script>
-    <script src="app/views/shares/login/users.js"></script>
+    <script src="app/views/shares/login/logout.js"></script>    
+    <script src="app/views/shares/profile/profile.js"></script>
+    <script src="app/views/shares/signup/signup.js"></script>
+    <script src="app/common/services/account.js"></script>
     <script src="app/views/shares//siderbar/sidebarController.js"></script>
     <script src="app/views/active/activeListCtrl.js"></script>
     <script src="app/views/factor/factorListCtrl.js"></script>
@@ -83,7 +84,14 @@
     <script src="app/views/dashboard/dashboarCtrl.js"></script>
     <script src="app/views/upload/uploadCtrl.js"></script>
     <script src="app/views/dashboard/canvasjs.min.js"></script>
+
     <script src="js/sb-admin-2.js"></script>
+
+    <!-- Directive -->
+    <script src="scripts/directives/passwordMatch.js"></script>
+    <script src="scripts/directives/passwordStrength.js"></script>
+
+
 
     <script src="bower_components/bower-ui-grid/ui-grid.js"></script>
     <link rel="stylesheet" href="bower_components/bower-ui-grid/ui-grid.css" type="text/css">
@@ -123,11 +131,16 @@
         <div id="wrapper">
             <!-- Navigation -->
             <!--<header>-->
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" ng-show="userInfo">
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" ng-controller="MainCtrl">
                 <div class="navbar-header" ng-include="'app/views/shares/header.html'"></div>
-                <div ng-include="'app/views/shares/notification.html'"></div>
-                <div class="navbar-default sidebar" role="navigation" ng-include="'app/views/shares/siderbar/sidebar.html'">
-                    dfada
+                <div ng-include="'app/views/shares/notification.html'" ng-if="isAuthenticated()"></div>
+                <ul class="nav navbar-top-links navbar-right" ng-if="!isAuthenticated()">
+                    <li>
+                        <a ui-sref="login"><i class="fa fa-user fa-fw"></i> Login</a>
+                    </li>
+                </ul>
+                <div class="navbar-default sidebar" role="navigation" ng-include="'app/views/shares/siderbar/sidebar.html'" ng-if="isAuthenticated()">
+
                 </div>
             </nav>
             <!--</header>-->
