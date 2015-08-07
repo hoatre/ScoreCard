@@ -187,7 +187,19 @@
                     $scope.message = response.data.exceptionMessage;
             });
         };
-        $scope.getFactorByModelId("19028285-5fd1-40d7-be66-5e630f948ee5");
+        //get model running
+        $http.get(appSettings.serverPath + "/activetable")
+        .success(function (data) {
+            if (data.activetable.header.code == 0) {
+                $scope.getFactorByModelId(data.activetable.body.modelid);
+            }
+            else {
+                //$scope.messageClass = "Can't find model running!";
+                $scope.message = "<br/><strong>Can't find generated model running!</strong><br/>";
+                console.log($scope.message);
+            }
+        });
+        
         $scope.getFactorByParentId = function (parentId) {
             var result = [];
 

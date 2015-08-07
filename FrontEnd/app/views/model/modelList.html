@@ -75,6 +75,7 @@
                         <th class="hidden-xs">Description</th>
                         <th class="col-medium center">Minimum Score</th>
                         <th class="col-medium center">Maximum Score</th>
+                        <th class="hidden-xs">Running</th>
                         <th class="hidden-xs">Status</th>
                         <th class="col-medium center">Action</th>
                     </tr>
@@ -115,6 +116,9 @@
                         </td>
                         <td class="hidden-xs">
                             {{model.max}}
+                        </td>
+                        <td class="hidden-xs">
+                            {{model._id==activetable.modelid?'Running':'Stop'}}
                         </td>
                         <td class="hidden-xs">
                             {{model.status}}

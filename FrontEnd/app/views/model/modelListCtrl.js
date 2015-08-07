@@ -30,6 +30,11 @@
                     //$scope.filteredList = data.modelinfo.body;
                     $scope.totalItems = data.modelinfo.count;
                     //$scope.pagination($scope.models);
+                    //get model running
+                    $http.get(appSettings.serverPath + "/activetable")
+                    .success(function (data) {
+                        $scope.activetable = data.activetable.body;
+                    });
                 });
         }
         $scope.getModelPage($scope.currentPage, $scope.itemsPerPage);
@@ -85,14 +90,14 @@
         // Delete
         $scope.modelDelete = function (index) {
             if (popupService.showPopup('Are you sure delete this model?')) {
-                $http.post(appSettings.serverPath + "/modelinfo/delete", { _id: $scope.models[index]._id })
+                $http.post(appSettings.serverPath + "/modelinfo/delall", { _id: $scope.models[index]._id })
                     .success(function (data, status, headers, config) {
-                        if (data.deleteModelInfo.header.code == 0) {
+                        if (data.dellallmodel.header.code == 0) {
                             $scope.models.splice(index, 1);
                             $scope.pagination($scope.models);
                         }
                         else {
-                            popupService.showMessage(data.deleteModelInfo.header.message);
+                            popupService.showMessage(data.dellallmodel.header.message);
                         }
                     })
                     .error(function (data, status, headers, config) {

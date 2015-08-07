@@ -66,10 +66,14 @@
 
         // Generator scoring range
         $scope.gennerateScoringRange = function () {
-            $http.post(url_modelrangerandupdateangular_scala, { id: $scope.model._id })
+            $http.post(appSettings.serverPath + "/modelinfo/rangeandupdate", { _id: $scope.model._id })
                 .success(function (data, status, headers, config) {
-                    $scope.model = data["SUCCESS"];
-                    //console.log($scope.model.name+"-->"+$scope.model.min);
+                    if (data["rangeAndUpdate"]["header"].code == 0) {
+                        $scope.model = data["rangeAndUpdate"]["body"];
+                    }
+                    else {
+                        alert(data["rangeAndUpdate"]["header"].message);
+                    }
                 })
                 .error(function (data, status, headers, config) {
                     // called asynchronously if an error occurs
