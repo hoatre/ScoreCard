@@ -23,10 +23,16 @@
                 </a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=1">
                     <li ui-sref-active="active">
+                        <a ui-sref="applicationList"><i class="fa fa-bar-chart-o fa-fw"></i> Applications<span></span></a>
+                    </li>
+                    <li ui-sref-active="active">
                         <a ui-sref="functionList"><i class="fa fa-bar-chart-o fa-fw"></i> Functions<span></span></a>
                     </li>
                     <li ui-sref-active="active">
                         <a ui-sref="groupList"><i class="fa fa-bar-chart-o fa-fw"></i> Groups<span></span></a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="groupFunctionList"><i class="fa fa-bar-chart-o fa-fw"></i> Group Function<span></span></a>
                     </li>
                     <li ui-sref-active="active">
                         <a ui-sref="roleList"><i class="fa fa-bar-chart-o fa-fw"></i> Roles<span></span></a>
@@ -35,11 +41,12 @@
                         <a ui-sref="roleGroupList"><i class="fa fa-bar-chart-o fa-fw"></i> Role Group<span></span></a>
                     </li>
                     <li ui-sref-active="active">
-                        <a ui-sref="userGroupList"><i class="fa fa-bar-chart-o fa-fw"></i> User Group<span></span></a>
+                        <a ui-sref="userList"><i class="fa fa-bar-chart-o fa-fw"></i> Users<span></span></a>
                     </li>
                     <li ui-sref-active="active">
-                        <a ui-sref="groupFunctionList"><i class="fa fa-bar-chart-o fa-fw"></i> Group Function<span></span></a>
+                        <a ui-sref="userGroupList"><i class="fa fa-bar-chart-o fa-fw"></i> User Group<span></span></a>
                     </li>
+                    
                 </ul>
             </li>
             <li ng-class="{active: collapseVar==2}">
