@@ -33,7 +33,7 @@ var myapp = angular
     })
     .constant("appSettings", {
         serverPath: "http://10.15.171.35:8080",
-        authPath: "http://localhost:9000"
+        authPath: "http://10.15.171.35:9000"
     })
   .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$authProvider', 'appSettings', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $authProvider, appSettings) {
 
