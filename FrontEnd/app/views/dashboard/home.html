@@ -13,7 +13,18 @@
         <stats number="18" comments="New orders!" colour="yellow" type="shopping-cart"></stats>
         <stats number="24" comments="Support tickets!" colour="red" type="support"></stats>
     </div>
-
+    <div class="row">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Model:</label>
+            <div class="col-sm-5">
+                <select id="cboModel" class="form-control" name="cboModel"
+                        ng-model="choiceModel"
+                        ng-options="model._id as model.name for model in models"
+                        ng-change="modelChanged(choiceModel)">
+                </select>
+            </div>
+        </div>
+    </div>
     <!-- /.panel -->
     <div class="row">
         <!--- Chart -->
@@ -27,6 +38,17 @@
     <div class="row">
         <!--- Chart -->
         <div class="col-lg-6">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Factor Option 1:</label>
+                <div class="col-sm-7">
+                    <select id="cboOption1" class="form-control" name="cboOption1"
+                            ng-model="choiceOptl"
+                            ng-options="factorOption1.FactorOptionId as factorOption1.FactorOptionName for factorOption1 in factorOption1s"
+                            ng-change="option1Changed(choiceOptl)">
+                    </select>
+                </div>
+            </div>
+            <br>
             <h2><center>{{topbot1T[0].factor_option_name}}</center></h2>
             <table class="table table-bordered table-hover tc-table">
                 <thead>
@@ -73,6 +95,17 @@
             </table>
         </div>
         <div class="col-lg-6">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Factor Option 2:</label>
+                <div class="col-sm-7">
+                    <select id="cboOption2" class="form-control" name="cboOption2"
+                            ng-model="choiceOpt2"
+                            ng-options="factorOption2.FactorOptionId as factorOption2.FactorOptionName for factorOption2 in factorOption2s"
+                            ng-change="option2Changed(choiceOpt2)">
+                    </select>
+                </div>
+            </div>
+            <br>
             <h2><center>{{topbot2T[0].factor_option_name}}</center></h2>
             <table class="table table-bordered table-hover tc-table">
                 <thead>

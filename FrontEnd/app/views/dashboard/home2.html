@@ -13,7 +13,18 @@
         <stats number="18" comments="New orders!" colour="yellow" type="shopping-cart"></stats>
         <stats number="24" comments="Support tickets!" colour="red" type="support"></stats>
     </div>
-
+    <div class="row">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Model:</label>
+            <div class="col-sm-5">
+                <select id="cboModel" class="form-control" name="cboModel"
+                        ng-model="choiceModel"
+                        ng-options="model._id as model.name for model in models"
+                        ng-change="modelChanged(choiceModel)">
+                </select>
+            </div>
+        </div>
+    </div>
     <!-- /.panel -->
     <div class="row">
         <!--- Chart -->
