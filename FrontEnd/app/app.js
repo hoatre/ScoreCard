@@ -23,7 +23,7 @@ var myapp = angular
   ])
     .run(function ($rootScope, $state, $auth) {
         $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
-            
+
             if (toState.authenticate && !$auth.isAuthenticated()) {
                 // User isn’t authenticated
                 $state.transitionTo("login");
@@ -34,6 +34,8 @@ var myapp = angular
     .constant("appSettings", {
         serverPath: "http://10.15.171.35:8080",
         authPath: "http://10.15.171.35:9000"
+        //serverPath: "http://localhost:8080",
+        //authPath: "http://localhost:9000"
     })
   .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$authProvider', 'appSettings', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $authProvider, appSettings) {
 
@@ -198,8 +200,13 @@ var myapp = angular
                 }
             }
         })
+          .state('dashboard2', {
+              templateUrl: 'app/views/dashboard/home2.html',
+              url: '/dashboard2',
+              controller: "Dashboard2Ctrl"
+          })
       .state('dashboard', {
-          url: '/dashboard2',
+          url: '/dashboard3',
           templateUrl: 'views/dashboard/main.html',
           resolve: {
               loadMyDirectives: function ($ocLazyLoad) {
@@ -350,8 +357,107 @@ var myapp = angular
           templateUrl: 'views/ui-elements/grid.html',
           url: '/grid'
       })
+
+      //System management
+    .state('applicationList', {
+        templateUrl: 'core/views/application/applicationList.html',
+        url: '/applications',
+        controller: "ApplicationListCtrl",
+        authenticate: true
+    })
+    .state('applicationEdit', {
+        templateUrl: 'core/views/application/applicationEdit.html',
+        url: '/applications/edit/:applicationId',
+        controller: "ApplicationEditCtrl",
+        authenticate: true
+    })
+    .state('functionList', {
+        templateUrl: 'core/views/function/functionList.html',
+        url: '/functions',
+        controller: "FunctionListCtrl",
+        authenticate: true
+    })
+    .state('functionEdit', {
+        templateUrl: 'core/views/function/functionEdit.html',
+        url: '/functions/edit/:functionId',
+        controller: "FunctionEditCtrl",
+        authenticate: true
+    })
+    .state('groupList', {
+        templateUrl: 'core/views/group/groupList.html',
+        url: '/groups',
+        controller: "GroupListCtrl",
+        authenticate: true
+    })
+    .state('groupEdit', {
+        templateUrl: 'core/views/group/groupEdit.html',
+        url: '/groups/edit/:groupId',
+        controller: "GroupEditCtrl",
+        authenticate: true
+    })
+    .state('groupFunctionList', {
+        templateUrl: 'core/views/groupfunction/groupFunctionList.html',
+        url: '/groupfunctions',
+        controller: "GroupFunctionListCtrl",
+        authenticate: true
+    })
+    .state('groupFunctionEdit', {
+        templateUrl: 'core/views/groupfunction/groupFunctionEdit.html',
+        url: '/groupfunctions/edit/:groupFunctionId',
+        controller: "GroupFunctionEditCtrl",
+        authenticate: true
+    })
+    .state('roleList', {
+        templateUrl: 'core/views/role/roleList.html',
+        url: '/roles',
+        controller: "RoleListCtrl",
+        authenticate: true
+    })
+    .state('roleEdit', {
+        templateUrl: 'core/views/role/roleEdit.html',
+        url: '/roles/edit/:roleId',
+        controller: "RoleEditCtrl",
+        authenticate: true
+    })
+    .state('roleGroupList', {
+        templateUrl: 'core/views/roleGroup/roleGroupList.html',
+        url: '/rolefunctons',
+        controller: "RoleGroupListCtrl",
+        authenticate: true
+    })
+    .state('roleGroupEdit', {
+        templateUrl: 'core/views/rolegroup/roleGroupEdit.html',
+        url: '/rolegroups/edit/:roleGroupId',
+        controller: "RoleGroupEditCtrl",
+        authenticate: true
+    })
+    .state('userList', {
+        templateUrl: 'core/views/user/userList.html',
+        url: '/users',
+        controller: "UserListCtrl",
+        authenticate: true
+    })
+    .state('userEdit', {
+        templateUrl: 'core/views/user/userEdit.html',
+        url: '/users/edit/:userId',
+        controller: "UserEditCtrl",
+        authenticate: true
+    })
+      .state('userGroupList', {
+          templateUrl: 'core/views/usergroup/userGroupList.html',
+          url: '/usergroups',
+          controller: "UserGroupListCtrl",
+          authenticate: true
+      })
+    .state('userGroupEdit', {
+        templateUrl: 'core/views/usergroup/userGroupEdit.html',
+        url: '/usergroups/edit/:usergroupId',
+        controller: "UserGroupEditCtrl",
+        authenticate: true
+    })
+      //End
   }])
-  .controller('MainCtrl', ['$scope','$auth', function ($scope, $auth) {
+  .controller('MainCtrl', ['$scope', '$auth', function ($scope, $auth) {
 
       $scope.isAuthenticated = function () {
           return $auth.isAuthenticated();
