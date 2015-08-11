@@ -36,15 +36,23 @@
                             {
                                 theme: 'theme2',
                                 title:{
-                                    text: data.PercentOptionOfFactor.body.modelName
+                                    text: data.PercentOptionOfFactor.body.modelName,
+                                    fontSize:25
 
+                                },
+                                axisX:{
+                                    labelFontSize: 12,
+                                    interval: 1
                                 },
                                 toolTip:{
                                     content: "{name} : #percent%"
                                 },
                                 animationEnabled: true,
                                 axisY:{
-                                    title: "percent"
+                                    title: "percent",
+                                    labelFontSize: 12,
+                                    interval: 10,
+                                    titleFontSize: 17
                                 },
                                 data:data.PercentOptionOfFactor.body.data
 
