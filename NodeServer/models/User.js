@@ -4,16 +4,16 @@ var bcrypt = require('bcryptjs');
 var userSchema = new mongoose.Schema({
   email: { type: String, unique: true, lowercase: true },
   password: { type: String, select: false },
-  displayName: String,
+  displayname: String,
   picture: String,
-  facebook: String,
-  foursquare: String,
-  google: String,
-  github: String,
-  linkedin: String,
-  live: String,
-  yahoo: String,
-  twitter: String
+  facebookid: String,
+  foursquareid: String,
+  googleid: String,
+  githubid: String,
+  linkedinid: String,
+  liveid: String,
+  yahooid: String,
+  twitterid: String
 });
 
 userSchema.pre('save', function(next) {

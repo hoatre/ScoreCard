@@ -32,7 +32,7 @@ exports.signup = function(req, res) {
       return res.status(409).send({ message: 'Email is already taken' });
     }
     var user = new User({
-      displayName: req.body.displayName,
+      displayname: req.body.displayName,
       email: req.body.email,
       password: req.body.password
     });

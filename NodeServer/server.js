@@ -96,7 +96,7 @@ app.put('/api/me', ensureAuthenticated, function(req, res) {
     if (!user) {
       return res.status(400).send({ message: 'User not found' });
     }
-    user.displayName = req.body.displayName || user.displayName;
+    user.displayname = req.body.displayName || user.displayName;
     user.email = req.body.email || user.email;
     user.save(function(err) {
       res.status(200).end();

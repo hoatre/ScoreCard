@@ -32,7 +32,7 @@ module.exports = function(req, res) {
       }
       // Step 3a. Link user accounts.
       if (req.headers.authorization) {
-        User.findOne({ google: profile.sub }, function(err, existingUser) {
+        User.findOne({ googleid: profile.sub }, function(err, existingUser) {
           if (existingUser) {
             return res.status(409).send({ message: 'There is already a Google account that belongs to you' });
           }
@@ -42,9 +42,9 @@ module.exports = function(req, res) {
             if (!user) {
               return res.status(400).send({ message: 'User not found' });
             }
-            user.google = profile.sub;
+            user.googleid = profile.sub;
             user.picture = user.picture || profile.picture.replace('sz=50', 'sz=200');
-            user.displayName = user.displayName || profile.name;
+            user.displayname = user.displayName || profile.name;
             user.save(function() {
               var token = createJWT(user);
               res.send({ token: token });
@@ -53,14 +53,14 @@ module.exports = function(req, res) {
         });
       } else {
         // Step 3b. Create a new user account or return an existing one.
-        User.findOne({ google: profile.sub }, function(err, existingUser) {
+        User.findOne({ googleid: profile.sub }, function(err, existingUser) {
           if (existingUser) {
             return res.send({ token: createJWT(existingUser) });
           }
           var user = new User();
-          user.google = profile.sub;
+          user.googleid = profile.sub;
           user.picture = profile.picture.replace('sz=50', 'sz=200');
-          user.displayName = profile.name;
+          user.displayname = profile.name;
           user.save(function(err) {
             var token = createJWT(user);
             res.send({ token: token });

@@ -31,7 +31,7 @@ module.exports = function(req, res) {
         return res.status(500).send({ message: profile.error.message });
       }
       if (req.headers.authorization) {
-        User.findOne({ facebook: profile.id }, function(err, existingUser) {
+        User.findOne({ facebookid: profile.id }, function(err, existingUser) {
           if (existingUser) {
             return res.status(409).send({ message: 'There is already a Facebook account that belongs to you' });
           }
@@ -41,9 +41,9 @@ module.exports = function(req, res) {
             if (!user) {
               return res.status(400).send({ message: 'User not found' });
             }
-            user.facebook = profile.id;
+            user.facebookid = profile.id;
             user.picture = user.picture || 'https://graph.facebook.com/v2.3/' + profile.id + '/picture?type=large';
-            user.displayName = user.displayName || profile.name;
+            user.displayname = user.displayName || profile.name;
             user.save(function() {
               var token = createJWT(user);
               res.send({ token: token });
@@ -52,15 +52,15 @@ module.exports = function(req, res) {
         });
       } else {
         // Step 3b. Create a new user account or return an existing one.
-        User.findOne({ facebook: profile.id }, function(err, existingUser) {
+        User.findOne({ facebookid: profile.id }, function(err, existingUser) {
           if (existingUser) {
             var token = createJWT(existingUser);
             return res.send({ token: token });
           }
           var user = new User();
-          user.facebook = profile.id;
+          user.facebookid = profile.id;
           user.picture = 'https://graph.facebook.com/' + profile.id + '/picture?type=large';
-          user.displayName = profile.name;
+          user.displayname = profile.name;
           user.save(function() {
             var token = createJWT(user);
             res.send({ token: token });

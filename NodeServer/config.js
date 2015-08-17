@@ -1,6 +1,6 @@
 module.exports = {
   TOKEN_SECRET: process.env.TOKEN_SECRET || 'chiennb',
-  MONGO_URI: process.env.MONGO_URI || 'localhost',
+  MONGO_URI: process.env.MONGO_URI || 'mongodb://UserReadWrite:Aa123aA@localhost:27017/UsersDB',
   FACEBOOK_SECRET: process.env.FACEBOOK_SECRET || 'dec7f18cad1322a9d35dbacd320f4c26',
   FOURSQUARE_SECRET: process.env.FOURSQUARE_SECRET || 'Foursquare Client Secret',
   GOOGLE_SECRET: process.env.GOOGLE_SECRET || 'eTIEDpr0y_qW22gx7DhuYle5',
