@@ -112,17 +112,27 @@
         }
 
         // Get all model
-        $http.get(appSettings.serverPath + "/modelinfo/getall")
+        //$http.get(appSettings.serverPath + "/modelinfo/getall")
+        //       .success(function (data) {
+        //           //console.log(data);
+        //
+        //           $scope.models = data.getModelInfoJSON.body;
+        //
+        //           if ($scope.choiceModel != '') {
+        //               $scope.modelChanged($scope.choiceModel);
+        //           }
+        //       });
+
+        $http.post(appSettings.serverPath + "/modelinfo/getbymodelinfostatus", { status: "draft" })
                .success(function (data) {
                    //console.log(data);
 
-                   $scope.models = data.getModelInfoJSON.body;
+                   $scope.models = data.getModelInfoByStatusJSON.body;
 
                    if ($scope.choiceModel != '') {
                        $scope.modelChanged($scope.choiceModel);
                    }
                });
-
 
         // Model select change
         $scope.modelChanged = function (id) {
