@@ -32,7 +32,7 @@ var myapp = angular
         });
     })
     .constant("appSettings", {
-        serverPath: "http://10.15.171.35:8080",
+        serverPath: "http://10.15.171.35:8080/fisliftweb",
         authPath: "http://10.15.171.35:9000"
         //serverPath: "http://localhost:8080",
         //authPath: "http://localhost:9000"
